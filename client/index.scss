@@ -1,0 +1,39 @@
+@import './global.scss';
+
+#landing-main, #sample-pictures {
+    margin-top: 2%;
+    margin-bottom: 0;
+}
+
+#landing-main {
+    background-image: url('../res/landing-image.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    height: 700px;
+    border-radius: 5%;
+}
+
+.landing-center-text{
+    font-size: 2.0rem;
+    color: $secondary-text;
+    text-align: center;
+    padding-top: 1.0rem;
+}
+
+#down-arrow {
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 10rem;
+    line-height: 100%;
+}
+
+#sample-pictures {
+    background-color: $sub-orange;
+    text-align: center;
+    height: 500px;
+
+    h2 {
+        font-size: 2.0rem;
+        padding-top: 1.0rem;
+    }
+}

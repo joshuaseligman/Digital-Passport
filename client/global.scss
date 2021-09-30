@@ -1,0 +1,59 @@
+$primary-text: #2196F3;
+$secondary-text: #FF9800;
+$sub-blue: #80d8ff;
+$sub-orange: #ffd180;
+$bg-color: #FAFAFA;
+$nav-color: #eeeeee;
+
+body {
+    background-color: $bg-color;
+    font-family: "Tangine", cursive;
+    color: $primary-text;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+nav, footer{
+    background-color: $nav-color;
+
+    margin-top: 1%;
+    display: flex;
+    height: 10%;
+}
+
+#logo-space {
+    width: 10%;
+    background-color: $secondary-text;
+}
+
+#company {
+    width: 60%;
+
+    h1 {
+        text-align: left;
+        font-size: 2.0rem;
+        padding-left: 3%;
+    }
+}
+
+#links {
+    width: 30%;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    a {
+        text-decoration: none;
+        color: $primary-text;
+        font-size: 1.25rem;
+    }
+
+    a:hover {
+        color: $secondary-text;
+    }
+}
+
+footer {
+    margin-top: 2%;
+}
