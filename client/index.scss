@@ -1,12 +1,12 @@
 @import './global.scss';
 
-#landing-main, #sample-pictures {
+#landing-main, #sample-pictures, #landing-search {
     margin-top: 2%;
     margin-bottom: 0;
 }
 
 #landing-main {
-    background-image: url('../res/landing-image.jpg');
+    background-image: url('../res/landing-img.jpg');
     background-attachment: fixed;
     background-size: cover;
     height: 700px;
@@ -35,5 +35,25 @@
     h2 {
         font-size: 2.0rem;
         padding-top: 1.0rem;
+    }
+}
+
+#landing-search {
+    background-image: url('../res/landing-search-img.jpg');
+    background-size: cover;
+    height: 500px;
+    border-radius: 5%;
+}
+
+#landing-search-area {
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100%;
+    border-radius: 5%;
+
+    h2 {
+        text-align: center;
+        font-size: 2.0rem;
+        padding-top: 3.0rem;
+        color: $secondary-text;
     }
 }

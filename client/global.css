@@ -19,7 +19,7 @@ nav, footer {
 }
 
 #company {
-  width: 60%;
+  width: 50%;
 }
 #company h1 {
   text-align: left;
@@ -28,7 +28,7 @@ nav, footer {
 }
 
 #links {
-  width: 30%;
+  width: 40%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -44,6 +44,10 @@ nav, footer {
 
 footer {
   margin-top: 2%;
+  justify-content: space-evenly;
+}
+footer h2 {
+  text-align: center;
 }
 
 /*# sourceMappingURL=global.css.map */
