@@ -46,12 +46,18 @@
     justify-content: space-evenly;
 }
 
-.arrrow {
-    background-color: $sub-orange;
-    h2 {
-        text-align: center;
-        font-size: 100px;
+.arrow {
+    width: 10%;
+    display: block;
+    //background-color: $sub-orange;
+    img {
+        float: left;
     }
+}
+
+.img-btn {
+    width: 25%;
+    cursor: pointer;
 }
 
 #reverse {
@@ -60,11 +66,12 @@
     -o-transform: scale(-1, 1);
     -ms-transform: scale(-1, 1);
     transform: scale(-1, 1);
+
+    float: right;
 }
 
 #img-carousel-images {
     width: 80%;
-    background-color: $sub-blue;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
