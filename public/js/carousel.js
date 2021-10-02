@@ -25,5 +25,5 @@ carouselButtons[1].addEventListener('click', () => {
 
     sideImgs[1].src = mainImg.src;
     mainImg.src = sideImgs[0].src;
-    sideImgs[0].src = carouselImgsDir + ((curMain === 5) ? 1: curMain + 1) + '.jpg';
+    sideImgs[0].src = carouselImgsDir + ((curMain === 1) ? 5 : curMain - 1) + '.jpg';
 });
