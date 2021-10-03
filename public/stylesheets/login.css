@@ -1,0 +1,130 @@
+body {
+  background-color: #FAFAFA;
+  font-family: "Tangine", cursive;
+  color: #2196F3;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+nav, footer {
+  background-color: #eeeeee;
+  margin-top: 1%;
+  display: flex;
+  height: 10%;
+}
+
+#logo-space {
+  width: 10%;
+  background-color: #FF9800;
+}
+
+#company {
+  width: 50%;
+}
+#company h1 {
+  text-align: left;
+  font-size: 2rem;
+  padding-left: 3%;
+}
+
+#links {
+  width: 40%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#links a {
+  text-decoration: none;
+  color: #2196F3;
+  font-size: 1.25rem;
+}
+#links a:hover {
+  color: #FF9800;
+}
+
+footer {
+  margin-top: 2%;
+  justify-content: space-evenly;
+}
+footer h2 {
+  text-align: center;
+}
+
+#login-signup-area {
+  margin-top: 2.5%;
+  display: flex;
+  align-items: center;
+}
+
+#login, #signup {
+  height: 500px;
+  width: 48.75%;
+  background-color: #eeeeee;
+  border-radius: 5%;
+}
+
+#login {
+  margin-right: 2.5%;
+  background-image: urL("../res/login-img.jpg");
+  background-size: cover;
+}
+
+#signup {
+  background-image: urL("../res/signup-img.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.login-page-cover {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  border-radius: 5%;
+}
+.login-page-cover h2 {
+  margin-top: 0;
+  font-size: 3rem;
+  padding-left: 2.5%;
+  padding-top: 2.5%;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-row {
+  display: flex;
+  margin-left: 2.5%;
+  margin-bottom: 2.5%;
+}
+.login-row label {
+  margin-right: 2.5%;
+  font-size: 1.75rem;
+  width: 20%;
+}
+.login-row input {
+  font-family: "Tangerine", cursive;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #eeeeee;
+  border-width: 1%;
+  color: #FF9800;
+  font-size: 1.5rem;
+  box-shadow: none;
+}
+.login-row input:focus {
+  outline: none;
+}
+.login-row input[type=submit] {
+  width: auto;
+  color: #2196F3;
+  background-color: #eeeeee;
+}
+.login-row input[type=submit]:active {
+  color: #FF9800;
+}
+
+.submit-btn {
+  justify-content: space-evenly;
+}
+
+/*# sourceMappingURL=login.css.map */

@@ -1,0 +1,79 @@
+@import './global.scss';
+
+#login-signup-area {
+    margin-top: 2.5%;
+    display: flex;
+    align-items: center;
+}
+
+#login, #signup {
+    height: 500px;
+    width: 48.75%;
+    background-color: $nav-color;
+    border-radius: 5%;
+}
+
+#login {
+    margin-right: 2.5%;
+    background-image: urL('../res/login-img.jpg');
+    background-size: cover;
+}
+
+#signup {
+    background-image: urL('../res/signup-img.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.login-page-cover {
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100%;
+    border-radius: 5%;
+
+    h2 {
+        margin-top: 0;
+        font-size: 3.0rem;
+        padding-left: 2.5%;
+        padding-top: 2.5%;
+    }
+}
+
+.login-row {
+    display: flex;
+    margin-left: 2.5%;
+    margin-bottom: 2.5%;
+
+    label {
+        margin-right: 2.5%;
+        font-size: 1.75rem;
+        width: 20%;
+    }
+
+    input {
+        font-family: "Tangerine", cursive;
+        background-color: rgba(0, 0, 0, 0);
+        border-color: $nav-color;
+        border-width: 1%;
+        color: $secondary-text;
+        font-size: 1.5rem;
+        box-shadow: none;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    input[type="submit"] {
+        width: auto;
+        color: $primary-text;
+        background-color: $nav-color;
+    }
+
+    input[type="submit"]:active {
+        color: $secondary-text;
+    }
+}
+
+.submit-btn {
+    justify-content: space-evenly;
+}
