@@ -29,6 +29,10 @@ app.get('/posts', (req, res) => {
     res.sendFile(path.join(projectDir, 'pages/posts.html'));
 });
 
+app.get('/postSelection', (req, res) => {
+    res.sendFile(path.join(projectDir, 'pages/postSelection.html'));
+});
+
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
