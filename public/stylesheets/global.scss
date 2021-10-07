@@ -31,7 +31,7 @@ nav, footer{
 
     h1 {
         text-align: left;
-        font-size: 2.0rem;
+        font-size: 3.0rem;
         padding-left: 3%;
     }
 }
@@ -46,7 +46,7 @@ nav, footer{
     a {
         text-decoration: none;
         color: $primary-text;
-        font-size: 1.25rem;
+        font-size: 2.0rem;
     }
 
     a:hover {
@@ -55,10 +55,11 @@ nav, footer{
 }
 
 footer {
-    margin-top: 2%;
+    margin-top: 2.5%;
     justify-content: space-evenly;
     
     h2 {
         text-align: center;
+        font-size: 1.75rem;
     }
 }
