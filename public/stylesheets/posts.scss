@@ -11,29 +11,38 @@
 }
 
 .post-header {
-    margin: 0 2.5%;
-    width: 50%;
+    margin-left: 2.5%;
+    margin-right: 0.5%;
+    width: 60%;
+    min-width: 12.5%;
+    max-width: 12.5%;
 }
 
 .post-user {
     display: inline-block;
-    margin-top: 5%;
-    background-color: #dfdfdf;
+    margin: 5% 0%;
     padding-left: 2.5%;
     padding-right: 2.5%;
     border-radius: 0.25rem;
+    background-color: #dfdfdf;
+    word-break: break-word;
 }
 
 .post-user:hover {
     color: #FF9800;
     text-decoration: underline;
+    background-color: $nav-color;
+}
+
+.post-timestamp {
+    color: gray;
+    margin: 0;
 }
 
 .post-title {
     font-size: 1.5rem;
     margin-bottom: 0;
     margin-top: 5%;
-
 }
 
 .post-content {
@@ -42,4 +51,6 @@
     border-radius: 0.5rem;
     margin: 1.5%;
     padding: 0 1%;
+    max-width: 77.5%;
+    min-width: 77.5%;
 }
