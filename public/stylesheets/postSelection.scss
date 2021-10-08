@@ -38,37 +38,49 @@
     margin-top: 2.5%;
     border-radius: 2.5%;
     display: flex;
-    justify-content: space-evenly;
     flex-direction: column;
 }
 
 #post-img {
-    display: flex;
+    width: 70%;
     margin-left: 15%;
     margin-right: 15%;
-    justify-content: space-evenly;
-    width: 70%;
+    margin-top: 2.5%;
     height: 29rem;
-    
-    img {
-        border-radius: 5%;
-    }
+    border-radius: 5%;
+    object-fit: cover;
 }
 
 #post-desc {
-    h3, h2 {
-        text-align: center;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
+    margin-top: 2.5%;   
+}
 
-    a {
-       color: $primary-text;
-    }
+.post-text {
+    padding-left: 5%;
+    padding-right: 5%;
+}
 
-    a:hover {
-        color: $secondary-text;
-    }
+#post-loc {
+    text-align: center;
+    color: $secondary-text;
+}
+
+#caption {
+    font-size: 1.25rem;
+    text-align: justify;
+}
+
+#post-user-info {
+    text-align: right;
+    color: $secondary-text;
+}
+
+#more-info {
+    text-align: right;
+    color: $primary-text;
+    text-decoration: none;
+}
+
+#more-info:hover {
+    color: $secondary-text;
 }

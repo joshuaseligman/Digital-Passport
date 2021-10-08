@@ -33,13 +33,14 @@
     <% if (curPost.id !== -1) { %>
         <div id="overlap-post-area">
             <div id="overlap-post">
-                <div id=post-img-area>
-                    <img id="post-img" src=<%= curPost.src %> alt="post image">
-                </div>
-                <div id="post-desc">
-                    <h2><%=curPost.city %>, <%= curPost.state %>, <%= curPost.country %></h3>
-                    <h3>Taken by <i><%= curPost.username %> </i> on <i><%= curPost.date.month %>, <%= curPost.date.day %>, <%= curPost.date.year %></i></h4>
-                    <h3>Click <a href="#">here</a> to see post details and comments</h4>
+                <div id="post-body">
+                    <img src=<%= curPost.src %> id="post-img" alt="post image">
+                    <div class="post-desc">
+                        <h2 id="post-loc" class="post-text"><%=curPost.city %>, <%= curPost.state %>, <%= curPost.country %></h2>
+                        <p id="caption" class="post-text"><%= curPost.caption %></p>
+                        <h4 id="post-user-info" class="post-text">Taken by <i><%= curPost.username %> </i> on <i><%= curPost.date.month %>, <%= curPost.date.day %>, <%= curPost.date.year %></i></h4>
+                        <a href="#" id="more-info"><h4 class="post-text">View post info and comments &rarr;</h4></a>
+                    </div>
                 </div>
             </div>
         </div>

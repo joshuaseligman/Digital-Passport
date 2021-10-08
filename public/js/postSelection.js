@@ -6,10 +6,15 @@ overlapPostArea.style.marginTop = '-' + overlapPostArea.style.height;
 overlapPostArea.style.width = postArea.offsetWidth + 'px';
 overlapPostArea.addEventListener('click', toggleOverlapPostArea);
 
+
+const postBody = document.querySelector("#post-body");
+const postBg = document.querySelector("#overlap-post");
+postBg.style.height = postBody.offsetHeight + "px";
+
 function toggleOverlapPostArea(event) {
     if (event.target.id == 'overlap-post-area') {
-        window.location.replace(`/postSelection`);
+        const index = window.location.href.indexOf("cur=");
+        const postIndex = window.location.href.substring(index + 4);
+        window.location.replace(`/postSelection#post${postIndex}`);
     }
 }
-
-

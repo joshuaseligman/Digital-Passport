@@ -10,15 +10,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 const port = 3000;
 
 const posts = [
-    {id: 1, src: '/res/posts-imgs/post1.jpg', city: 'London', state: 'England', country: 'GBR', user: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 2, src: '/res/posts-imgs/post2.jpg', city: 'Princeton', state: 'New Jersey', country: 'USA', user: 'joshseligman', date: {month: 'May', day: 4, year: 1976}},
-    {id: 3, src: '/res/posts-imgs/post3.jpg', city: 'London', state: 'England', country: 'GBR', user: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 4, src: '/res/posts-imgs/post4.jpg', city: 'London', state: 'England', country: 'GBR', user: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 5, src: '/res/posts-imgs/post5.jpg', city: 'London', state: 'England', country: 'GBR', user: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 6, src: '/res/posts-imgs/post6.jpg', city: 'London', state: 'England', country: 'GBR', user: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 7, src: '/res/posts-imgs/post7.jpg', city: 'London', state: 'England', country: 'GBR', user: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 8, src: '/res/posts-imgs/post8.jpg', city: 'London', state: 'England', country: 'GBR', user: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 9, src: '/res/posts-imgs/post9.jpg', city: 'London', state: 'England', country: 'GBR', user: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
+    {id: 1, src: '/res/posts-imgs/post1.jpg', caption: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
+    {id: 2, src: '/res/posts-imgs/post2.jpg', caption: 'This is a great caption', city: 'Princeton', state: 'New Jersey', country: 'USA', username: 'joshseligman', date: {month: 'May', day: 4, year: 1976}},
+    {id: 3, src: '/res/posts-imgs/post3.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
+    {id: 4, src: '/res/posts-imgs/post4.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
+    {id: 5, src: '/res/posts-imgs/post5.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
+    {id: 6, src: '/res/posts-imgs/post6.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
+    {id: 7, src: '/res/posts-imgs/post7.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
+    {id: 8, src: '/res/posts-imgs/post8.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
+    {id: 9, src: '/res/posts-imgs/post9.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
 ];
 
 app.get('/', (req, res) => {
