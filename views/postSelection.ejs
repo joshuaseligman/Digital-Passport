@@ -24,20 +24,26 @@
         </div>
     </nav>
 
-    <div id="posts-area"></div>
+    <div id="posts-area">
+        <% for (let j = 0; j < posts.length; j++) { %>
+            <a href=<%= `/postSelection?cur=${j + 1}` %> class="post-link" id=<%= `post${j + 1}` %>> <img src=<%= posts[j].src %> > </a>
+        <% } %>
+    </div>
 
-    <div id="overlap-post-area">
-        <div id="overlap-post">
-            <div>
-                <img id="post-img" src="/res/posts-imgs/post1.jpg">
+    <% if (curPost.id !== -1) { %>
+        <div id="overlap-post-area">
+            <div id="overlap-post">
+                <div id=post-img-area>
+                    <img id="post-img" src=<%= curPost.src %> alt="post image">
+                </div>
                 <div id="post-desc">
-                    <h2>City, State, Country Code</h3>
-                    <h3>Taken by <i>Username</i> on <i>Month, Day, Year</i></h4>
+                    <h2><%=curPost.city %>, <%= curPost.state %>, <%= curPost.country %></h3>
+                    <h3>Taken by <i><%= curPost.username %> </i> on <i><%= curPost.date.month %>, <%= curPost.date.day %>, <%= curPost.date.year %></i></h4>
                     <h3>Click <a href="#">here</a> to see post details and comments</h4>
                 </div>
             </div>
         </div>
-    </div>
+    <% } %>
 
     <footer>
         <h2>&copy; Digital Passport. All rights reserved.</h2>
