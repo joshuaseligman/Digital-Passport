@@ -2,13 +2,49 @@
 
 #map {
     height: 30rem;
-    margin-top: 0;
+    margin-top: 2.5%;
 }
 
-#selection {
+#selection-area {
     background-color: $nav-color;
+}
 
-    p {
-        font-size: 1.5rem;
+#directions {
+    text-align: center;
+    font-size: 2.75rem;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-bottom: 0;
+}
+
+#location-selection {
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+
+    h2 {
+        font-size: 2.5rem;
+        color: $secondary-text;
+    }
+
+    input {
+        font-size: 2.5rem;
+    }
+
+    input[type="submit"] {
+        width: auto;
+        border-radius: 5%;
+        background-color: $bg-color;
+        color: $secondary-text;
+        height: auto;
+        font-family: "Tangerine", cursive;
+    }
+
+    input[type="submit"]:active {
+        color: $primary-text;
     }
 }

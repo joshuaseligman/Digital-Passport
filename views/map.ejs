@@ -49,10 +49,15 @@
         </div>
     </nav>
 
-    <div id="selection">
-        <h2 class="info">Locality</p>
-        <h2 class="info">Subdivision</p>
-        <h2 class="info">Country</p>
+    <div id="selection-area">
+        <h1 id="directions">Click on the map to select where you want to go.</h1>
+        <form id="location-selection">
+            <h2><span class="info">City</span>, <span class="info">State</span>, <span class="info">Country</span></h2>
+            <input class="location-form-data" type="hidden" name="city" value="">
+            <input class="location-form-data" type="hidden" name="state" value="">
+            <input class="location-form-data" type="hidden" name="country" value="">
+            <input type="submit" value="Explore">
+        </form>
     </div>
 
     <div id="map"></div>

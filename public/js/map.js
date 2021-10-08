@@ -2,6 +2,8 @@ const map = L.map('map').setView([25, 0], 2);
 let marker = undefined;
 
 const info = document.querySelectorAll('.info');
+const formData = document.querySelectorAll('.location-form-data');
+const locationSelection = document.querySelector('#location-selection');
 
 const platform = new H.service.Platform({
     'apikey': 'PgNfIZMslRqRWI_dxJLtyptKNZINHNcgDpsM5lsQO1c'
@@ -31,7 +33,11 @@ map.on('click', (e) => {
     }, (result) => {
         const loc = result['items'][0]['address'];
         info[0].textContent = loc['city'];
+        formData[0].value = loc['city'];
         info[1].textContent = loc['state'];
+        formData[1].value = loc['state'];
         info[2].textContent = loc['countryCode'];
+        formData[2].value = loc['countryCode'];
+        locationSelection.style.display = 'flex';
     }, alert);
 });
