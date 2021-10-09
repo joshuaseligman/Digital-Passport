@@ -15,6 +15,6 @@ function toggleOverlapPostArea(event) {
     if (event.target.id == 'overlap-post-area') {
         const index = window.location.href.indexOf("cur=");
         const postIndex = window.location.href.substring(index + 4);
-        window.location.replace(`/postSelection#post${postIndex}`);
+        window.location.replace(window.location.href.substring(0, index) + `#post${postIndex}`);
     }
 }

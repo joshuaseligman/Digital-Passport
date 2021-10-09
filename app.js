@@ -26,7 +26,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/map', (req, res) => {
-    res.render('map');
+    const city = req.query.city;
+    const state = req.query.state;
+    const country = req.query.country;
+
+    if (city !== undefined && country !== undefined) {
+        res.redirect(`/postSelection?city=${city}&state=${state}&country=${country}`.replace(' ', '%20'));
+    } else {
+        res.render('map');
+    }
 });
 
 app.get('/collection', (req, res) => {
@@ -42,19 +50,25 @@ app.get('/posts', (req, res) => {
 });
 
 app.get('/postSelection', (req, res) => {
-    let curPostIndex = req.query.cur;
-    let cPost = getCurPost(curPostIndex);
-    res.render('postSelection', {posts : posts, curPost: cPost});
+    const goodPosts = posts.filter((post) => {
+        return post.city === req.query.city && 
+        post.state === req.query.state && 
+        post.country === req.query.country;
+    });
+
+    const curPostIndex = req.query.cur;
+    const cPost = getCurPost(curPostIndex, goodPosts);
+    res.render('postSelection', {posts : goodPosts, curPost: cPost});
 });
 
-function getCurPost(postIndex) {
-    const index = posts.findIndex((post) => {
+function getCurPost(postIndex, postsToSearch) {
+    const index = postsToSearch.findIndex((post) => {
         return post.id === parseInt(postIndex);
     });
     if (index < 0) {
         return {id: -1, error: 'No such post exists'};
     } else {
-        return posts[index];
+        return postsToSearch[index];
     }
 }
 

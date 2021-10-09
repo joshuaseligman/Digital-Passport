@@ -26,7 +26,7 @@
 
     <div id="posts-area">
         <% for (let j = 0; j < posts.length; j++) { %>
-            <a href=<%= `/postSelection?cur=${j + 1}` %> class="post-link" id=<%= `post${j + 1}` %>> <img src=<%= posts[j].src %> > </a>
+            <a href=<%= `/postSelection?city=${posts[j].city}&state=${posts[j].state}&country=${posts[j].country}&cur=${posts[j].id}`.replace(' ', '%20') %> class="post-link" id=<%= `post${posts[j].id}` %>> <img src=<%= posts[j].src %> > </a>
         <% } %>
     </div>
 
