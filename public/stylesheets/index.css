@@ -1,6 +1,6 @@
 body {
   background-color: #FAFAFA;
-  font-family: "Tangine", cursive;
+  font-family: "Tangerine", cursive;
   color: #2196F3;
   margin-left: 2%;
   margin-right: 2%;
@@ -15,20 +15,26 @@ nav, footer {
 
 #logo-space {
   width: 10%;
-  background-color: #FF9800;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#logo-space img {
+  width: 75%;
+  height: auto;
 }
 
 #company {
-  width: 50%;
+  width: 40%;
 }
 #company h1 {
   text-align: left;
-  font-size: 2rem;
+  font-size: 3rem;
   padding-left: 3%;
 }
 
 #links {
-  width: 40%;
+  width: 50%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -36,18 +42,26 @@ nav, footer {
 #links a {
   text-decoration: none;
   color: #2196F3;
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 #links a:hover {
   color: #FF9800;
 }
 
 footer {
-  margin-top: 2%;
+  margin-top: 2.5%;
+  display: flex;
+  align-items: center;
   justify-content: space-evenly;
+  flex-direction: column;
 }
 footer h2 {
   text-align: center;
+  font-size: 1.75rem;
+}
+
+#logo-ad {
+  font-size: 1.25rem;
 }
 
 #landing-main, #sample-pictures, #landing-search {

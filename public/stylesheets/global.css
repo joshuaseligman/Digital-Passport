@@ -15,7 +15,13 @@ nav, footer {
 
 #logo-space {
   width: 10%;
-  background-color: #FF9800;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#logo-space img {
+  width: 75%;
+  height: auto;
 }
 
 #company {
@@ -44,11 +50,18 @@ nav, footer {
 
 footer {
   margin-top: 2.5%;
+  display: flex;
+  align-items: center;
   justify-content: space-evenly;
+  flex-direction: column;
 }
 footer h2 {
   text-align: center;
   font-size: 1.75rem;
+}
+
+#logo-ad {
+  font-size: 1.25rem;
 }
 
 /*# sourceMappingURL=global.css.map */
