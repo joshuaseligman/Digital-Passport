@@ -34,7 +34,7 @@
         <div id="login">
             <div class="login-page-cover">
                 <h2>Log In</h2>
-                <form id="login-form">
+                <form id="login-form" method="POST" action="/login">
                     <input type="hidden" name="signup" value="false">
                     <div class="login-row">
                         <label for="username">Username</label>
@@ -59,7 +59,7 @@
         <div id="signup">
             <div class="login-page-cover">
                 <h2>Sign Up</h2>
-                <form id="signup-form">
+                <form id="signup-form" method="POST" action='/login'>
                     <input type="hidden" name="signup" value="true">
                     <div class="login-row">
                         <label for="username">Username</label>

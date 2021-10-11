@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 const path = require('path');
 const url = require('url');
@@ -7,6 +8,8 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+
+const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 const port = 3000;
 
@@ -33,15 +36,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/map', (req, res) => {
-    const city = req.query.city;
-    const state = req.query.state;
-    const country = req.query.country;
+    res.render('map', {account: curAcct}); 
+});
 
-    if (city !== undefined && country !== undefined) {
-        res.redirect(`/postSelection?city=${city}&state=${state}&country=${country}`.replace(' ', '%20'));
-    } else {
-        res.render('map', {account: curAcct});
-    }
+app.post('/map', urlencodedParser, (req, res) => {
+    const city = req.body.city;
+    const state = req.body.state;
+    const country = req.body.country;
+
+    res.redirect(`/postSelection?city=${city}&state=${state}&country=${country}`.replace(' ', '%20'));
 });
 
 app.get('/collection', (req, res) => {
@@ -49,22 +52,26 @@ app.get('/collection', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    const signup = req.query.signup;
+    res.render('login', {account: curAcct});
+});
+
+app.post('/login', urlencodedParser, (req, res) => {
+    const signup = req.body.signup;
     if (signup === 'true') {
-        let uname = req.query.username;
+        let uname = req.body.username;
         const index = accounts.findIndex((acct) => {
             return acct.username === uname;
         });
         if (index === -1) {
-            curAcct = {id: Math.floor(Math.random() * 10000) + 1,username: uname, password: req.query.password};
+            curAcct = {id: Math.floor(Math.random() * 10000) + 1,username: uname, password: req.body.password};
             accounts.push(curAcct);
         } else {
             curAcct = {id: -1, error: "signup"};
         }
     } else if (signup === 'false') {
         const index = accounts.findIndex((acct) => {
-            return acct.username === req.query.username
-            && acct.password === req.query.password;
+            return acct.username === req.body.username
+            && acct.password === req.body.password;
         });
         if (index === -1) {
             curAcct = {id: -1, error: "login"};
@@ -73,10 +80,8 @@ app.get('/login', (req, res) => {
         }
     }
 
-    if (curAcct.id === 0) {
+    if (curAcct.id <= 0) {
         res.render('login', {account: curAcct});
-    } else if (curAcct.id === -1) {
-        res.render('login', {account: curAcct})
     } else {
         res.redirect('/');
     }
