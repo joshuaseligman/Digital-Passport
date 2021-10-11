@@ -77,3 +77,14 @@
 .submit-btn {
     justify-content: space-evenly;
 }
+
+.form-error {
+    background-color: $sub-blue;
+    color: $secondary-text;
+    margin-left: 25%;
+    margin-right: 25%;
+
+    h3 {
+        text-align: center;
+    }
+}

@@ -1,20 +1,20 @@
 const postArea = document.querySelector('#posts-area');
 
-for (let i = 1; i <= 9; i++) {
-    const post = document.createElement('img');
-    post.src = `/res/posts-imgs/post${i}.jpg`;
-    post.classList.add('post-link');
-
-    postArea.appendChild(post);
-}
-
-const posts = document.querySelectorAll('.post-link');
-posts[0].addEventListener('click', () => {
-    overlapPostArea.style.display = 'none';
-});
-// for (let j = 0; j < posts.length; j++) {
-    
-// }
-
 const overlapPostArea = document.querySelector('#overlap-post-area');
 overlapPostArea.style.height = postArea.offsetHeight + 'px';
+overlapPostArea.style.marginTop = '-' + overlapPostArea.style.height;
+overlapPostArea.style.width = postArea.offsetWidth + 'px';
+overlapPostArea.addEventListener('click', toggleOverlapPostArea);
+
+
+const postBody = document.querySelector("#post-body");
+const postBg = document.querySelector("#overlap-post");
+postBg.style.height = postBody.offsetHeight + "px";
+
+function toggleOverlapPostArea(event) {
+    if (event.target.id == 'overlap-post-area') {
+        const index = window.location.href.indexOf("cur=");
+        const postIndex = window.location.href.substring(index + 4);
+        window.location.replace(window.location.href.substring(0, index) + `#post${postIndex}`);
+    }
+}

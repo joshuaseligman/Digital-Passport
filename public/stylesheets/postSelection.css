@@ -63,9 +63,13 @@ footer h2 {
 
 .post-link {
   width: 30%;
+}
+.post-link img {
+  width: 100%;
   height: 25rem;
   margin-top: 1.5%;
   border-radius: 5%;
+  object-fit: cover;
 }
 
 #overlap-post-area {
@@ -73,11 +77,61 @@ footer h2 {
   display: flex;
   justify-content: space-evenly;
   margin-top: 1%;
+  border-radius: 2.5%;
+  position: absolute;
 }
 
 #overlap-post {
   width: 50%;
   background-color: #FAFAFA;
+  margin-top: 2.5%;
+  border-radius: 2.5%;
+  display: flex;
+  flex-direction: column;
+}
+
+#post-img {
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 2.5%;
+  height: 29rem;
+  border-radius: 5%;
+  object-fit: cover;
+}
+
+#post-desc {
+  margin-top: 2.5%;
+}
+
+.post-text {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#post-loc {
+  text-align: center;
+  color: #FF9800;
+}
+
+#caption {
+  font-size: 1.25rem;
+  text-align: justify;
+}
+
+#post-user-info {
+  text-align: right;
+  color: #FF9800;
+}
+
+#more-info {
+  text-align: right;
+  color: #2196F3;
+  text-decoration: none;
+}
+
+#more-info:hover {
+  color: #FF9800;
 }
 
 /*# sourceMappingURL=postSelection.css.map */

@@ -1,6 +1,6 @@
 body {
   background-color: #FAFAFA;
-  font-family: "Tangine", cursive;
+  font-family: "Tangerine", cursive;
   color: #2196F3;
   margin-left: 2%;
   margin-right: 2%;
@@ -19,16 +19,16 @@ nav, footer {
 }
 
 #company {
-  width: 50%;
+  width: 40%;
 }
 #company h1 {
   text-align: left;
-  font-size: 2rem;
+  font-size: 3rem;
   padding-left: 3%;
 }
 
 #links {
-  width: 40%;
+  width: 50%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -36,18 +36,19 @@ nav, footer {
 #links a {
   text-decoration: none;
   color: #2196F3;
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 #links a:hover {
   color: #FF9800;
 }
 
 footer {
-  margin-top: 2%;
+  margin-top: 2.5%;
   justify-content: space-evenly;
 }
 footer h2 {
   text-align: center;
+  font-size: 1.75rem;
 }
 
 #login-signup-area {
@@ -87,11 +88,6 @@ footer h2 {
   padding-top: 2.5%;
 }
 
-#login-form {
-  display: flex;
-  flex-direction: column;
-}
-
 .login-row {
   display: flex;
   margin-left: 2.5%;
@@ -125,6 +121,16 @@ footer h2 {
 
 .submit-btn {
   justify-content: space-evenly;
+}
+
+.form-error {
+  background-color: #80d8ff;
+  color: #FF9800;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+.form-error h3 {
+  text-align: center;
 }
 
 /*# sourceMappingURL=login.css.map */
