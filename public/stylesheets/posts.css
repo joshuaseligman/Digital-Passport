@@ -23,7 +23,7 @@ nav, footer {
 }
 #company h1 {
   text-align: left;
-  font-size: 2rem;
+  font-size: 3rem;
   padding-left: 3%;
 }
 
@@ -36,18 +36,19 @@ nav, footer {
 #links a {
   text-decoration: none;
   color: #2196F3;
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 #links a:hover {
   color: #FF9800;
 }
 
 footer {
-  margin-top: 2%;
+  margin-top: 2.5%;
   justify-content: space-evenly;
 }
 footer h2 {
   text-align: center;
+  font-size: 1.75rem;
 }
 
 .post {
@@ -55,7 +56,7 @@ footer h2 {
   background-color: #eeeeee;
   border-radius: 1.5rem;
   display: flex;
-  margin: 2.5%;
+  margin: 1% 2.5%;
   border-bottom: 2px solid #bdbdbd;
 }
 
@@ -94,14 +95,79 @@ footer h2 {
   margin-top: 5%;
 }
 
-.post-content {
-  display: flex;
+.post-inner {
+  display: inline-block;
   background-color: #dfdfdf;
   border-radius: 0.5rem;
   margin: 1.5%;
   padding: 0 1%;
   max-width: 77.5%;
   min-width: 77.5%;
+}
+.post-inner img {
+  margin: 1%;
+}
+
+.post-coverimg {
+  position: relative;
+  padding-right: 2%;
+  margin-top: 1%;
+  max-height: 20%;
+  margin-bottom: 0%;
+  overflow: hidden;
+}
+.post-coverimg img {
+  width: 100%;
+}
+.post-coverimg .expand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  color: #FFF;
+}
+.post-coverimg .expand h1 {
+  padding-top: 5%;
+  text-align: center;
+}
+
+.post-coverimg:hover .expand {
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.post-function {
+  display: flex;
+}
+
+.btn {
+  background-color: #dfdfdf;
+  /* Green */
+  border: none;
+  color: gray;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 0.5rem;
+}
+
+.btn:hover {
+  background-color: #d7d7d7;
+}
+
+.reply {
+  background-color: #eeeeee;
+  border-radius: 1.5rem;
+  margin: 1% 2.5%;
+  padding: 1% 2%;
+  border-bottom: 2px solid #bdbdbd;
+}
+
+#replyField {
+  max-width: 100%;
 }
 
 /*# sourceMappingURL=posts.css.map */
