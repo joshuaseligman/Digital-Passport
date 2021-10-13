@@ -1,17 +1,20 @@
 const expandBtn = document.querySelector('.expand');
+const header = document.querySelector('#expandText');
 const img = document.querySelector('.post-coverimg');
 let isExpanded = false;
 
 expandBtn.addEventListener('click', function() {
-    // if (!isExpanded) {
+    if (!isExpanded) {
         img.style.maxHeight = 'none';
-        expandBtn.textContent = 'Collapse <br> ʌ';
+        header.style.paddingTop = '22.5%'
+        header.textContent = 'Collapse ∧';
         console.log("test message");
         isExpanded = true;
-    // }
-    // else {
-    //     img.style.maxHeight = '20%';
-    //     expandBtn.textContent = 'Expand <br> v';
-    //     isExpanded = true;
-    // }
+    }
+    else {
+        img.style.maxHeight = '20%';
+        header.style.paddingTop = '7.5%';
+        header.textContent = 'Expand ∨';
+        isExpanded = false;
+    }
 });
