@@ -2,12 +2,24 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const path = require('path');
 const url = require('url');
+const multer = require('multer');
 
 const app = express();
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname.replace(/\s/g, '-'));
+    }
+});
+const upload = multer({storage: storage});
 
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -93,11 +105,13 @@ app.get('/posts', (req, res) => {
 
 app.get('/postSelection', (req, res) => {
     const goodPosts = posts.filter((post) => {
+        console.log(post);
         return post.city === req.query.city && 
         post.state === req.query.state && 
         post.country === req.query.country;
     });
 
+    console.log(goodPosts);
     const curPostIndex = req.query.cur;
     const cPost = getCurPost(curPostIndex, goodPosts);
     res.render('postSelection', {account: curAcct, posts : goodPosts, curPost: cPost});
@@ -110,7 +124,30 @@ app.get('/profile', (req, res) => {
 app.get('/logout', (req, res) => {
     curAcct = {id: 0};
     res.redirect('/');
-})
+});
+
+app.get('/addPost', (req, res) => {
+    res.render('addPost');
+});
+
+app.post('/addPost', urlencodedParser, upload.single('pic'), (req, res) => {
+    const newPost = {
+        id: posts.length + 1,
+        src: '/' + req.file.path.replace(/\s/g, '-').substring(8),
+        caption: req.body.caption,
+        city: req.body.city,
+        state: req.body.state,
+        country: req.body.country,
+        username: 'joshseligman',
+        date: {
+            monnth: 'October',
+            day: 16,
+            year: 2021
+        }
+    };
+        posts.push(newPost);
+    res.redirect('/');
+});
 
 function getCurPost(postIndex, postsToSearch) {
     const index = postsToSearch.findIndex((post) => {
