@@ -11,6 +11,7 @@ nav, footer {
   margin-top: 1%;
   display: flex;
   height: 10%;
+  box-shadow: 5px 5px 2.5px #a8a8a8;
 }
 
 #logo-space {
