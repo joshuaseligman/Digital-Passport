@@ -1,14 +1,17 @@
 const postArea = document.querySelector('#posts-area');
-
 const overlapPostArea = document.querySelector('#overlap-post-area');
+const postBody = document.querySelector("#post-body");
+const postBg = document.querySelector("#overlap-post");
+
+if (postBody.offsetHeight > postArea.offsetHeight) {
+    postArea.style.height = postBody.offsetHeight + 'px';
+}
+
 overlapPostArea.style.height = postArea.offsetHeight + 'px';
 overlapPostArea.style.marginTop = '-' + overlapPostArea.style.height;
 overlapPostArea.style.width = postArea.offsetWidth + 'px';
 overlapPostArea.addEventListener('click', toggleOverlapPostArea);
 
-
-const postBody = document.querySelector("#post-body");
-const postBg = document.querySelector("#overlap-post");
 postBg.style.height = postBody.offsetHeight + "px";
 
 function toggleOverlapPostArea(event) {
