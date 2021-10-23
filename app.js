@@ -1,13 +1,22 @@
 const express = require('express');
 const path = require('path');
-const url = require('url');
 const fs = require('fs');
 const multer = require('multer');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const db = require('./db');
-const Post = require('./models/postModel')
+const Post = require('./models/postModel');
+const User = require('./models/userModel');
 
 const app = express();
+
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: false
+}));
+app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -26,13 +35,8 @@ const upload = multer({storage: storage});
 
 const port = 3000;
 
-const accounts = [
-    {id: 1, username: "joshseligman", password: "helloworld"}
-]
-
-let curAcct = {id: 0}
-
 app.get('/', (req, res) => {
+    const curAcct = getCurrentUser(req);
     res.render('index', {account: curAcct});
 });
 
@@ -53,38 +57,39 @@ app.get('/collection', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+    const curAcct = getCurrentUser(req);
     res.render('login', {account: curAcct});
 });
 
-app.post('/login', (req, res) => {
-    const signup = req.body.signup;
-    if (signup === 'true') {
-        let uname = req.body.username;
-        const index = accounts.findIndex((acct) => {
-            return acct.username === uname;
+app.post('/signup', async (req, res) => {
+    const existingUser = await db.getUsers({username: req.body.username});
+    if (existingUser.length === 0) {
+        User.create({
+            username: req.body.username,
+            password: req.body.password
         });
-        if (index === -1) {
-            curAcct = {id: Math.floor(Math.random() * 10000) + 1,username: uname, password: req.body.password};
-            accounts.push(curAcct);
-        } else {
-            curAcct = {id: -1, error: "signup"};
-        }
-    } else if (signup === 'false') {
-        const index = accounts.findIndex((acct) => {
-            return acct.username === req.body.username
-            && acct.password === req.body.password;
-        });
-        if (index === -1) {
-            curAcct = {id: -1, error: "login"};
-        } else {
-            curAcct = accounts[index];
-        }
-    }
-
-    if (curAcct.id <= 0) {
-        res.render('login', {account: curAcct});
+        req.session.user = req.body.username;
     } else {
+        req.session.error = 'signup';
+    }
+    if (req.session.user) {
         res.redirect('/');
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.post('/login', async (req, res) => {
+    const usersFound = await db.getUsers({username: req.body.username, password: req.body.password});
+    if (usersFound.length === 1) {
+        req.session.user = req.body.username; 
+    } else {
+        req.session.error = 'login';
+    }
+    if (req.session.user) {
+        res.redirect('/');
+    } else {
+        res.redirect('/login');
     }
 });
 
@@ -134,7 +139,7 @@ app.get('/profile', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-    curAcct = {id: 0};
+    req.session.destroy();
     res.redirect('/');
 });
 
@@ -176,6 +181,18 @@ app.post('/addPost', upload.single('pic'), (req, res) => {
 
     res.redirect('/');
 });
+
+function getCurrentUser(req) {
+    const curUser = {
+        id: (req.session.user) ? 1 : 0,
+    };
+    if (req.session.error) {
+        curUser.id = -1;
+        curUser.error = req.session.error;
+        req.session.destroy();
+    }
+    return curUser;
+}
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
