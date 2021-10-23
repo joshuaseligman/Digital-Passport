@@ -1,1 +1,5 @@
+#Actual node modules
+node_modules/
+
+#MAC file
 .DS_Store

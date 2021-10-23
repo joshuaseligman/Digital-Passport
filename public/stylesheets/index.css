@@ -1,0 +1,159 @@
+body {
+  background-color: #FAFAFA;
+  font-family: "Tangine", cursive;
+  color: #2196F3;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+nav, footer {
+  background-color: #eeeeee;
+  margin-top: 1%;
+  display: flex;
+  height: 10%;
+}
+
+#logo-space {
+  width: 10%;
+  background-color: #FF9800;
+}
+
+#company {
+  width: 50%;
+}
+#company h1 {
+  text-align: left;
+  font-size: 2rem;
+  padding-left: 3%;
+}
+
+#links {
+  width: 40%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#links a {
+  text-decoration: none;
+  color: #2196F3;
+  font-size: 1.25rem;
+}
+#links a:hover {
+  color: #FF9800;
+}
+
+footer {
+  margin-top: 2%;
+  justify-content: space-evenly;
+}
+footer h2 {
+  text-align: center;
+}
+
+#landing-main, #sample-pictures, #landing-search {
+  margin-top: 2%;
+  margin-bottom: 0;
+}
+
+#landing-main {
+  background-image: url("../res/landing-img.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  height: 700px;
+  border-radius: 5%;
+}
+
+.landing-center-text {
+  font-size: 2rem;
+  color: #FF9800;
+  text-align: center;
+  padding-top: 1rem;
+}
+
+#down-arrow {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 10rem;
+  line-height: 100%;
+}
+
+#sample-pictures {
+  background-color: #eeeeee;
+  text-align: center;
+  border-radius: 5%;
+  padding-bottom: 1rem;
+}
+#sample-pictures h2 {
+  font-size: 2rem;
+  padding-top: 1rem;
+  cursor: pointer;
+}
+
+#img-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.arrow {
+  width: 10%;
+  display: block;
+}
+.arrow img {
+  float: left;
+}
+
+.img-btn {
+  width: 25%;
+  cursor: pointer;
+}
+
+#reverse {
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+  float: right;
+}
+
+#img-carousel-images {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#img-carousel-images img {
+  border-radius: 5%;
+}
+
+#sample-main {
+  width: 20%;
+  height: 16rem;
+}
+
+.sample-side {
+  width: 15%;
+  height: 12rem;
+}
+
+#landing-search {
+  background-image: url("../res/landing-search-img.jpg");
+  background-size: cover;
+  height: 500px;
+  border-radius: 5%;
+}
+
+#landing-search-area {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  border-radius: 5%;
+}
+#landing-search-area h2 {
+  text-align: center;
+  font-size: 2rem;
+  padding-top: 3rem;
+  color: #FF9800;
+}
+
+/*# sourceMappingURL=index.css.map */

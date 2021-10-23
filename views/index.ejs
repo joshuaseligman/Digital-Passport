@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <title>Digital Passport</title>
+</head>
+
+<body>
+    <nav>
+        <div id="logo-space">
+
+        </div>
+        <div id="company">
+            <h1>Digital Passport</h1>
+        </div>
+        <div id="links">
+            <a href="/map"><h3>Map</h3></a>
+            <% if (account.id > 0) { %>
+                <a href="/collection"><h3>Collection</h3></a>
+                <a href="/profile"><h3>Profile</h3></a>
+                <a href="/logout"><h3>Log Out</h3></a>
+            <% } else { %>
+                <a href="/login"><h3>Log In</h3></a>
+            <% } %>
+        </div>
+    </nav>
+
+    <div id="landing-main">
+        <h2 class="landing-center-text">Connecting the world one picture at a time.</h2>
+        <h2 class="landing-center-text" id="down-arrow">&caron;</h2>
+    </div>
+
+    <div id="sample-pictures">
+        <h2>See what others are doing around the world.</h2>
+        <div id="img-carousel">
+            <div class="arrow">
+                <img src="../res/landing-carousel/arrow.png" id='reverse' class='img-btn'>
+            </div>
+            <div id="img-carousel-images">
+                <img class="sample-side" src="../res/landing-carousel/carousel1.jpg" alt="sample-post">
+                <img id="sample-main" src="../res/landing-carousel/carousel2.jpg" alt="sample post">
+                <img class="sample-side" src="../res/landing-carousel/carousel3.jpg" alt="sample-post">
+            </div>
+            <div class="arrow">
+                <img src="../res/landing-carousel/arrow.png" class='img-btn'>
+            </div>
+        </div>
+    </div>
+
+    <div id="landing-search">
+        <div id="landing-search-area">
+            <h2>Where will you explore?</h2>
+            <h2>add a form</h2>
+        </div>
+    </div>
+
+    <footer>
+        <h2>&copy; Digital Passport. All rights reserved.</h2>
+    </footer>
+
+    <script src="/js/carousel.js"></script>
+</body>
+
+</html>
