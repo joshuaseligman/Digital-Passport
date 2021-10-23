@@ -3,6 +3,3 @@ node_modules/
 
 #MAC file
 .DS_Store
-
-#ENV file
-.env
