@@ -41,6 +41,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/map', (req, res) => {
+    const curAcct = getCurrentUser(req);
     res.render('map', {account: curAcct}); 
 });
 
@@ -53,7 +54,8 @@ app.post('/map', (req, res) => {
 });
 
 app.get('/collection', (req, res) => {
-    res.render('collection');
+    const curAcct = getCurrentUser(req);
+    res.render('collection', {account: curAcct});
 });
 
 app.get('/login', (req, res) => {
@@ -108,6 +110,7 @@ app.get('/postSelection', async (req, res) => {
         }
     );
     
+    const curAcct = getCurrentUser(req);
     const context = {
         account: curAcct,
         posts: posts.map((post) => ({
@@ -154,6 +157,8 @@ app.post('/addPost', upload.single('pic'), (req, res) => {
         imgData: encodedImg,
         contentType: req.file.mimetype
     }
+
+    const curDate = new Date().toString().split(' ');
     
     Post.create({
         id: Math.floor(Math.random() * 100000),
@@ -166,9 +171,9 @@ app.post('/addPost', upload.single('pic'), (req, res) => {
             country: req.body.country
         },
         date: {
-            month: 'October',
-            day: 16,
-            year: 2021
+            month: curDate[1],
+            day: curDate[2],
+            year: curDate[3]
         },
         comments: []
     });

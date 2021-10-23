@@ -15,8 +15,8 @@ const postSchema = mongoose.Schema({
     },
     date: {
         month: String,
-        day: Number,
-        year: Number
+        day: String,
+        year: String
     },
     comments: [{
         user: String,
