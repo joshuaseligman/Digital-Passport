@@ -12,7 +12,7 @@ expandBtn.addEventListener('click', function() {
         isExpanded = true;
     }
     else {
-        img.style.maxHeight = '20%';
+        img.style.maxHeight = '200px';
         header.style.paddingTop = '7.5%';
         header.textContent = 'Expand ∨';
         isExpanded = false;
