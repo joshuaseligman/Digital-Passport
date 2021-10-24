@@ -31,11 +31,11 @@
 
     <div id="posts-area">
         <% for (let j = 0; j < posts.length; j++) { %>
-            <a href=<%= `/postSelection?city=${posts[j].location.city}&state=${posts[j].location.state}&country=${posts[j].location.country}&cur=${posts[j].id}`.replace(' ', '%20') %> class="post-link" id=<%= `post${posts[j].id}` %>> <img src=<%= `data:${posts[j].img.contentType};base64,${posts[j].img.imgData}` %> > </a>
+            <a href=<%= `/postSelection?city=${posts[j].location.city}&state=${posts[j].location.state}&country=${posts[j].location.country}&cur=${posts[j]._id}`.replace(' ', '%20') %> class="post-link" id=<%= `post${posts[j]._id}` %>> <img src=<%= `data:${posts[j].img.contentType};base64,${posts[j].img.imgData}` %> > </a>
         <% } %>
     </div>
 
-    <% if (curPost.id !== -1) { %>
+    <% if (curPost._id !== -1) { %>
         <div id="overlap-post-area">
             <div id="overlap-post">
                 <div id="post-body">

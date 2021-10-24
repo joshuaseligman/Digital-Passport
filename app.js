@@ -4,6 +4,7 @@ const fs = require('fs');
 const multer = require('multer');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const sharp = require('sharp');
 
 const db = require('./db');
 const Post = require('./models/postModel');
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use(express.urlencoded({extended: false}));
 
@@ -114,7 +116,7 @@ app.get('/postSelection', async (req, res) => {
     const context = {
         account: curAcct,
         posts: posts.map((post) => ({
-            id: post.id,
+            _id: post._id.toString(),
             user: post.user,
             img: post.img,
             caption: post.caption,
@@ -122,13 +124,13 @@ app.get('/postSelection', async (req, res) => {
             date: post.date,
             comments: post.comments
         })),
-        curPost: {id: -1, error: 'No post selected'}
+        curPost: {_id: -1, error: 'No post selected'}
     };
 
     if (req.query.cur) {
         const curPost = await db.getPosts(
             {
-                id: parseInt(req.query.cur)
+                _id: req.query.cur
             }
         );
         context.curPost = curPost[0];
@@ -150,8 +152,19 @@ app.get('/addPost', (req, res) => {
     res.render('addPost');
 });
 
-app.post('/addPost', upload.single('pic'), (req, res) => {
-    const img = fs.readFileSync(req.file.path);
+app.post('/addPost', upload.single('pic'), async (req, res) => {
+    let newPath = req.file.path.split('.');
+    newPath[0] = newPath[0] + '1';
+    newPath = newPath.join('.');
+    await sharp(path.join(__dirname, req.file.path)).resize({ width: 720 }).toFile(path.join(__dirname, newPath))
+    .then(function(newFileInfo) {
+        console.log("Success");
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
+
+    const img = fs.readFileSync(newPath);
     const encodedImg = img.toString('base64');
     const finalImg = {
         imgData: encodedImg,
@@ -161,7 +174,6 @@ app.post('/addPost', upload.single('pic'), (req, res) => {
     const curDate = new Date().toString().split(' ');
     
     Post.create({
-        id: Math.floor(Math.random() * 100000),
         user: 'joshseligman',
         img: finalImg,
         caption: req.body.caption,
@@ -179,6 +191,12 @@ app.post('/addPost', upload.single('pic'), (req, res) => {
     });
 
     fs.unlink('./' + req.file.path, (err) => {
+        if (err) {
+            console.error(err);
+        }
+    });
+
+    fs.unlink('./' + newPath, (err) => {
         if (err) {
             console.error(err);
         }

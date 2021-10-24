@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
-    id: Number,
     user: String,
     img: {
         imgData: String,
