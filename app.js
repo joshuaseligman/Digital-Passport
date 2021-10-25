@@ -1,84 +1,99 @@
 const express = require('express');
 const path = require('path');
-const url = require('url');
+const fs = require('fs');
+const multer = require('multer');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const sharp = require('sharp');
+
+const db = require('./db');
+const Post = require('./models/postModel');
+const User = require('./models/userModel');
 
 const app = express();
 
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: false
+}));
+app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
+
+app.use(express.urlencoded({extended: false}));
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname.replace(/\s/g, '-'));
+    }
+});
+const upload = multer({storage: storage});
 
 const port = 3000;
 
-const posts = [
-    {id: 1, src: '/res/posts-imgs/post1.jpg', caption: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 2, src: '/res/posts-imgs/post2.jpg', caption: 'This is a great caption', city: 'Princeton', state: 'New Jersey', country: 'USA', username: 'joshseligman', date: {month: 'May', day: 4, year: 1976}},
-    {id: 3, src: '/res/posts-imgs/post3.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 4, src: '/res/posts-imgs/post4.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 5, src: '/res/posts-imgs/post5.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 6, src: '/res/posts-imgs/post6.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 7, src: '/res/posts-imgs/post7.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 8, src: '/res/posts-imgs/post8.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-    {id: 9, src: '/res/posts-imgs/post9.jpg', caption: 'This is a great caption', city: 'London', state: 'England', country: 'GBR', username: 'joshseligman', date: {month: 'June', day: 1, year: 2021}},
-];
-
-const accounts = [
-    {id: 1, username: "joshseligman", password: "helloworld"}
-]
-
-let curAcct = {id: 0}
-
 app.get('/', (req, res) => {
+    const curAcct = getCurrentUser(req);
     res.render('index', {account: curAcct});
 });
 
 app.get('/map', (req, res) => {
-    const city = req.query.city;
-    const state = req.query.state;
-    const country = req.query.country;
+    const curAcct = getCurrentUser(req);
+    res.render('map', {account: curAcct}); 
+});
 
-    if (city !== undefined && country !== undefined) {
-        res.redirect(`/postSelection?city=${city}&state=${state}&country=${country}`.replace(' ', '%20'));
-    } else {
-        res.render('map', {account: curAcct});
-    }
+app.post('/map', (req, res) => {
+    const city = req.body.city;
+    const state = req.body.state;
+    const country = req.body.country;
+
+    res.redirect(`/postSelection?city=${city}&state=${state}&country=${country}`.replace(' ', '%20'));
 });
 
 app.get('/collection', (req, res) => {
-    res.render('collection');
+    const curAcct = getCurrentUser(req);
+    res.render('collection', {account: curAcct});
 });
 
 app.get('/login', (req, res) => {
-    const signup = req.query.signup;
-    if (signup === 'true') {
-        let uname = req.query.username;
-        const index = accounts.findIndex((acct) => {
-            return acct.username === uname;
-        });
-        if (index === -1) {
-            curAcct = {id: Math.floor(Math.random() * 10000) + 1,username: uname, password: req.query.password};
-            accounts.push(curAcct);
-        } else {
-            curAcct = {id: -1, error: "signup"};
-        }
-    } else if (signup === 'false') {
-        const index = accounts.findIndex((acct) => {
-            return acct.username === req.query.username
-            && acct.password === req.query.password;
-        });
-        if (index === -1) {
-            curAcct = {id: -1, error: "login"};
-        } else {
-            curAcct = accounts[index];
-        }
-    }
+    const curAcct = getCurrentUser(req);
+    res.render('login', {account: curAcct});
+});
 
-    if (curAcct.id === 0) {
-        res.render('login', {account: curAcct});
-    } else if (curAcct.id === -1) {
-        res.render('login', {account: curAcct})
+app.post('/signup', async (req, res) => {
+    const existingUser = await db.getUsers({username: req.body.username});
+    if (existingUser.length === 0) {
+        User.create({
+            username: req.body.username,
+            password: req.body.password
+        });
+        req.session.user = req.body.username;
     } else {
+        req.session.error = 'signup';
+    }
+    if (req.session.user) {
         res.redirect('/');
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.post('/login', async (req, res) => {
+    const usersFound = await db.getUsers({username: req.body.username, password: req.body.password});
+    if (usersFound.length === 1) {
+        req.session.user = req.body.username; 
+    } else {
+        req.session.error = 'login';
+    }
+    if (req.session.user) {
+        res.redirect('/');
+    } else {
+        res.redirect('/login');
     }
 });
 
@@ -86,16 +101,42 @@ app.get('/posts', (req, res) => {
     res.render('posts');
 });
 
-app.get('/postSelection', (req, res) => {
-    const goodPosts = posts.filter((post) => {
-        return post.city === req.query.city && 
-        post.state === req.query.state && 
-        post.country === req.query.country;
-    });
+app.get('/postSelection', async (req, res) => {
+    const posts = await db.getPosts(
+        {
+            location: {
+                city: req.query.city,
+                state: req.query.state,
+                country: req.query.country
+            }
+        }
+    );
+    
+    const curAcct = getCurrentUser(req);
+    const context = {
+        account: curAcct,
+        posts: posts.map((post) => ({
+            _id: post._id.toString(),
+            user: post.user,
+            img: post.img,
+            caption: post.caption,
+            location: post.location,
+            date: post.date,
+            comments: post.comments
+        })),
+        curPost: {_id: -1, error: 'No post selected'}
+    };
 
-    const curPostIndex = req.query.cur;
-    const cPost = getCurPost(curPostIndex, goodPosts);
-    res.render('postSelection', {account: curAcct, posts : goodPosts, curPost: cPost});
+    if (req.query.cur) {
+        const curPost = await db.getPosts(
+            {
+                _id: req.query.cur
+            }
+        );
+        context.curPost = curPost[0];
+    }
+
+    res.render('postSelection', context);
 });
 
 app.get('/profile', (req, res) => {
@@ -103,19 +144,77 @@ app.get('/profile', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-    curAcct = {id: 0};
+    req.session.destroy();
     res.redirect('/');
-})
+});
 
-function getCurPost(postIndex, postsToSearch) {
-    const index = postsToSearch.findIndex((post) => {
-        return post.id === parseInt(postIndex);
+app.get('/addPost', (req, res) => {
+    res.render('addPost');
+});
+
+app.post('/addPost', upload.single('pic'), async (req, res) => {
+    let newPath = req.file.path.split('.');
+    newPath[0] = newPath[0] + '1';
+    newPath = newPath.join('.');
+    await sharp(path.join(__dirname, req.file.path)).resize({ width: 720 }).toFile(path.join(__dirname, newPath))
+    .then(function(newFileInfo) {
+        console.log("Success");
+    })
+    .catch(function(err) {
+        console.log(err);
     });
-    if (index < 0) {
-        return {id: -1, error: 'No such post exists'};
-    } else {
-        return postsToSearch[index];
+
+    const img = fs.readFileSync(newPath);
+    const encodedImg = img.toString('base64');
+    const finalImg = {
+        imgData: encodedImg,
+        contentType: req.file.mimetype
     }
+
+    const curDate = new Date().toString().split(' ');
+    
+    Post.create({
+        user: 'joshseligman',
+        img: finalImg,
+        caption: req.body.caption,
+        location: {
+            city: req.body.city,
+            state: req.body.state,
+            country: req.body.country
+        },
+        date: {
+            month: curDate[1],
+            day: curDate[2],
+            year: curDate[3]
+        },
+        comments: []
+    });
+
+    fs.unlink('./' + req.file.path, (err) => {
+        if (err) {
+            console.error(err);
+        }
+    });
+
+    fs.unlink('./' + newPath, (err) => {
+        if (err) {
+            console.error(err);
+        }
+    });
+
+    res.redirect('/');
+});
+
+function getCurrentUser(req) {
+    const curUser = {
+        id: (req.session.user) ? 1 : 0,
+    };
+    if (req.session.error) {
+        curUser.id = -1;
+        curUser.error = req.session.error;
+        req.session.destroy();
+    }
+    return curUser;
 }
 
 app.listen(port, () => {
