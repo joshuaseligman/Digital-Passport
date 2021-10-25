@@ -97,8 +97,15 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/posts', (req, res) => {
-    res.render('posts');
+app.get('/posts/:postID', async (req, res) => {
+    const post = await db.getPosts(
+        {
+            _id: req.params.postID
+        }
+    );
+
+    const curAcct = getCurrentUser(req);
+    res.render('posts', {account: curAcct, post: post[0]});
 });
 
 app.get('/postSelection', async (req, res) => {
@@ -115,15 +122,7 @@ app.get('/postSelection', async (req, res) => {
     const curAcct = getCurrentUser(req);
     const context = {
         account: curAcct,
-        posts: posts.map((post) => ({
-            _id: post._id.toString(),
-            user: post.user,
-            img: post.img,
-            caption: post.caption,
-            location: post.location,
-            date: post.date,
-            comments: post.comments
-        })),
+        posts: posts,
         curPost: {_id: -1, error: 'No post selected'}
     };
 
@@ -139,8 +138,16 @@ app.get('/postSelection', async (req, res) => {
     res.render('postSelection', context);
 });
 
-app.get('/profile', (req, res) => {
-    res.render('profile');
+app.get('/profile/:username', async (req, res) => {
+    const user = await db.getUsers({username: req.params.username});
+    const posts = await db.getPosts(
+        {
+            user: req.params.username
+        }
+    );
+
+    const curAcct = getCurrentUser(req);
+    res.render('profile', {account: curAcct, user: user[0], posts: posts});
 });
 
 app.get('/logout', (req, res) => {
@@ -149,7 +156,11 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/addPost', (req, res) => {
-    res.render('addPost');
+    if (!req.session.user) {
+        res.redirect('/');
+    } else {
+        res.render('addPost');
+    }
 });
 
 app.post('/addPost', upload.single('pic'), async (req, res) => {
@@ -174,7 +185,7 @@ app.post('/addPost', upload.single('pic'), async (req, res) => {
     const curDate = new Date().toString().split(' ');
     
     Post.create({
-        user: 'joshseligman',
+        user: req.session.user,
         img: finalImg,
         caption: req.body.caption,
         location: {
@@ -213,6 +224,8 @@ function getCurrentUser(req) {
         curUser.id = -1;
         curUser.error = req.session.error;
         req.session.destroy();
+    } else {
+        curUser.username = req.session.user;
     }
     return curUser;
 }

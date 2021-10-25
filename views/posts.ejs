@@ -13,7 +13,8 @@
     
     <link rel="stylesheet" href="/stylesheets/global.css">
     <link rel="stylesheet" href="/stylesheets/posts.css">
-    <title>Document</title>
+
+    <title>Digital Passport - Post</title>
 </head>
 
 <body>
@@ -26,8 +27,13 @@
         </div>
         <div id="links">
             <a href="/map"><h3>Map</h3></a>
-            <a href="/collection"><h3>Collection</h3></a>
-            <a href="/login"><h3>Log In</h3></a>
+            <% if (account.id > 0) { %>
+                <a href="/collection"><h3>Collection</h3></a>
+                <a href=<%= `/profile/${account.username}` %>><h3>Profile</h3></a>
+                <a href="/logout"><h3>Log Out</h3></a>
+            <% } else { %>
+                <a href="/login"><h3>Log In</h3></a>
+            <% } %>
         </div>
     </nav>
 
@@ -35,17 +41,16 @@
         <div class="post-flex">
             <div class="post-header">
                 <h3 class="post-title">Test Title is a very good test name</h3>
-                <h4 class="post-user">TestUser182384317</h6>
-                <h5 class="post-timestamp">12:00 AM September 31st, 2021</h4>
+                <h4 class="post-user"><%= post.user %></h6>
+                <h5 class="post-timestamp"><%= `${post.date.month} ${post.date.day}, ${post.date.year}` %></h4>
             </div>
             <div class="post-inner">
                 <div class="post-coverimg">
-                    <img src="https://wallpaperaccess.com/full/284466.jpg" alt="">
+                    <img src=<%= `data:${post.img.contentType};base64,${post.img.imgData}` %> >
                     <div class="expand"><h1 id="expandText">Expand ∨</h1></div>
                 </div>
                 <div class="post-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet, tortor a feugiat commodo, enim nibh cursus velit, sed laoreet sapien mi eget justo. Ut cursus mi nec ante sagittis tristique. Donec congue nulla quis vestibulum ullamcorper. Fusce et nulla varius lectus facilisis iaculis. Sed at volutpat sapien, eu ornare metus. Donec maximus turpis sed tristique eleifend. Quisque efficitur urna id maximus elementum. Proin commodo dignissim libero et viverra. Praesent ac velit mauris. Duis eget feugiat massa. In sagittis risus urna, vitae vulputate velit ornare vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet, tortor a feugiat commodo, enim nibh cursus velit, sed laoreet sapien mi eget justo. Ut cursus mi nec ante sagittis tristique. Donec congue nulla quis vestibulum ullamcorper. Fusce et nulla varius lectus facilisis iaculis. Sed at volutpat sapien, eu ornare metus. Donec maximus turpis sed tristique eleifend. Quisque efficitur urna id maximus elementum. Proin commodo dignissim libero et viverra. Praesent ac velit mauris. Duis eget feugiat massa. In sagittis risus urna, vitae vulputate velit ornare vel. <br>
-                        Nullam sed erat sed augue tincidunt lacinia nec sed dolor. Proin et molestie libero, non scelerisque tortor. Integer finibus dolor a augue vestibulum, sed porta erat pulvinar. Nullam nec interdum massa. Fusce vel facilisis lectus. Aliquam ut risus nunc. Etiam a lectus eget nulla faucibus aliquet. Donec fringilla enim iaculis felis ornare sollicitudin. Suspendisse at odio mollis, tristique arcu non, efficitur ipsum. Sed hendrerit lacinia pharetra. Nunc vestibulum, nisl a pharetra aliquam, diam dolor lacinia purus, sed placerat odio elit vestibulum lacus. Maecenas eget tincidunt leo.</p>
+                    <p><%= post.caption %></p>
                 </div>
             </div>
         </div>
@@ -65,6 +70,6 @@
         </div>
     </div>
 </body>
-<script src="js/expandImg.js"></script>
-<script src="js/reply.js"></script>
+<script src="/js/expandImg.js"></script>
+<script src="/js/reply.js"></script>
 </html>
