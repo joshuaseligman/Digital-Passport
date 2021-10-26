@@ -103,6 +103,10 @@
     background-color: rgba(0, 0, 0, 0.6);
     height: 100%;
     border-radius: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
 
     h2 {
         text-align: center;
@@ -110,4 +114,22 @@
         padding-top: 3.0rem;
         color: $secondary-text;
     }
+}
+
+#start-btn, #start-btn:visited {
+    font-size: 3.0rem;
+    padding: 1rem;
+    border: 3px solid $bg-color;
+    text-decoration: none;
+    color: $primary-text;
+    text-align: center;
+    background-color: rgba($bg-color, 0.7);
+}
+
+#start-btn:hover {
+    color: $secondary-text;
+}
+
+#start-btn:active {
+    background-color: $bg-color;
 }
