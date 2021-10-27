@@ -112,14 +112,20 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/posts/:postID', async (req, res) => {
-    const post = await db.getPosts(
-        {
-            _id: req.params.postID
-        }
-    );
+    const post = await db.getPosts({ _id: req.params.postID });
 
     const curAcct = getCurrentUser(req);
-    res.render('posts', {account: curAcct, post: post[0]});
+
+    const context = {
+        account: curAcct,
+        post: post[0]
+    };
+
+    if (req.session.user) {
+        const user = await db.getUsers({username: req.session.user});
+        context.user = user[0];
+    }
+    res.render('posts', context);
 });
 
 app.delete('/posts/:postID', async (req, res) => {
@@ -169,6 +175,15 @@ app.get('/profile/:username', async (req, res) => {
     res.render('profile', {account: curAcct, posts: posts});
 });
 
+app.post('/api/users/savedPosts', async (req, res) => {
+    if (req.body.updateType === 'add') {
+        await db.addToSavedPosts(req.body.postID, {username: req.body.user});
+    } else {
+        await db.removeFromSavedPosts(req.body.postID, {username: req.body.user});
+    }
+    res.redirect(`/posts/${req.body.postID}`);
+});
+
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
@@ -203,7 +218,7 @@ app.post('/addPost', upload.single('pic'), async (req, res) => {
 
     const curDate = new Date().toString().split(' ');
     
-    Post.create({
+    await Post.create({
         user: req.session.user,
         img: finalImg,
         caption: req.body.caption,
@@ -232,7 +247,7 @@ app.post('/addPost', upload.single('pic'), async (req, res) => {
         }
     });
 
-    res.redirect('/');
+    res.redirect(`/profile/${req.session.user}`);
 });
 
 function getCurrentUser(req) {

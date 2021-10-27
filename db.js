@@ -19,5 +19,6 @@ module.exports = {
     getPosts: async (options = {}) => Post.find(options),
     deletePost: async (options = {}) => Post.deleteOne(options),
     getUsers: async (options = {}) => User.find(options),
-    removeFromSavedPosts: async (postID) => User.updateMany({}, {$pull : {savedPosts: postID }})
+    addToSavedPosts: async (postID, options = {}) => User.updateMany(options, {$addToSet : {savedPosts: postID }}),
+    removeFromSavedPosts: async (postID, options = {}) => User.updateMany(options, {$pull : {savedPosts: postID }})
 };

@@ -56,7 +56,17 @@
         </div>
         <div class="post-function">
             <% if (account.id > 0) { %>
-                <button class="btn">Save to Collection</button>
+                <form id="collection-form" method="POST" action='/api/users/savedPosts'>
+                    <input type="hidden" name="user" value=<%= account.username %>>
+                    <input type="hidden" name="postID" value=<%= post._id %>>
+                    <% if (user.savedPosts.includes(post._id)) { %>
+                        <input type="hidden" name="updateType" value="remove">
+                        <input type="submit" class="btn" value="Remove from Collection">
+                    <% } else { %>
+                        <input type="hidden" name="updateType" value="add">
+                        <input type="submit" class="btn" value="Save to Collection">
+                    <% } %>
+                </form>
                 <button class="btn">Reply</button>
             <% } %>
             <% if (account.username === post.user) { %>
