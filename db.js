@@ -17,5 +17,7 @@ db.once('open', () => {
 
 module.exports = {
     getPosts: async (options = {}) => Post.find(options),
-    getUsers: async (options = {}) => User.find(options)
+    deletePost: async (options = {}) => Post.deleteOne(options),
+    getUsers: async (options = {}) => User.find(options),
+    removeFromSavedPosts: async (postID) => User.updateMany({}, {$pull : {savedPosts: postID }})
 };

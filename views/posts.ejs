@@ -55,10 +55,13 @@
             </div>
         </div>
         <div class="post-function">
-            <button class="btn">Edit</button>
-            <button class="btn">Bookmark</button>
-            <button class="btn">Reply</button>
-            <button class="btn" id="redBtn">Delete</button>
+            <% if (account.id > 0) { %>
+                <button class="btn">Save to Collection</button>
+                <button class="btn">Reply</button>
+            <% } %>
+            <% if (account.username === post.user) { %>
+                <button class="btn" id="redBtn" onclick="deletePost()">Delete</button>
+            <% } %>
         </div>
     </div>
     <div class="reply">
@@ -69,7 +72,8 @@
             </form>
         </div>
     </div>
+    <script src="/js/expandImg.js"></script>
+    <script src="/js/reply.js"></script>
+    <script src="/js/deletePost.js"></script>
 </body>
-<script src="/js/expandImg.js"></script>
-<script src="/js/reply.js"></script>
 </html>

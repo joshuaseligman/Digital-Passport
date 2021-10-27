@@ -56,8 +56,21 @@ app.post('/map', (req, res) => {
 });
 
 app.get('/collection', (req, res) => {
-    const curAcct = getCurrentUser(req);
-    res.render('collection', {account: curAcct});
+    if (!req.session.user) {
+        res.redirect('/');
+    } else {
+        let user, savedPosts;
+        db.getUsers({username: req.session.user})
+            .then((data) => {
+                user = data[0];
+                db.getPosts({ _id: { $in: user.savedPosts } })
+                    .then((postsData) => {
+                        savedPosts = postsData;
+                        const curAcct = getCurrentUser(req);
+                        res.render('collection', {account: curAcct, user: user, posts: savedPosts});
+                    });
+                });
+    }
 });
 
 app.get('/login', (req, res) => {
@@ -70,7 +83,8 @@ app.post('/signup', async (req, res) => {
     if (existingUser.length === 0) {
         User.create({
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            savedPosts: []
         });
         req.session.user = req.body.username;
     } else {
@@ -108,6 +122,12 @@ app.get('/posts/:postID', async (req, res) => {
     res.render('posts', {account: curAcct, post: post[0]});
 });
 
+app.delete('/posts/:postID', async (req, res) => {
+    await db.deletePost({ _id: req.params.postID });
+    await db.removeFromSavedPosts(req.params.postID);
+    res.send({newURL: `/profile/${req.session.user}`});
+});
+
 app.get('/postSelection', async (req, res) => {
     const posts = await db.getPosts(
         {
@@ -139,7 +159,6 @@ app.get('/postSelection', async (req, res) => {
 });
 
 app.get('/profile/:username', async (req, res) => {
-    const user = await db.getUsers({username: req.params.username});
     const posts = await db.getPosts(
         {
             user: req.params.username
@@ -147,7 +166,7 @@ app.get('/profile/:username', async (req, res) => {
     );
 
     const curAcct = getCurrentUser(req);
-    res.render('profile', {account: curAcct, user: user[0], posts: posts});
+    res.render('profile', {account: curAcct, posts: posts});
 });
 
 app.get('/logout', (req, res) => {
