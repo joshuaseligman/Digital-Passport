@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="post-function">
-            <% if (account.id > 0) { %>
+            <% if (account.id > 0 && account.username !== post.user) { %>
                 <form id="collection-form" method="POST" action='/api/users/savedPosts'>
                     <input type="hidden" name="user" value=<%= account.username %>>
                     <input type="hidden" name="postID" value=<%= post._id %>>
@@ -67,8 +67,8 @@
                         <input type="submit" class="btn" value="Save to Collection">
                     <% } %>
                 </form>
-                <button class="btn">Reply</button>
             <% } %>
+            <button class="btn" onclick="toggleComments()" id="comments-btn">Show Comments</button>
             <% if (account.username === post.user) { %>
                 <form method="POST">
                     <input type="submit" class="btn" id="redBtn" value="Delete">
@@ -77,14 +77,25 @@
         </div>
     </div>
     <div class="reply">
-        <div class="reply-textbox">
-            <form id="reply-form">
-                <textarea name="replyField" id="replyField" cols="100" rows="10"></textarea>
-                <input class="reply-content" type="submit" name="reply" id="replyBtn" value="Reply">
+        <% if (account.username) { %>
+            <form id="reply-form" method="POST" action=<%= `/posts/${post._id}/comment` %>>
+                <label for="commentText">Post a<br>comment</label>
+                <textarea name="commentText" id="replyField" cols="25" rows="4"></textarea>
+                <input type="hidden" name="user" value=<%= account.username %>>
+                <input class="reply-content" type="submit" name="reply" id="replyBtn" value="Post Comment">
             </form>
+        <% } %>
+        <div id="comments-area">
+        <% for (let i = 0; i < post.comments.length; i++) { %>
+            <div class="comment">
+                <p id="comment-text"><%= post.comments[i].commentText %></p>
+                <p id="comment-user">&mdash; <%= post.comments[i].user %></p>
+            </div>
+        <% } %>
         </div>
     </div>
     <script src="/js/expandImg.js"></script>
     <script src="/js/reply.js"></script>
+    <script src="/js/toggleComments.js"></script>
 </body>
 </html>

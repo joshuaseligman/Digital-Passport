@@ -131,9 +131,17 @@ app.get('/posts/:postID', async (req, res) => {
 app.post('/posts/:postID', async (req, res) => {
     await db.deletePost({ _id: req.params.postID });
     await db.removeFromSavedPosts(req.params.postID);
-    // res.send({newURL: `/profile/${req.session.user}`});
     res.redirect(`/profile/${req.session.user}`);
 });
+
+app.post('/posts/:postID/comment', async (req, res) => {
+    const comment = {
+        user: req.body.user,
+        commentText: req.body.commentText
+    };
+    await db.addComment(comment, {_id: req.params.postID});
+    res.redirect(`/posts/${req.params.postID}`);
+})
 
 app.get('/postSelection', async (req, res) => {
     const posts = await db.getPosts(
