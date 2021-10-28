@@ -70,7 +70,9 @@
                 <button class="btn">Reply</button>
             <% } %>
             <% if (account.username === post.user) { %>
-                <button class="btn" id="redBtn" onclick="deletePost()">Delete</button>
+                <form method="POST">
+                    <input type="submit" class="btn" id="redBtn" value="Delete">
+                </form>
             <% } %>
         </div>
     </div>
@@ -84,6 +86,5 @@
     </div>
     <script src="/js/expandImg.js"></script>
     <script src="/js/reply.js"></script>
-    <script src="/js/deletePost.js"></script>
 </body>
 </html>

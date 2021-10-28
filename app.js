@@ -128,10 +128,11 @@ app.get('/posts/:postID', async (req, res) => {
     res.render('posts', context);
 });
 
-app.delete('/posts/:postID', async (req, res) => {
+app.post('/posts/:postID', async (req, res) => {
     await db.deletePost({ _id: req.params.postID });
     await db.removeFromSavedPosts(req.params.postID);
-    res.send({newURL: `/profile/${req.session.user}`});
+    // res.send({newURL: `/profile/${req.session.user}`});
+    res.redirect(`/profile/${req.session.user}`);
 });
 
 app.get('/postSelection', async (req, res) => {
