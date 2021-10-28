@@ -40,17 +40,27 @@
     <div class="post">
         <div class="post-flex">
             <div class="post-header">
-                <h3 class="post-title">Test Title is a very good test name</h3>
-                <h4 class="post-user"><%= post.user %></h6>
+                <a class="post-user" href=<%= `/profile/${post.user}` %>><span><%= post.user %></span></a>
+
+                <h4 class="location-text"><u>Location</u></h4>
+                <% if (post.location.city !== 'undefined') { %> 
+                    <h4 class="location-text">City: <%= post.location.city %></h4>
+                <% } %>
+                <% if (post.location.state !== 'undefined') { %>
+                    <h4 class="location-text">State: <%= post.location.state %></h4>
+                <% } %>
+                <% if (post.location.country !== 'undefined') { %>
+                    <h4 class="location-text">Country: <%= post.location.country %></h4>
+                <% } %>
                 <h5 class="post-timestamp"><%= `${post.date.month} ${post.date.day}, ${post.date.year}` %></h4>
             </div>
             <div class="post-inner">
                 <div class="post-coverimg">
-                    <img src=<%= `data:${post.img.contentType};base64,${post.img.imgData}` %> >
+                    <img id="post-img" src=<%= `data:${post.img.contentType};base64,${post.img.imgData}` %> >
                     <div class="expand"><h1 id="expandText">Expand ∨</h1></div>
                 </div>
                 <div class="post-content">
-                    <p><%= post.caption %></p>
+                    <p id="post-caption"><%= post.caption %></p>
                 </div>
             </div>
         </div>
@@ -86,14 +96,24 @@
             </form>
         <% } %>
         <div id="comments-area">
-        <% for (let i = 0; i < post.comments.length; i++) { %>
-            <div class="comment">
-                <p id="comment-text"><%= post.comments[i].commentText %></p>
-                <p id="comment-user">&mdash; <%= post.comments[i].user %></p>
-            </div>
-        <% } %>
+            <% if (post.comments.length > 0) { %>
+                <% for (let i = 0; i < post.comments.length; i++) { %>
+                    <div class="comment">
+                        <p id="comment-text"><%= post.comments[i].commentText %></p>
+                        <p id="comment-user">&mdash; <%= post.comments[i].user %></p>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <h4 id="no-comments-text">There are no comments for this post.</h4>
+            <% } %>
         </div>
     </div>
+
+    <footer>
+        <h2>&copy; Digital Passport. All rights reserved.</h2>
+        <div id="logo-ad">Logo made by <a href="https://www.designevo.com/" title="Free Online Logo Maker">DesignEvo free logo creator</a></div>
+    </footer>
+
     <script src="/js/expandImg.js"></script>
     <script src="/js/reply.js"></script>
     <script src="/js/toggleComments.js"></script>
