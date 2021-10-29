@@ -97,7 +97,7 @@
         <% } %>
         <div id="comments-area">
             <% if (post.comments.length > 0) { %>
-                <% for (let i = 0; i < post.comments.length; i++) { %>
+                <% for (let i = posts.comments.length - 1; i >= 0; i--) { %>
                     <div class="comment">
                         <p id="comment-text"><%= post.comments[i].commentText %></p>
                         <p id="comment-user">&mdash; <%= post.comments[i].user %></p>

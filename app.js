@@ -91,7 +91,7 @@ app.post('/signup', async (req, res) => {
         req.session.error = 'signup';
     }
     if (req.session.user) {
-        res.redirect('/');
+        res.redirect(`/profile/${req.session.user}`);
     } else {
         res.redirect('/login');
     }
@@ -105,7 +105,7 @@ app.post('/login', async (req, res) => {
         req.session.error = 'login';
     }
     if (req.session.user) {
-        res.redirect('/');
+        res.redirect(`/profile/${req.session.user}`);
     } else {
         res.redirect('/login');
     }
@@ -155,33 +155,19 @@ app.get('/postSelection', async (req, res) => {
     );
     
     const curAcct = getCurrentUser(req);
-    const context = {
-        account: curAcct,
-        posts: posts,
-        curPost: {_id: -1, error: 'No post selected'}
-    };
 
-    if (req.query.cur) {
-        const curPost = await db.getPosts(
-            {
-                _id: req.query.cur
-            }
-        );
-        context.curPost = curPost[0];
-    }
-
-    res.render('postSelection', context);
+    res.render('postSelection', {account: curAcct, posts: posts});
 });
 
 app.get('/profile/:username', async (req, res) => {
-    const posts = await db.getPosts(
-        {
-            user: req.params.username
-        }
-    );
+    const reqUser = await db.getUsers({username: req.params.username});
+    if (!reqUser[0]) {
+        res.redirect('/');
+    }
 
+    const posts = await db.getPosts({user: req.params.username});
     const curAcct = getCurrentUser(req);
-    res.render('profile', {account: curAcct, posts: posts});
+    res.render('profile', {account: curAcct, user: reqUser[0], posts: posts});
 });
 
 app.post('/api/users/savedPosts', async (req, res) => {

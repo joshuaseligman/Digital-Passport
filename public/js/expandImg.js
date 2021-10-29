@@ -5,7 +5,7 @@ let isExpanded = false;
 
 expandBtn.addEventListener('click', function() {
     if (!isExpanded) {
-        img.style.maxHeight = '30rem';
+        img.style.maxHeight = '60rem';
         header.style.paddingTop = '22.5%'
         header.textContent = 'Collapse ∧';
         isExpanded = true;

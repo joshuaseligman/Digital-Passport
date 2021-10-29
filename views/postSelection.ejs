@@ -30,32 +30,16 @@
     </nav>
 
     <div id="posts-area">
-        <% for (let j = 0; j < posts.length; j++) { %>
-            <a href=<%= `/postSelection?city=${posts[j].location.city}&state=${posts[j].location.state}&country=${posts[j].location.country}&cur=${posts[j]._id}`.replace(' ', '%20') %> class="post-link" id=<%= `post${posts[j]._id}` %>> <img src=<%= `data:${posts[j].img.contentType};base64,${posts[j].img.imgData}` %> > </a>
+        <% for (let i = posts.length - 1; i >= 0; i--) { %>
+            <a href=<%= `/posts/${posts[i]._id}` %> class="post" id=<%= `${posts[i]._id}` %>> <img src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> > </a>
         <% } %>
     </div>
-
-    <% if (curPost._id !== -1) { %>
-        <div id="overlap-post-area">
-            <div id="overlap-post">
-                <div id="post-body">
-                    <img src=<%= `data:${curPost.img.contentType};base64,${curPost.img.imgData}` %> id="post-img" alt="post image">
-                    <div class="post-desc">
-                        <h2 id="post-loc" class="post-text"><%=curPost.location.city %>, <%= curPost.location.state %>, <%= curPost.location.country %></h2>
-                        <p id="caption" class="post-text"><%= curPost.caption %></p>
-                        <h4 id="post-user-info" class="post-text">Taken by <i><%= curPost.username %> </i> on <i><%= curPost.date.month %>, <%= curPost.date.day %>, <%= curPost.date.year %></i></h4>
-                        <a href="#" id="more-info"><h4 class="post-text">View post info and comments &rarr;</h4></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <% } %>
 
     <footer>
         <h2>&copy; Digital Passport. All rights reserved.</h2>
         <div id="logo-ad">Logo made by <a href="https://www.designevo.com/" title="Free Online Logo Maker">DesignEvo free logo creator</a></div>
     </footer>
 
-    <script src="/js/postSelection.js"></script>
+    <script src="/js/postRedirect.js"></script>
 </body>
 </html>
