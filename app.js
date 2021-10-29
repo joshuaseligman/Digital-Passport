@@ -56,8 +56,21 @@ app.post('/map', (req, res) => {
 });
 
 app.get('/collection', (req, res) => {
-    const curAcct = getCurrentUser(req);
-    res.render('collection', {account: curAcct});
+    if (!req.session.user) {
+        res.redirect('/');
+    } else {
+        let user, savedPosts;
+        db.getUsers({username: req.session.user})
+            .then((data) => {
+                user = data[0];
+                db.getPosts({ _id: { $in: user.savedPosts } })
+                    .then((postsData) => {
+                        savedPosts = postsData;
+                        const curAcct = getCurrentUser(req);
+                        res.render('collection', {account: curAcct, user: user, posts: savedPosts});
+                    });
+                });
+    }
 });
 
 app.get('/login', (req, res) => {
@@ -70,14 +83,15 @@ app.post('/signup', async (req, res) => {
     if (existingUser.length === 0) {
         User.create({
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            savedPosts: []
         });
         req.session.user = req.body.username;
     } else {
         req.session.error = 'signup';
     }
     if (req.session.user) {
-        res.redirect('/');
+        res.redirect(`/profile/${req.session.user}`);
     } else {
         res.redirect('/login');
     }
@@ -91,15 +105,43 @@ app.post('/login', async (req, res) => {
         req.session.error = 'login';
     }
     if (req.session.user) {
-        res.redirect('/');
+        res.redirect(`/profile/${req.session.user}`);
     } else {
         res.redirect('/login');
     }
 });
 
-app.get('/posts', (req, res) => {
-    res.render('posts');
+app.get('/posts/:postID', async (req, res) => {
+    const post = await db.getPosts({ _id: req.params.postID });
+
+    const curAcct = getCurrentUser(req);
+
+    const context = {
+        account: curAcct,
+        post: post[0]
+    };
+
+    if (req.session.user) {
+        const user = await db.getUsers({username: req.session.user});
+        context.user = user[0];
+    }
+    res.render('posts', context);
 });
+
+app.post('/posts/:postID', async (req, res) => {
+    await db.deletePost({ _id: req.params.postID });
+    await db.removeFromSavedPosts(req.params.postID);
+    res.redirect(`/profile/${req.session.user}`);
+});
+
+app.post('/posts/:postID/comment', async (req, res) => {
+    const comment = {
+        user: req.body.user,
+        commentText: req.body.commentText
+    };
+    await db.addComment(comment, {_id: req.params.postID});
+    res.redirect(`/posts/${req.params.postID}`);
+})
 
 app.get('/postSelection', async (req, res) => {
     const posts = await db.getPosts(
@@ -113,34 +155,28 @@ app.get('/postSelection', async (req, res) => {
     );
     
     const curAcct = getCurrentUser(req);
-    const context = {
-        account: curAcct,
-        posts: posts.map((post) => ({
-            _id: post._id.toString(),
-            user: post.user,
-            img: post.img,
-            caption: post.caption,
-            location: post.location,
-            date: post.date,
-            comments: post.comments
-        })),
-        curPost: {_id: -1, error: 'No post selected'}
-    };
 
-    if (req.query.cur) {
-        const curPost = await db.getPosts(
-            {
-                _id: req.query.cur
-            }
-        );
-        context.curPost = curPost[0];
-    }
-
-    res.render('postSelection', context);
+    res.render('postSelection', {account: curAcct, posts: posts});
 });
 
-app.get('/profile', (req, res) => {
-    res.render('profile');
+app.get('/profile/:username', async (req, res) => {
+    const reqUser = await db.getUsers({username: req.params.username});
+    if (!reqUser[0]) {
+        res.redirect('/');
+    }
+
+    const posts = await db.getPosts({user: req.params.username});
+    const curAcct = getCurrentUser(req);
+    res.render('profile', {account: curAcct, user: reqUser[0], posts: posts});
+});
+
+app.post('/api/users/savedPosts', async (req, res) => {
+    if (req.body.updateType === 'add') {
+        await db.addToSavedPosts(req.body.postID, {username: req.body.user});
+    } else {
+        await db.removeFromSavedPosts(req.body.postID, {username: req.body.user});
+    }
+    res.redirect(`/posts/${req.body.postID}`);
 });
 
 app.get('/logout', (req, res) => {
@@ -149,7 +185,11 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/addPost', (req, res) => {
-    res.render('addPost');
+    if (!req.session.user) {
+        res.redirect('/');
+    } else {
+        res.render('addPost');
+    }
 });
 
 app.post('/addPost', upload.single('pic'), async (req, res) => {
@@ -173,8 +213,8 @@ app.post('/addPost', upload.single('pic'), async (req, res) => {
 
     const curDate = new Date().toString().split(' ');
     
-    Post.create({
-        user: 'joshseligman',
+    await Post.create({
+        user: req.session.user,
         img: finalImg,
         caption: req.body.caption,
         location: {
@@ -202,7 +242,7 @@ app.post('/addPost', upload.single('pic'), async (req, res) => {
         }
     });
 
-    res.redirect('/');
+    res.redirect(`/profile/${req.session.user}`);
 });
 
 function getCurrentUser(req) {
@@ -213,6 +253,8 @@ function getCurrentUser(req) {
         curUser.id = -1;
         curUser.error = req.session.error;
         req.session.destroy();
+    } else {
+        curUser.username = req.session.user;
     }
     return curUser;
 }

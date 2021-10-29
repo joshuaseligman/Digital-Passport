@@ -20,19 +20,22 @@
 .post-header {
     margin-left: 2.5%;
     margin-right: 0.5%;
-    width: 60%;
-    min-width: 12.5%;
-    max-width: 12.5%;
+    width: 25%;
 }
 
 .post-user {
     display: inline-block;
-    margin: 5% 0%;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
+    color: $primary-text;
+    margin-top: 10%;
     border-radius: 0.25rem;
-    background-color: #dfdfdf;
-    word-break: break-word;
+    text-decoration: none;
+    font-size: 2.5rem;
+    font-weight: 700;
+
+    span {
+        background-color: #dfdfdf;
+        padding: 10%;
+    }
 }
 
 .post-user:hover {
@@ -41,15 +44,15 @@
     background-color: $nav-color;
 }
 
+.location-text {
+    font-size: 1.5rem;
+    line-height: 0.25rem;
+}
+
 .post-timestamp {
     color: gray;
     margin: 0;
-}
-
-.post-title {
-    font-size: 1.5rem;
-    margin-bottom: 0;
-    margin-top: 5%;
+    font-size: 1.25rem;
 }
 
 .post-inner {
@@ -59,9 +62,7 @@
     border-radius: 0.5rem;
     margin: 1.5% 1.5% 0%;
     padding: 0 1%;
-    max-width: 77.5%;
-    min-width: 77.5%;
-    height: fit-content;
+    width: 75%;
     img {
         margin: 1%;
     }
@@ -72,8 +73,8 @@
     padding-right: 2%;
     margin-top: 1%;
     max-height: 200px;
-    margin-bottom: 0%;
     overflow: hidden;
+
     img {
         width: 100%;
     }
@@ -99,10 +100,17 @@
     }
 }
 
+#post-caption {
+    font-size: 1.25rem;
+    text-align: justify;
+}
+
 .post-function {
     margin: auto;
     min-width: fit-content;
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     div {
         padding: 0 2%;
     }
@@ -139,4 +147,84 @@
     margin: 1% 2.5%;
     padding: 1% 2%;
     border-bottom: 2px solid #bdbdbd;
+    display: none;
+
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+#reply-form {
+    width: 60%;
+    
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    label {
+        font-size: 1.75rem;
+        font-family: Helvetica, Arial, sans-serif;
+        text-align: center;
+    }
+
+    textarea {
+        font-size: 1.25rem;
+        resize: none;
+    }
+
+    textarea:focus {
+        outline: none;
+    }
+
+    input[type="submit"] {
+        color: $primary-text;
+        font-size: 1.5rem;
+        font-family: Helvetica, Arial, sans-serif;
+        background-color: rgba(0, 0, 0, 0);
+        border: 2px solid $primary-text;
+    }
+
+    input[type="submit"]:hover {
+        cursor: pointer;
+        color: $secondary-text;
+        border-color: $secondary-text;
+    }
+}
+
+#comments-area {
+    width: 100%;
+    margin: 2.5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.comment {
+    width: 40%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background-color: $bg-color;
+    border-radius: 5px;
+
+    p {
+        font-size: 1.25rem;
+        font-family: Helvetica, Arial, sans-serif;
+        line-height: 0.25rem;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+    }
+}
+
+#comment-user {
+    text-align: right;
+}
+
+#no-comments-text {
+    font-size: 2.0rem;
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 0rem;
+    margin: 0;
+    padding: 0;
 }

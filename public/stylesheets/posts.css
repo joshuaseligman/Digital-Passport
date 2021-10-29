@@ -15,7 +15,13 @@ nav, footer {
 
 #logo-space {
   width: 10%;
-  background-color: #FF9800;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#logo-space img {
+  width: 75%;
+  height: auto;
 }
 
 #company {
@@ -44,11 +50,18 @@ nav, footer {
 
 footer {
   margin-top: 2.5%;
+  display: flex;
+  align-items: center;
   justify-content: space-evenly;
+  flex-direction: column;
 }
 footer h2 {
   text-align: center;
   font-size: 1.75rem;
+}
+
+#logo-ad {
+  font-size: 1.25rem;
 }
 
 .post {
@@ -70,19 +83,21 @@ footer h2 {
 .post-header {
   margin-left: 2.5%;
   margin-right: 0.5%;
-  width: 60%;
-  min-width: 12.5%;
-  max-width: 12.5%;
+  width: 25%;
 }
 
 .post-user {
   display: inline-block;
-  margin: 5% 0%;
-  padding-left: 2.5%;
-  padding-right: 2.5%;
+  color: #2196F3;
+  margin-top: 10%;
   border-radius: 0.25rem;
+  text-decoration: none;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.post-user span {
   background-color: #dfdfdf;
-  word-break: break-word;
+  padding: 10%;
 }
 
 .post-user:hover {
@@ -91,15 +106,15 @@ footer h2 {
   background-color: #eeeeee;
 }
 
+.location-text {
+  font-size: 1.5rem;
+  line-height: 0.25rem;
+}
+
 .post-timestamp {
   color: gray;
   margin: 0;
-}
-
-.post-title {
-  font-size: 1.5rem;
-  margin-bottom: 0;
-  margin-top: 5%;
+  font-size: 1.25rem;
 }
 
 .post-inner {
@@ -109,9 +124,7 @@ footer h2 {
   border-radius: 0.5rem;
   margin: 1.5% 1.5% 0%;
   padding: 0 1%;
-  max-width: 77.5%;
-  min-width: 77.5%;
-  height: fit-content;
+  width: 75%;
 }
 .post-inner img {
   margin: 1%;
@@ -122,7 +135,6 @@ footer h2 {
   padding-right: 2%;
   margin-top: 1%;
   max-height: 200px;
-  margin-bottom: 0%;
   overflow: hidden;
 }
 .post-coverimg img {
@@ -147,10 +159,17 @@ footer h2 {
   background: rgba(0, 0, 0, 0.6);
 }
 
+#post-caption {
+  font-size: 1.25rem;
+  text-align: justify;
+}
+
 .post-function {
   margin: auto;
   min-width: fit-content;
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .post-function div {
   padding: 0 2%;
@@ -187,6 +206,77 @@ footer h2 {
   margin: 1% 2.5%;
   padding: 1% 2%;
   border-bottom: 2px solid #bdbdbd;
+  display: none;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+#reply-form {
+  width: 60%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#reply-form label {
+  font-size: 1.75rem;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+#reply-form textarea {
+  font-size: 1.25rem;
+  resize: none;
+}
+#reply-form textarea:focus {
+  outline: none;
+}
+#reply-form input[type=submit] {
+  color: #2196F3;
+  font-size: 1.5rem;
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #2196F3;
+}
+#reply-form input[type=submit]:hover {
+  cursor: pointer;
+  color: #FF9800;
+  border-color: #FF9800;
+}
+
+#comments-area {
+  width: 100%;
+  margin: 2.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.comment {
+  width: 40%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  background-color: #FAFAFA;
+  border-radius: 5px;
+}
+.comment p {
+  font-size: 1.25rem;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 0.25rem;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+}
+
+#comment-user {
+  text-align: right;
+}
+
+#no-comments-text {
+  font-size: 2rem;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 0rem;
+  margin: 0;
+  padding: 0;
 }
 
 /*# sourceMappingURL=posts.css.map */
