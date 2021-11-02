@@ -80,7 +80,7 @@
             <% } %>
             <button class="btn" onclick="toggleComments()" id="comments-btn">Show Comments</button>
             <% if (account.username === post.user) { %>
-                <form method="POST">
+                <form method="POST" action=<%= `/posts/${post._id}/delete` %>>
                     <input type="submit" class="btn" id="redBtn" value="Delete">
                 </form>
             <% } %>
@@ -115,7 +115,6 @@
     </footer>
 
     <script src="/js/expandImg.js"></script>
-    <script src="/js/reply.js"></script>
     <script src="/js/toggleComments.js"></script>
 </body>
 </html>
