@@ -20,7 +20,7 @@
 <body>
      <nav>
         <div id="logo-space">
-
+            <img src="/res/logo.jpg" alt="logo">
         </div>
         <div id="company">
             <h1>Digital Passport</h1>
@@ -37,30 +37,16 @@
         </div>
     </nav>
 
-<div id="bookmark-area">
-    <h1 id="statemenet">Revisit your favorite places.</h1>
-        <div id="listing"> 
-            <div class="savedpic">
-                <% for (let i = 0; i < posts.length; i += 2) { %>
-                    <img class="post" src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> >
-                <% } %>
-            </div>
-            <div class="savedpic">
-                <% for (let i = 1; i < posts.length; i += 2) { %>
-                    <img class="post" src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> >
-                <% } %>
-            </div>
-            <div class="savedpic">
-                <% for (let i = 1; i < posts.length; i += 2) { %>
-                    <img class="post" src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> >
-                <% } %>
-            </div>
-            <div class="savedpic">
-                <% for (let i = 1; i < posts.length; i += 2) { %>
-                    <img class="post" src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> >
-                <% } %>
-            </div>
-        </div>
+<div id="collection-area">
+    <h1 id="subtitle">Revisit your favorite places</h1>
+    <div id="posts-area">
+        <% for (let i = posts.length - 1; i >= 0; i--) { %>
+            <a href=<%= `/posts/${posts[i]._id}` %> class="post" id=<%= posts[i]._id %> > 
+                <img class="post-img" src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> > 
+                <div class="overlay"></div>
+            </a>
+        <% } %>
+    </div>
 </div>
 
 <footer>
