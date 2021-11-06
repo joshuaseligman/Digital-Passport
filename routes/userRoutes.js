@@ -88,7 +88,8 @@ router.get('/:username/addPost', (req, res) => {
         res.redirect('/');
     } else {
         // Render the add post page
-        res.render('addPost');
+        const curAcct = getCurrentUser(req);
+        res.render('addPost', { account: curAcct });
     }
 });
 

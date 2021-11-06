@@ -4,9 +4,7 @@ const path = require('path');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
-// Import the database stuff
-const db = require('./db');
-const User = require('./models/userModel');
+const { getCurrentUser } = require('./util');
 
 // Initialize the server app
 const app = express();
@@ -42,6 +40,12 @@ app.use('/posts', postRoutes)
 
 const userRoutes = require('./routes/userRoutes');
 app.use('/users', userRoutes);
+
+app.use((req, res) => {
+    res.status(404);
+    const curUser = getCurrentUser(req);
+    res.render('error404.ejs', { account: curUser });
+});
 
 // Set up the server to listen on the given port
 app.listen(PORT, () => {
