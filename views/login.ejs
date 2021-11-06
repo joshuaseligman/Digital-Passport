@@ -35,14 +35,13 @@
             <div class="login-page-cover">
                 <h2>Log In</h2>
                 <form id="login-form" method="POST" action="/login">
-                    <input type="hidden" name="signup" value="false">
                     <div class="login-row">
-                        <label for="username">Username</label>
-                        <input class="uname" type="text" name="username" required>
+                        <label for="login[username]">Username</label>
+                        <input class="uname" type="text" name="login[username]" required>
                     </div>
                     <div class="login-row">
-                        <label for="password">Password</label>
-                        <input class="pwd" type="password" name="password" required>
+                        <label for="login[password]">Password</label>
+                        <input class="pwd" type="password" name="login[password]" required>
                     </div>
                     <% if (account.id === -1 && account.error === 'login') { %>
                         <div class="form-error">
@@ -60,14 +59,13 @@
             <div class="login-page-cover">
                 <h2>Sign Up</h2>
                 <form id="signup-form" method="POST" action='/signup'>
-                    <input type="hidden" name="signup" value="true">
                     <div class="login-row">
-                        <label for="username">Username</label>
-                        <input class="uname" type="text" name="username" required>
+                        <label for="signup[username]">Username</label>
+                        <input class="uname" type="text" name="signup[username]" required>
                     </div>
                     <div class="login-row">
-                        <label for="password">Password</label>
-                        <input class="pwd" type="password" name="password" required>
+                        <label for="signup[password]">Password</label>
+                        <input class="pwd" type="password" name="signup[password]" required>
                     </div>
                     <% if (account.id === -1 && account.error === 'signup') { %>
                         <div class="form-error">
@@ -86,7 +84,5 @@
         <h2>&copy; Digital Passport. All rights reserved.</h2>
         <div id="logo-ad">Logo made by <a href="https://www.designevo.com/" title="Free Online Logo Maker">DesignEvo free logo creator</a></div>
     </footer>
-
-    <script src="/js/login.js"></script>
 </body>
 </html>
