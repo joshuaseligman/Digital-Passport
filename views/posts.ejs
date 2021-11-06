@@ -1,120 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-    
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include('./partials/header') %>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    
-    <link rel="stylesheet" href="/stylesheets/global.css">
-    <link rel="stylesheet" href="/stylesheets/posts.css">
+<link rel="stylesheet" href="/stylesheets/posts.css">
+<title>Digital Passport - Post</title>
 
-    <title>Digital Passport - Post</title>
-</head>
+<%- include('./partials/navbar') %>
 
-<body>
-    <nav>
-        <div id="logo-space">
+<div class="post">
+    <div class="post-flex">
+        <div class="post-header">
+            <a class="post-user" href=<%= `/users/${post.user}` %>><span><%= post.user %></span></a>
 
-        </div>
-        <div id="company">
-            <h1>Digital Passport</h1>
-        </div>
-        <div id="links">
-            <a href="/map"><h3>Map</h3></a>
-            <% if (account.id > 0) { %>
-                <a href="/collection"><h3>Collection</h3></a>
-                <a href=<%= `/profile/${account.username}` %>><h3>Profile</h3></a>
-                <a href="/logout"><h3>Log Out</h3></a>
-            <% } else { %>
-                <a href="/login"><h3>Log In</h3></a>
+            <h4 class="location-text"><u>Location</u></h4>
+            <% if (post.location.city !== 'undefined') { %> 
+                <h4 class="location-text">City: <%= post.location.city %></h4>
             <% } %>
+            <% if (post.location.state !== 'undefined') { %>
+                <h4 class="location-text">State: <%= post.location.state %></h4>
+            <% } %>
+            <% if (post.location.country !== 'undefined') { %>
+                <h4 class="location-text">Country: <%= post.location.country %></h4>
+            <% } %>
+            <h5 class="post-timestamp"><%= `${post.date.month} ${post.date.day}, ${post.date.year}` %></h4>
         </div>
-    </nav>
-
-    <div class="post">
-        <div class="post-flex">
-            <div class="post-header">
-                <a class="post-user" href=<%= `/profile/${post.user}` %>><span><%= post.user %></span></a>
-
-                <h4 class="location-text"><u>Location</u></h4>
-                <% if (post.location.city !== 'undefined') { %> 
-                    <h4 class="location-text">City: <%= post.location.city %></h4>
-                <% } %>
-                <% if (post.location.state !== 'undefined') { %>
-                    <h4 class="location-text">State: <%= post.location.state %></h4>
-                <% } %>
-                <% if (post.location.country !== 'undefined') { %>
-                    <h4 class="location-text">Country: <%= post.location.country %></h4>
-                <% } %>
-                <h5 class="post-timestamp"><%= `${post.date.month} ${post.date.day}, ${post.date.year}` %></h4>
+        <div class="post-inner">
+            <div class="post-coverimg">
+                <img id="post-img" src=<%= `data:${post.img.contentType};base64,${post.img.imgData}` %> >
+                <div class="expand"><h1 id="expandText">Expand ∨</h1></div>
             </div>
-            <div class="post-inner">
-                <div class="post-coverimg">
-                    <img id="post-img" src=<%= `data:${post.img.contentType};base64,${post.img.imgData}` %> >
-                    <div class="expand"><h1 id="expandText">Expand ∨</h1></div>
-                </div>
-                <div class="post-content">
-                    <p id="post-caption"><%= post.caption %></p>
-                </div>
+            <div class="post-content">
+                <p id="post-caption"><%= post.caption %></p>
             </div>
-        </div>
-        <div class="post-function">
-            <% if (account.id > 0 && account.username !== post.user) { %>
-                <form id="collection-form" method="POST" action='/api/users/savedPosts'>
-                    <input type="hidden" name="user" value=<%= account.username %>>
-                    <input type="hidden" name="postID" value=<%= post._id %>>
-                    <% if (user.savedPosts.includes(post._id)) { %>
-                        <input type="hidden" name="updateType" value="remove">
-                        <input type="submit" class="btn" value="Remove from Collection">
-                    <% } else { %>
-                        <input type="hidden" name="updateType" value="add">
-                        <input type="submit" class="btn" value="Save to Collection">
-                    <% } %>
-                </form>
-            <% } %>
-            <button class="btn" onclick="toggleComments()" id="comments-btn">Show Comments</button>
-            <% if (account.username === post.user) { %>
-                <form method="POST" action=<%= `/posts/${post._id}/delete` %>>
-                    <input type="submit" class="btn" id="redBtn" value="Delete">
-                </form>
-            <% } %>
         </div>
     </div>
-    <div class="reply">
-        <% if (account.username) { %>
-            <form id="reply-form" method="POST" action=<%= `/posts/${post._id}/comment` %>>
-                <label for="commentText">Post a<br>comment</label>
-                <textarea name="commentText" id="replyField" cols="25" rows="4"></textarea>
+    <div class="post-function">
+        <% if (account.id > 0 && account.username !== post.user) { %>
+            <form id="collection-form" method="POST" action='/api/users/savedPosts'>
                 <input type="hidden" name="user" value=<%= account.username %>>
-                <input class="reply-content" type="submit" name="reply" id="replyBtn" value="Post Comment">
+                <input type="hidden" name="postID" value=<%= post._id %>>
+                <% if (user.savedPosts.includes(post._id)) { %>
+                    <input type="hidden" name="updateType" value="remove">
+                    <input type="submit" class="btn" value="Remove from Collection">
+                <% } else { %>
+                    <input type="hidden" name="updateType" value="add">
+                    <input type="submit" class="btn" value="Save to Collection">
+                <% } %>
             </form>
         <% } %>
-        <div id="comments-area">
-            <% if (post.comments.length > 0) { %>
-                <% for (let i = post.comments.length - 1; i >= 0; i--) { %>
-                    <div class="comment">
-                        <p id="comment-text"><%= post.comments[i].commentText %></p>
-                        <p id="comment-user">&mdash; <%= post.comments[i].user %></p>
-                    </div>
-                <% } %>
-            <% } else { %>
-                <h4 id="no-comments-text">There are no comments for this post.</h4>
-            <% } %>
-        </div>
+        <button class="btn" onclick="toggleComments()" id="comments-btn">Show Comments</button>
+        <% if (account.username === post.user) { %>
+            <form method="POST" action=<%= `/posts/${post._id}/delete` %>>
+                <input type="submit" class="btn" id="redBtn" value="Delete">
+            </form>
+        <% } %>
     </div>
+</div>
+<div class="reply">
+    <% if (account.username) { %>
+        <form id="reply-form" method="POST" action=<%= `/posts/${post._id}/comment` %>>
+            <label for="commentText">Post a<br>comment</label>
+            <textarea name="commentText" id="replyField" cols="25" rows="4"></textarea>
+            <input type="hidden" name="user" value=<%= account.username %>>
+            <input class="reply-content" type="submit" name="reply" id="replyBtn" value="Post Comment">
+        </form>
+    <% } %>
+    <div id="comments-area">
+        <% if (post.comments.length > 0) { %>
+            <% for (let i = post.comments.length - 1; i >= 0; i--) { %>
+                <div class="comment">
+                    <p id="comment-text"><%= post.comments[i].commentText %></p>
+                    <p id="comment-user">&mdash; <%= post.comments[i].user %></p>
+                </div>
+            <% } %>
+        <% } else { %>
+            <h4 id="no-comments-text">There are no comments for this post.</h4>
+        <% } %>
+    </div>
+</div>
 
-    <footer>
-        <h2>&copy; Digital Passport. All rights reserved.</h2>
-        <div id="logo-ad">Logo made by <a href="https://www.designevo.com/" title="Free Online Logo Maker">DesignEvo free logo creator</a></div>
-    </footer>
+<script src="/js/expandImg.js"></script>
+<script src="/js/toggleComments.js"></script>
 
-    <script src="/js/expandImg.js"></script>
-    <script src="/js/toggleComments.js"></script>
-</body>
-</html>
+<%- include('./partials/footer') %>
