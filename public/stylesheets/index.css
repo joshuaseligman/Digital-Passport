@@ -4,6 +4,7 @@ body {
   color: #2196F3;
   margin-left: 2%;
   margin-right: 2%;
+  overflow-y: scroll;
 }
 
 nav, footer {
@@ -74,7 +75,7 @@ footer h2 {
   background-attachment: fixed;
   background-size: cover;
   height: 700px;
-  border-radius: 5%;
+  border-radius: 1.5rem;
 }
 
 .landing-center-text {
@@ -94,7 +95,7 @@ footer h2 {
 #sample-pictures {
   background-color: #eeeeee;
   text-align: center;
-  border-radius: 5%;
+  border-radius: 1.5rem;
   padding-bottom: 1rem;
 }
 #sample-pictures h2 {
@@ -138,7 +139,7 @@ footer h2 {
   justify-content: space-evenly;
 }
 #img-carousel-images img {
-  border-radius: 5%;
+  border-radius: 1.5rem;
 }
 
 #sample-main {
@@ -155,13 +156,13 @@ footer h2 {
   background-image: url("../res/landing-search-img.jpg");
   background-size: cover;
   height: 500px;
-  border-radius: 5%;
+  border-radius: 1.5rem;
 }
 
 #landing-search-area {
   background-color: rgba(0, 0, 0, 0.6);
   height: 100%;
-  border-radius: 5%;
+  border-radius: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
