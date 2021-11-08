@@ -28,30 +28,20 @@ router.get('/:username', async (req, res) => {
 
 // POST for updating a user's saved posts collection
 router.post('/:username/savedPosts/:postID/add', async (req, res) => {
-    // If the user wants to add the post to their collection
-    if (req.body.updateType === 'add') {
-        // Add the post to the collection
-        await db.addToSavedPosts(req.body.postID, {username: req.body.user});
-    } else {
-        // Otherwise remove the post from the collection
-        await db.removeFromSavedPosts(req.body.postID, {username: req.body.user});
-    }
+    // Add the post to the collection
+    await db.addToSavedPosts(req.params.postID, {username: req.params.username});
+
     // Redirect to the post page
-    res.redirect(`/posts/${req.body.postID}`);
+    res.redirect(`/posts/${req.params.postID}`);
 });
 
 // POST for updating a user's saved posts collection
 router.post('/:username/savedPosts/:postID/remove', async (req, res) => {
-    // If the user wants to add the post to their collection
-    if (req.body.updateType === 'add') {
-        // Add the post to the collection
-        await db.addToSavedPosts(req.body.postID, {username: req.body.user});
-    } else {
-        // Otherwise remove the post from the collection
-        await db.removeFromSavedPosts(req.body.postID, {username: req.body.user});
-    }
+    // Temove the post from the collection
+    await db.removeFromSavedPosts(req.params.postID, {username: req.params.username});
+
     // Redirect to the post page
-    res.redirect(`/posts/${req.body.postID}`);
+    res.redirect(`/posts/${req.params.postID}`);
 });
 
 // GET for the collection page
