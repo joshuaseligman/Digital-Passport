@@ -1,0 +1,40 @@
+@import './global.scss';
+
+#error-bg {
+    background-image: url('/res/lightning.jpg');
+    background-size: cover;
+    height: 500px;
+    border-radius: 5%;
+    margin-top: 2%;
+    margin-bottom: 0;
+}
+
+#error-area {
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 100%;
+    border-radius: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 40%;
+    border-radius: 5%;
+
+    h2 {
+        font-size: 4rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    p {
+        font-size: 3rem;
+        margin: 0;
+        padding: 0;
+    }
+}

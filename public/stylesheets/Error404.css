@@ -1,0 +1,104 @@
+body {
+  background-color: #FAFAFA;
+  font-family: "Tangerine", cursive;
+  color: #2196F3;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+nav, footer {
+  background-color: #eeeeee;
+  margin-top: 1%;
+  display: flex;
+  height: 10%;
+}
+
+#logo-space {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#logo-space img {
+  width: 75%;
+  height: auto;
+}
+
+#company {
+  width: 40%;
+}
+#company h1 {
+  text-align: left;
+  font-size: 3rem;
+  padding-left: 3%;
+}
+
+#links {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#links a {
+  text-decoration: none;
+  color: #2196F3;
+  font-size: 2rem;
+}
+#links a:hover {
+  color: #FF9800;
+}
+
+footer {
+  margin-top: 2.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+footer h2 {
+  text-align: center;
+  font-size: 1.75rem;
+}
+
+#logo-ad {
+  font-size: 1.25rem;
+}
+
+#error-bg {
+  background-image: url("/res/lightning.jpg");
+  background-size: cover;
+  height: 500px;
+  border-radius: 5%;
+  margin-top: 2%;
+  margin-bottom: 0;
+}
+
+#error-area {
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 100%;
+  border-radius: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 40%;
+  border-radius: 5%;
+}
+#error h2 {
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
+}
+#error p {
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
+}
+
+/*# sourceMappingURL=error404.css.map */

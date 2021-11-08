@@ -15,11 +15,17 @@ nav, footer {
 
 #logo-space {
   width: 10%;
-  background-color: #FF9800;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#logo-space img {
+  width: 75%;
+  height: auto;
 }
 
 #company {
-  width: 50%;
+  width: 40%;
 }
 #company h1 {
   text-align: left;
@@ -28,7 +34,7 @@ nav, footer {
 }
 
 #links {
-  width: 40%;
+  width: 50%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -44,11 +50,18 @@ nav, footer {
 
 footer {
   margin-top: 2.5%;
+  display: flex;
+  align-items: center;
   justify-content: space-evenly;
+  flex-direction: column;
 }
 footer h2 {
   text-align: center;
   font-size: 1.75rem;
+}
+
+#logo-ad {
+  font-size: 1.25rem;
 }
 
 #posts-area {
@@ -61,77 +74,15 @@ footer h2 {
   margin-bottom: 0.5%;
 }
 
-.post-link {
+.post {
   width: 30%;
 }
-.post-link img {
+.post img {
   width: 100%;
   height: 25rem;
   margin-top: 1.5%;
   border-radius: 5%;
   object-fit: cover;
-}
-
-#overlap-post-area {
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 1%;
-  border-radius: 2.5%;
-  position: absolute;
-}
-
-#overlap-post {
-  width: 50%;
-  background-color: #FAFAFA;
-  margin-top: 2.5%;
-  border-radius: 2.5%;
-  display: flex;
-  flex-direction: column;
-}
-
-#post-img {
-  width: 70%;
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-top: 2.5%;
-  height: 29rem;
-  border-radius: 5%;
-  object-fit: cover;
-}
-
-#post-desc {
-  margin-top: 2.5%;
-}
-
-.post-text {
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-#post-loc {
-  text-align: center;
-  color: #FF9800;
-}
-
-#caption {
-  font-size: 1.25rem;
-  text-align: justify;
-}
-
-#post-user-info {
-  text-align: right;
-  color: #FF9800;
-}
-
-#more-info {
-  text-align: right;
-  color: #2196F3;
-  text-decoration: none;
-}
-
-#more-info:hover {
-  color: #FF9800;
 }
 
 /*# sourceMappingURL=postSelection.css.map */

@@ -11,9 +11,10 @@ body {
     color: $primary-text;
     margin-left: 2%;
     margin-right: 2%;
+    overflow-y: scroll;
 }
 
-nav, footer{
+nav, footer {
     background-color: $nav-color;
 
     margin-top: 1%;
@@ -23,7 +24,15 @@ nav, footer{
 
 #logo-space {
     width: 10%;
-    background-color: $secondary-text;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    img {
+        width: 75%;
+        height: auto;
+    }
 }
 
 #company {
@@ -56,10 +65,18 @@ nav, footer{
 
 footer {
     margin-top: 2.5%;
+
+    display: flex;
+    align-items: center;
     justify-content: space-evenly;
+    flex-direction: column;
     
     h2 {
         text-align: center;
         font-size: 1.75rem;
     }
+}
+
+#logo-ad {
+    font-size: 1.25rem;
 }
