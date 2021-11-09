@@ -50,13 +50,14 @@
     }
 
     input {
-        font-family: "Tangerine", cursive;
+        font-family: 'Libre Baskerville';
         background-color: rgba(0, 0, 0, 0);
         border-color: $nav-color;
         border-width: 1%;
         color: $secondary-text;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         box-shadow: none;
+        padding: 0.25rem;
     }
 
     input:focus {
