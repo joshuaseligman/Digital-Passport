@@ -12,7 +12,7 @@ const app = express();
 // Set up the cookie data for users
 app.use(session({
     secret: 'secret',
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: false
 }));
 app.use(cookieParser());
