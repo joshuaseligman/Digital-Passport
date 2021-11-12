@@ -130,4 +130,19 @@ footer h2 {
   margin-bottom: 0;
 }
 
+#no-posts {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: 2.25rem;
+}
+#no-posts a {
+  color: #2196F3;
+}
+#no-posts a:visited {
+  color: #2196F3;
+}
+#no-posts a:hover {
+  color: #FF9800;
+}
+
 /*# sourceMappingURL=collection.css.map */

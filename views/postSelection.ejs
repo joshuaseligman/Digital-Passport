@@ -6,8 +6,12 @@
 <%- include('./partials/navbar') %>
 
 <div id="posts-area">
-    <% for (let i = posts.length - 1; i >= 0; i--) { %>
-        <a href=<%= `/posts/${posts[i]._id}` %> class="post" id=<%= `${posts[i]._id}` %>> <img src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> > </a>
+    <% if (posts.length > 0) { %>
+        <% for (let i = posts.length - 1; i >= 0; i--) { %>
+            <a href=<%= `/posts/${posts[i]._id}` %> class="post" id=<%= `${posts[i]._id}` %>> <img src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> > </a>
+        <% } %>
+    <% } else { %>
+        <h2 id="no-posts">There are no posts for the selected location. Click <a href="/map">here</a> to go back and choose a new location.</h2>
     <% } %>
 </div>
 

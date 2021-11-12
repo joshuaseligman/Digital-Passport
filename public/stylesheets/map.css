@@ -109,6 +109,7 @@ footer h2 {
 #location-selection h2 {
   font-size: 2.5rem;
   color: #FF9800;
+  font-family: Helvetica;
 }
 #location-selection input {
   font-size: 2.5rem;

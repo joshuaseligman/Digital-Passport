@@ -22,3 +22,21 @@
         object-fit: cover;
     }
 }
+
+#no-posts {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: 2.25rem;
+
+    a {
+        color: $primary-text;
+    }
+
+    a:visited {
+        color: $primary-text;
+    }
+
+    a:hover {
+        color: $secondary-text;
+    }
+}

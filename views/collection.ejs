@@ -6,13 +6,17 @@
 <%- include('./partials/navbar') %>
 
 <div id="collection-area">
-    <h1 id="subtitle">Revisit your favorite places</h1>
+    <h1 id="subtitle">Your Collection</h1>
     <div id="posts-area">
-        <% for (let i = posts.length - 1; i >= 0; i--) { %>
-            <a href=<%= `/posts/${posts[i]._id}` %> class="post" id=<%= `${posts[i]._id}` %> > 
-                <img class="post-img" src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> > 
-                <div class="overlay"></div>
-            </a>
+        <% if (posts.length > 0) { %>
+            <% for (let i = posts.length - 1; i >= 0; i--) { %>
+                <a href=<%= `/posts/${posts[i]._id}` %> class="post" id=<%= `${posts[i]._id}` %> > 
+                    <img class="post-img" src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> > 
+                    <div class="overlay"></div>
+                </a>
+            <% } %>
+        <% } else { %>
+            <h2 id="no-posts">You do not have any posts in your collection. Click <a href="/map">here</a> to explore and save posts.</h2>
         <% } %>
     </div>
 </div>
