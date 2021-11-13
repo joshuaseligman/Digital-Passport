@@ -101,4 +101,24 @@ footer h2 {
   object-fit: cover;
 }
 
+#no-posts {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: 2.25rem;
+}
+#no-posts a {
+  color: #2196F3;
+}
+#no-posts a:visited {
+  color: #2196F3;
+}
+#no-posts a:hover {
+  color: #FF9800;
+}
+
+#location {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
 /*# sourceMappingURL=postSelection.css.map */

@@ -8,12 +8,10 @@
 <%- include('./partials/navbar') %>
 
 <div id="selection-area">
-    <h1 id="directions">Click on the map to select where you want to go.</h1>
+    <h1 id="directions">Navigate the map and click on the place where you want to go.</h1>
     <form id="location-selection" action="/map" method="POST">
         <h2>
-            <span class="info">City</span>, 
-            <span class="info">State</span>, 
-            <span class="info">Country</span>
+            <span class="info">City, </span><span class="info">State, </span><span class="info">Country</span>
         </h2>
         <input class="location-form-data" type="hidden" name="city" value="">
         <input class="location-form-data" type="hidden" name="state" value="">
