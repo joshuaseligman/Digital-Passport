@@ -1,76 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('./partials/header') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include('./partials/mapLinks') %>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+<link rel="stylesheet" href="/stylesheets/map.css">
+<title>Digital Passport - Map</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+<%- include('./partials/navbar') %>
 
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
-        type="text/javascript" charset="utf-8"></script>
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
-        type="text/javascript" charset="utf-8"></script>
+<div id="selection-area">
+    <h1 id="directions">Navigate the map and click on the place where you want to go.</h1>
+    <form id="location-selection" action="/map" method="POST">
+        <h2>
+            <span class="info">City, </span><span class="info">State, </span><span class="info">Country</span>
+        </h2>
+        <input class="location-form-data" type="hidden" name="city" value="">
+        <input class="location-form-data" type="hidden" name="state" value="">
+        <input class="location-form-data" type="hidden" name="country" value="">
+        <input type="submit" value="Explore">
+    </form>
+</div>
 
-    <link rel="stylesheet" href="/stylesheets/global.css">
-    <link rel="stylesheet" href="/stylesheets/map.css">
+<div id="map"></div>
 
-    <title>Digital Passport - Map</title>
-</head>
+<script src="/js/map.js"></script>
 
-<body>
-    <nav>
-        <div id="logo-space">
-            <img src="/res/logo.jpg" alt="logo">
-        </div>
-        <div id="company">
-            <h1>Digital Passport</h1>
-        </div>
-        <div id="links">
-            <a href="/map"><h3>Map</h3></a>
-            <% if (account.id > 0) { %>
-                <a href="/collection"><h3>Collection</h3></a>
-                <a href=<%= `/profile/${account.username}` %>><h3>Profile</h3></a>
-                <a href="/logout"><h3>Log Out</h3></a>
-            <% } else { %>
-                <a href="/login"><h3>Log In</h3></a>
-            <% } %>
-        </div>
-    </nav>
-
-    <div id="selection-area">
-        <h1 id="directions">Click on the map to select where you want to go.</h1>
-        <form id="location-selection" action="/map" method="POST">
-            <h2>
-                <span class="info">City</span>, 
-                <span class="info">State</span>, 
-                <span class="info">Country</span>
-            </h2>
-            <input class="location-form-data" type="hidden" name="city" value="">
-            <input class="location-form-data" type="hidden" name="state" value="">
-            <input class="location-form-data" type="hidden" name="country" value="">
-            <input type="submit" value="Explore">
-        </form>
-    </div>
-
-    <div id="map"></div>
-
-    <footer>
-        <h2>&copy; Digital Passport. All rights reserved.</h2>
-        <div id="logo-ad">Logo made by <a href="https://www.designevo.com/" title="Free Online Logo Maker">DesignEvo free logo creator</a></div>
-    </footer>
-
-    <script src="/js/map.js"></script>
-</body>
-
-</html>
+<%- include('./partials/footer') %>

@@ -1,0 +1,154 @@
+body {
+  background-color: #FAFAFA;
+  font-family: "Tangerine", cursive;
+  color: #2196F3;
+  margin-left: 2%;
+  margin-right: 2%;
+  overflow-y: scroll;
+}
+
+nav, footer {
+  background-color: #eeeeee;
+  margin-top: 1%;
+  display: flex;
+  height: 10%;
+}
+
+#index-link {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  text-decoration: none;
+}
+
+#index-link:visited {
+  color: #2196F3;
+}
+
+#index-link:hover {
+  color: #FF9800;
+}
+
+#logo-space {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#logo-space img {
+  width: 75%;
+  height: auto;
+}
+
+#company {
+  width: 80%;
+}
+#company h1 {
+  text-align: left;
+  font-size: 3rem;
+  padding-left: 3%;
+}
+
+#links {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#links a {
+  text-decoration: none;
+  color: #2196F3;
+  font-size: 2rem;
+}
+#links a:hover {
+  color: #FF9800;
+}
+
+footer {
+  margin-top: 2.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+footer h2 {
+  text-align: center;
+  font-size: 1.75rem;
+}
+
+#logo-ad {
+  font-size: 1.25rem;
+}
+
+#addPostForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #eeeeee;
+  margin-top: 2%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+#addPostForm label {
+  font-size: 2rem;
+}
+#addPostForm input[type=file] {
+  font-size: 1.25rem;
+  color: #FF9800;
+}
+#addPostForm input[type=file]::cue {
+  padding-left: 5px;
+}
+#addPostForm input[type=file]::file-selector-button {
+  color: #2196F3;
+  font-size: 1.25rem;
+  font-family: Helvetica, Arial, sans-serif;
+  border: 2px solid #eeeeee;
+  background-color: #FAFAFA;
+  box-shadow: 2px 2px 2.5px #a8a8a8;
+}
+#addPostForm input[type=file]::file-selector-button:hover {
+  box-shadow: 4px 4px 2.5px #a8a8a8;
+}
+#addPostForm input[type=file]::file-selector-button:active {
+  background-color: #ffd180;
+}
+#addPostForm textarea {
+  font-size: 1.25rem;
+  color: #2196F3;
+  resize: none;
+}
+#addPostForm input[type=submit] {
+  color: #2196F3;
+  font-size: 1.25rem;
+  border: 2px solid #2196F3;
+  background-color: #FAFAFA;
+}
+#addPostForm input[type=submit]:hover {
+  color: #FF9800;
+  border-color: #FF9800;
+}
+
+#map {
+  height: 30rem;
+}
+
+#file-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#location-selection {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 2%;
+}
+#location-selection h3 {
+  font-size: 1.25rem;
+}
+
+/*# sourceMappingURL=addPost.css.map */

@@ -1,0 +1,82 @@
+@import './global.scss';
+
+#addPostForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $nav-color;
+    margin-top: 2%;
+    margin-left: 15%;
+    margin-right: 15%;
+
+    label {
+        font-size: 2.0rem;
+    }
+
+    input[type="file"] {
+        font-size: 1.25rem;
+        color: $secondary-text;
+    }
+
+    input[type="file"]::cue {
+        padding-left: 5px;
+    }
+
+    input[type="file"]::file-selector-button {
+        color: $primary-text;
+        font-size: 1.25rem;
+        font-family: Helvetica, Arial, sans-serif;
+        border: 2px solid $nav-color;
+        background-color: $bg-color;
+        box-shadow: 2px 2px 2.5px #a8a8a8;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+        box-shadow: 4px 4px 2.5px #a8a8a8;
+    }
+
+    input[type="file"]::file-selector-button:active {
+        background-color: $sub-orange;
+    }
+
+    textarea {
+        font-size: 1.25rem;
+        color: $primary-text;
+        resize: none;
+    }
+
+    input[type="submit"] {
+        color: $primary-text;
+        font-size: 1.25rem;
+        border: 2px solid $primary-text;
+        background-color: $bg-color;
+    }
+
+    input[type="submit"]:hover {
+        color: $secondary-text;
+        border-color: $secondary-text;
+    }
+}
+
+#map {
+    height: 30rem;   
+}
+
+#file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#location-selection {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 2%;
+
+    h3 {
+        font-size: 1.25rem;
+    }
+}

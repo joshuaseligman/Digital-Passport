@@ -15,8 +15,23 @@ nav, footer {
   height: 10%;
 }
 
+#index-link {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  text-decoration: none;
+}
+
+#index-link:visited {
+  color: #2196F3;
+}
+
+#index-link:hover {
+  color: #FF9800;
+}
+
 #logo-space {
-  width: 10%;
+  width: 20%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -27,7 +42,7 @@ nav, footer {
 }
 
 #company {
-  width: 40%;
+  width: 80%;
 }
 #company h1 {
   text-align: left;
@@ -114,6 +129,21 @@ footer h2 {
   font-size: 3rem;
   margin-top: 2.5%;
   margin-bottom: 0;
+}
+
+#no-posts {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: 2.25rem;
+}
+#no-posts a {
+  color: #2196F3;
+}
+#no-posts a:visited {
+  color: #2196F3;
+}
+#no-posts a:hover {
+  color: #FF9800;
 }
 
 /*# sourceMappingURL=collection.css.map */

@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-    
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include('./partials/header') %>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,47 +8,24 @@
     <link rel="stylesheet" href="/stylesheets/global.css">
     <link rel="stylesheet" href="/stylesheets/collection.css">
 
-    <title>Digital Passport - Collection</title>
-</head>
-
-<body>
-     <nav>
-        <div id="logo-space">
-            <img src="/res/logo.jpg" alt="logo">
-        </div>
-        <div id="company">
-            <h1>Digital Passport</h1>
-        </div>
-        <div id="links">
-            <a href="/map"><h3>Map</h3></a>
-            <% if (account.id > 0) { %>
-                <a href="/collection"><h3>Collection</h3></a>
-                <a href=<%= `/profile/${account.username}` %>><h3>Profile</h3></a>
-                <a href="/logout"><h3>Log Out</h3></a>
-            <% } else { %>
-                <a href="/login"><h3>Log In</h3></a>
-            <% } %>
-        </div>
-    </nav>
+<%- include('./partials/navbar') %>
 
 <div id="collection-area">
-    <h1 id="subtitle">Revisit your favorite places</h1>
+    <h1 id="subtitle">Your Collection</h1>
     <div id="posts-area">
-        <% for (let i = posts.length - 1; i >= 0; i--) { %>
-            <a href=<%= `/posts/${posts[i]._id}` %> class="post" id=<%= posts[i]._id %> > 
-                <img class="post-img" src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> > 
-                <div class="overlay"></div>
-            </a>
+        <% if (posts.length > 0) { %>
+            <% for (let i = posts.length - 1; i >= 0; i--) { %>
+                <a href=<%= `/posts/${posts[i]._id}` %> class="post" id=<%= `${posts[i]._id}` %> > 
+                    <img class="post-img" src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> > 
+                    <div class="overlay"></div>
+                </a>
+            <% } %>
+        <% } else { %>
+            <h2 id="no-posts">You do not have any posts in your collection. Click <a href="/map">here</a> to explore and save posts.</h2>
         <% } %>
     </div>
 </div>
 
-<footer>
-        <h2>&copy; Digital Passport. All rights reserved.</h2>
-        <div id="logo-ad">Logo made by <a href="https://www.designevo.com/" title="Free Online Logo Maker">DesignEvo free logo creator</a></div>
-    </footer>
+<script src="/js/postRedirect.js"></script>
 
-    <script src="/js/postSelection.js"></script>
-</body>
-</html>
-
+<%- include('./partials/footer') %>

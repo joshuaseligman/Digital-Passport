@@ -1,0 +1,38 @@
+@import './global.scss';
+
+#about-bg {
+    background-image: url('/res/about-img.jpg');
+    background-position: center;
+    background-size: cover;
+    border-radius: 5%;;
+}
+
+#about {
+    background-color: rgba(0.0, 0.0, 0.0, 0.4);
+    padding-top: 1%;
+    padding-left: 1%;
+    padding-bottom: 1%;
+    margin-top: 2%;
+    border-radius: 5%;
+
+    font-family: Helvetica;
+
+    h1 {
+        font-size: 3rem;
+        line-height: 2rem;
+    }
+
+    p {
+        font-size: 1.25rem;
+        width: 98%;
+        text-align: justify;
+    }
+
+    a {
+        color: $primary-text;
+    }
+
+    a:hover {
+        color: $secondary-text;
+    }
+}
