@@ -1,0 +1,115 @@
+body {
+  background-color: #FAFAFA;
+  font-family: "Tangerine", cursive;
+  color: #2196F3;
+  margin-left: 2%;
+  margin-right: 2%;
+  overflow-y: scroll;
+}
+
+nav, footer {
+  background-color: #eeeeee;
+  margin-top: 1%;
+  display: flex;
+  height: 10%;
+}
+
+#index-link {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  text-decoration: none;
+}
+
+#index-link:visited {
+  color: #2196F3;
+}
+
+#index-link:hover {
+  color: #FF9800;
+}
+
+#logo-space {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#logo-space img {
+  width: 75%;
+  height: auto;
+}
+
+#company {
+  width: 80%;
+}
+#company h1 {
+  text-align: left;
+  font-size: 3rem;
+  padding-left: 3%;
+}
+
+#links {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#links a {
+  text-decoration: none;
+  color: #2196F3;
+  font-size: 2rem;
+}
+#links a:hover {
+  color: #FF9800;
+}
+
+footer {
+  margin-top: 2.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+footer h2 {
+  text-align: center;
+  font-size: 1.75rem;
+}
+
+#logo-ad {
+  font-size: 1.25rem;
+}
+
+#about-bg {
+  background-image: url("/res/about-img.jpg");
+  background-position: center;
+  background-size: cover;
+  border-radius: 5%;
+}
+
+#about {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 1%;
+  padding-left: 1%;
+  padding-bottom: 1%;
+  margin-top: 2%;
+  border-radius: 5%;
+  font-family: Helvetica;
+}
+#about h1 {
+  font-size: 3rem;
+  line-height: 2rem;
+}
+#about p {
+  font-size: 1.25rem;
+  width: 98%;
+  text-align: justify;
+}
+#about a {
+  color: #2196F3;
+}
+#about a:hover {
+  color: #FF9800;
+}
+
+/*# sourceMappingURL=about.css.map */
