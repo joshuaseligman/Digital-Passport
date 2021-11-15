@@ -2,12 +2,12 @@ $primary-text: #2196F3;
 $secondary-text: #FF9800;
 $sub-blue: #80d8ff;
 $sub-orange: #ffd180;
-$bg-color: #FAFAFA;
+$bg-color: #fafafa;
 $nav-color: #eeeeee;
 
 body {
     background-color: $bg-color;
-    font-family: "Tangerine", cursive;
+    font-family:'Libre Baskerville', Arial, Helvetica, sans-serif;
     color: $primary-text;
     margin-left: 2%;
     margin-right: 2%;
@@ -16,7 +16,7 @@ body {
 
 nav, footer {
     background-color: $nav-color;
-
+    font-weight: bold;
     margin-top: 1%;
     display: flex;
     height: 10%;

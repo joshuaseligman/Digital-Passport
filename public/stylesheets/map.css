@@ -1,6 +1,6 @@
 body {
-  background-color: #FAFAFA;
-  font-family: "Tangerine", cursive;
+  background-color: #fafafa;
+  font-family: "Libre Baskerville", Arial, Helvetica, sans-serif;
   color: #2196F3;
   margin-left: 2%;
   margin-right: 2%;
@@ -9,6 +9,7 @@ body {
 
 nav, footer {
   background-color: #eeeeee;
+  font-weight: bold;
   margin-top: 1%;
   display: flex;
   height: 10%;
@@ -117,7 +118,7 @@ footer h2 {
 #location-selection input[type=submit] {
   width: auto;
   border-radius: 5%;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   color: #FF9800;
   height: auto;
   font-family: "Tangerine", cursive;
