@@ -8,6 +8,8 @@
     margin-top: 2%;
     margin-left: 15%;
     margin-right: 15%;
+    border-radius: 1.5rem;
+    padding: 1%;
 
     label {
         font-size: 2.0rem;
@@ -16,6 +18,10 @@
     input[type="file"] {
         font-size: 1.25rem;
         color: $secondary-text;
+        background-color: #dfdfdf;
+        border-radius: 1rem;
+        margin: 0.5%;
+        padding: 2%;
     }
 
     input[type="file"]::cue {
@@ -29,6 +35,7 @@
         border: 2px solid $nav-color;
         background-color: $bg-color;
         box-shadow: 2px 2px 2.5px #a8a8a8;
+        border-radius: 0.5rem;
     }
 
     input[type="file"]::file-selector-button:hover {
@@ -43,6 +50,7 @@
         font-size: 1.25rem;
         color: $primary-text;
         resize: none;
+        margin: 2.5% 0%;
     }
 
     input[type="submit"] {
@@ -59,7 +67,7 @@
 }
 
 #map {
-    height: 30rem;   
+    height: 30rem;
 }
 
 #file-upload {
