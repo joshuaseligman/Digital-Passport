@@ -44,7 +44,7 @@ app.use('/users', userRoutes);
 app.use((req, res) => {
     res.status(404);
     const curUser = getCurrentUser(req);
-    res.render('error404.ejs', { account: curUser });
+    res.render('error404', { account: curUser });
 });
 
 // Set up the server to listen on the given port
