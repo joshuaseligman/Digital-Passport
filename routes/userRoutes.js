@@ -52,6 +52,7 @@ router.get('/:username/collection', (req, res) => {
     } else if (req.session.user !== req.params.username) {
         res.redirect('/');
     } else {
+        console.log('hello')
         let user, savedPosts;
         // Get the user
         db.getUsers({username: req.session.user})
