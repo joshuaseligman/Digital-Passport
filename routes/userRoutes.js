@@ -52,7 +52,6 @@ router.get('/:username/collection', (req, res) => {
     } else if (req.session.user !== req.params.username) {
         res.redirect('/');
     } else {
-        console.log('hello')
         let user, savedPosts;
         // Get the user
         db.getUsers({username: req.session.user})
@@ -93,9 +92,6 @@ router.post('/:username/addPost', upload.single('pic'), async (req, res) => {
 
     // Resize the image
     await sharp(path.join(__dirname, '..', req.file.path)).resize({ width: 720 }).toFile(path.join(__dirname, '..', newPath))
-    .then(function(newFileInfo) {
-        console.log("Success");
-    })
     .catch(function(err) {
         console.log(err);
     });
@@ -147,6 +143,5 @@ router.post('/:username/addPost', upload.single('pic'), async (req, res) => {
     // Redirect to the user's profile page
     res.redirect(`/users/${req.session.user}`);
 });
-
 
 module.exports = router;
