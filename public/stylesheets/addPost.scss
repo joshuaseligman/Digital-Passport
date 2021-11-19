@@ -69,6 +69,12 @@
     justify-content: space-evenly;
 }
 
+#img-preview {
+    width: 50%;
+    height: 20rem;
+    display: none;
+}
+
 #location-selection {
     display: none;
     flex-direction: column;

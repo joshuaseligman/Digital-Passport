@@ -20,7 +20,6 @@ app.use(cookieParser());
 // Set up some other express app settings
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.urlencoded({extended: true}));
 
 // Use port 3000

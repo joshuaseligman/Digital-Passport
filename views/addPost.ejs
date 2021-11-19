@@ -11,7 +11,8 @@
 <form id="addPostForm" method="POST" enctype="multipart/form-data">
     <label for="pic">Upload an image</label>
     <div id="file-upload">
-        <input type="file" accept="image/*" name="pic" required>
+        <input type="file" accept=".png, .jpeg, .jpg" name="pic" id="img-input" required>
+        <img src="" id="img-preview">
     </div>
     <br>
     <label for="caption">Caption</label>
@@ -31,5 +32,6 @@
 </form>
 
 <script src="/js/map.js"></script>
+<script src="/js/previewImg.js"></script>
 
 <%- include('./partials/footer') %>
