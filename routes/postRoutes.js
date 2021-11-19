@@ -43,6 +43,9 @@ router.get('/', async (req, res) => {
 router.get('/:postID', async (req, res) => {
     // Get the specific post requested in the URL path
     const post = await db.getPosts({ _id: req.params.postID });
+    if (post.length === 0) {
+        return res.redirect('/404');
+    }
     
     const curAcct = getCurrentUser(req);
     
