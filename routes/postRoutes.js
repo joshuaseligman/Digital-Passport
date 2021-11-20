@@ -42,8 +42,9 @@ router.get('/', async (req, res) => {
 // GET for the page of a specific post
 router.get('/:postID', async (req, res) => {
     // Get the specific post requested in the URL path
-    const post = await db.getPosts({ _id: req.params.postID });
-    if (post.length === 0) {
+    const post = await db.getPosts({ _id: req.params.postID })
+        .catch((err) => {});
+    if (post === undefined || post.length !== 1) {
         return res.redirect('/404');
     }
     

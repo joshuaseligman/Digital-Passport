@@ -13,10 +13,11 @@ const { getCurrentUser, upload } = require('../util');
 // GET for the profile page
 router.get('/:username', async (req, res) => {
     // Get the user requested in the URL
-    const reqUser = await db.getUsers({username: req.params.username});
+    const reqUser = await db.getUsers({username: req.params.username})
+        .catch((err) => {});
     // If the user doesn't exist, go back to the home page
-    if (!reqUser[0]) {
-        res.redirect('/404');
+    if (reqUser === undefined || reqUser.length !== 1) {
+        return res.redirect('/404');
     }
     // Get the posts of the user
     const posts = await db.getPosts({user: req.params.username});
