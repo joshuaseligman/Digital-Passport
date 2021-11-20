@@ -13,6 +13,8 @@ nav, footer {
   margin-top: 1%;
   display: flex;
   height: 10%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
 }
 
 #index-link {
@@ -85,7 +87,7 @@ footer h2 {
   background-image: url("/res/about-img.jpg");
   background-position: center;
   background-size: cover;
-  border-radius: 5%;
+  border-radius: 1.5rem;
 }
 
 #about {
@@ -94,8 +96,9 @@ footer h2 {
   padding-left: 1%;
   padding-bottom: 1%;
   margin-top: 2%;
-  border-radius: 5%;
-  font-family: Helvetica;
+  border-radius: 1.5rem;
+  text-shadow: 1px 1px 2px black;
+  font-family: Nunito;
 }
 #about h1 {
   font-size: 3rem;

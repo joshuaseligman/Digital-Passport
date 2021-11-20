@@ -13,6 +13,8 @@ nav, footer {
   margin-top: 1%;
   display: flex;
   height: 10%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
 }
 
 #index-link {
@@ -89,6 +91,8 @@ footer h2 {
   margin-top: 2%;
   margin-left: 15%;
   margin-right: 15%;
+  border-radius: 1.5rem;
+  padding: 1%;
 }
 #addPostForm label {
   font-size: 2rem;
@@ -96,6 +100,10 @@ footer h2 {
 #addPostForm input[type=file] {
   font-size: 1.25rem;
   color: #FF9800;
+  background-color: #dfdfdf;
+  border-radius: 1rem;
+  margin: 0.5%;
+  padding: 2%;
 }
 #addPostForm input[type=file]::cue {
   padding-left: 5px;
@@ -107,6 +115,7 @@ footer h2 {
   border: 2px solid #eeeeee;
   background-color: #fafafa;
   box-shadow: 2px 2px 2.5px #a8a8a8;
+  border-radius: 0.5rem;
 }
 #addPostForm input[type=file]::file-selector-button:hover {
   box-shadow: 4px 4px 2.5px #a8a8a8;
@@ -118,6 +127,7 @@ footer h2 {
   font-size: 1.25rem;
   color: #2196F3;
   resize: none;
+  margin: 2.5% 0%;
 }
 #addPostForm input[type=submit] {
   color: #2196F3;
