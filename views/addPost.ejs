@@ -1,77 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include('./partials/header') %>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+<%- include('./partials/mapLinks') %>
 
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
-        type="text/javascript" charset="utf-8"></script>
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
-        type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/stylesheets/addPost.css">
 
-    <link rel="stylesheet" href="/stylesheets/addPost.css">
+<title>Digital Passport - Add Post</title>
 
-    <title>Document</title>
-</head>
-<body>
-    <nav>
-        <div id="logo-space">
-            <img src="/res/logo.jpg" alt="logo">
-        </div>
-        <div id="company">
-            <h1>Digital Passport</h1>
-        </div>
-        <div id="links">
-            <a href="/map"><h3>Map</h3></a>
-            <% if (account.id > 0) { %>
-                <a href="/collection"><h3>Collection</h3></a>
-                <a href=<%= `/profile/${account.username}` %>><h3>Profile</h3></a>
-                <a href="/logout"><h3>Log Out</h3></a>
-            <% } else { %>
-                <a href="/login"><h3>Log In</h3></a>
-            <% } %>
-        </div>
-    </nav>
+<%- include('./partials/navbar') %>
 
-    <form id="addPostForm" method="POST" enctype="multipart/form-data">
-        <label for="pic">Upload an image</label>
-        <div id="file-upload">
-            <input type="file" accept="image/*" name="pic" required>
-        </div>
-        <br>
-        <label for="caption">Caption</label>
-        <div>
-            <textarea name="caption" rows="8" cols="25" required></textarea>
-        </div>
-        <br>
-        <div id="map" style="width: 30rem; height: 30rem;"></div>
-        <br>
-        <div id="location-selection">
-            <h3>
-                <span class="info">City</span>,
-                <span class="info">State</span>,
-                <span class="info">Country</span>
-            </h3>
-            <input type="hidden" name="city" class="location-form-data" required>
-            <input type="hidden" name="state" class="location-form-data">
-            <input type="hidden" name="country" class="location-form-data" required>
-            <input type="Submit" value="Post">
-        </div>
-    </form>
+<form id="addPostForm" method="POST" enctype="multipart/form-data">
+    <label for="pic">Upload an image</label>
+    <div id="file-upload">
+        <input type="file" accept=".png, .jpeg, .jpg" name="pic" id="img-input" required>
+        <img src="" id="img-preview">
+    </div>
+    <br>
+    <div>
+        <textarea name="caption" rows="8" cols="50" required placeholder="Describe your experience..."></textarea>
+    </div>
+    <br>
+    <div id="map" style="width: 30rem; height: 30rem;"></div>
+    <br>
+    <div id="location-selection">
+        <h3><span class="info">City</span><span class="info">State</span><span class="info">Country</span></h3>
+        <input type="hidden" name="city" class="location-form-data" required>
+        <input type="hidden" name="state" class="location-form-data">
+        <input type="hidden" name="country" class="location-form-data" required>
+        <input type="Submit" value="Post">
+    </div>
+</form>
 
-    <footer>
-        <h2>&copy; Digital Passport. All rights reserved.</h2>
-        <div id="logo-ad">Logo made by <a href="https://www.designevo.com/" title="Free Online Logo Maker">DesignEvo free logo creator</a></div>
-    </footer>
+<script src="/js/map.js"></script>
+<script src="/js/previewImg.js"></script>
 
-    <script src="/js/map.js"></script>
-</body>
-</html>
+<%- include('./partials/footer') %>

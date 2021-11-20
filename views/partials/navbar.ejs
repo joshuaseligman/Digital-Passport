@@ -1,0 +1,26 @@
+</head>
+
+<body>
+    <nav>
+        <a href="/" id="index-link">
+            <div id="logo-space">
+                <img src="/res/logo.jpg" alt="logo">
+            </div>
+            <div id="company">
+                <h1>Digital Passport</h1>
+            </div>
+        </a>
+        <div id="links">
+            <% if (account.id <= 0) { %>
+                <a href="/about"><h3>About</h3></a>
+            <% } %>
+            <a href="/map"><h3>Map</h3></a>
+            <% if (account.id > 0) { %>
+                <a href=<%=`/users/${account.username}/collection`%>><h3>Collection</h3></a>
+                <a href=<%= `/users/${account.username}` %>><h3>Profile</h3></a>
+                <a href="/logout"><h3>Log Out</h3></a>
+            <% } else { %>
+                <a href="/login"><h3>Log In</h3></a>
+            <% } %>
+        </div>
+    </nav>

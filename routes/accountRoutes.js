@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const db = require('../db');
+const User = require('../models/userModel');
 
 const { getCurrentUser } = require('../util');
 

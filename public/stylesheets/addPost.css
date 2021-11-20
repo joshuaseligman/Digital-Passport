@@ -1,20 +1,39 @@
 body {
-  background-color: #FAFAFA;
-  font-family: "Tangerine", cursive;
+  background-color: #fafafa;
+  font-family: "Libre Baskerville", Arial, Helvetica, sans-serif;
   color: #2196F3;
   margin-left: 2%;
   margin-right: 2%;
+  overflow-y: scroll;
 }
 
 nav, footer {
   background-color: #eeeeee;
+  font-weight: bold;
   margin-top: 1%;
   display: flex;
   height: 10%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+
+#index-link {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  text-decoration: none;
+}
+
+#index-link:visited {
+  color: #2196F3;
+}
+
+#index-link:hover {
+  color: #FF9800;
 }
 
 #logo-space {
-  width: 10%;
+  width: 20%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -25,7 +44,7 @@ nav, footer {
 }
 
 #company {
-  width: 40%;
+  width: 80%;
 }
 #company h1 {
   text-align: left;
@@ -72,6 +91,8 @@ footer h2 {
   margin-top: 2%;
   margin-left: 15%;
   margin-right: 15%;
+  border-radius: 1.5rem;
+  padding: 1%;
 }
 #addPostForm label {
   font-size: 2rem;
@@ -79,6 +100,10 @@ footer h2 {
 #addPostForm input[type=file] {
   font-size: 1.25rem;
   color: #FF9800;
+  background-color: #dfdfdf;
+  border-radius: 1rem;
+  margin: 0.5%;
+  padding: 2%;
 }
 #addPostForm input[type=file]::cue {
   padding-left: 5px;
@@ -88,8 +113,9 @@ footer h2 {
   font-size: 1.25rem;
   font-family: Helvetica, Arial, sans-serif;
   border: 2px solid #eeeeee;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   box-shadow: 2px 2px 2.5px #a8a8a8;
+  border-radius: 0.5rem;
 }
 #addPostForm input[type=file]::file-selector-button:hover {
   box-shadow: 4px 4px 2.5px #a8a8a8;
@@ -101,13 +127,13 @@ footer h2 {
   font-size: 1.25rem;
   color: #2196F3;
   resize: none;
+  margin: 2.5% 0%;
 }
 #addPostForm input[type=submit] {
   color: #2196F3;
-  width: 50%;
   font-size: 1.25rem;
   border: 2px solid #2196F3;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 #addPostForm input[type=submit]:hover {
   color: #FF9800;
@@ -123,6 +149,12 @@ footer h2 {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+#img-preview {
+  width: 50%;
+  height: 20rem;
+  display: none;
 }
 
 #location-selection {

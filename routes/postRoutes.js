@@ -4,13 +4,52 @@ const router = express.Router();
 const { getCurrentUser } = require('../util');
 const db = require('../db');
 
+// GET for the post selection page
+router.get('/', async (req, res) => {
+    // Get the posts for the inputted location
+    const posts = await db.getPosts(
+        {
+            location: {
+                city: req.query.city,
+                state: req.query.state,
+                country: req.query.country
+            }
+        }
+    );
+
+    let place = ''; 
+    if (req.query.city !== 'undefined') {
+        place += req.query.city;
+    }
+    if (req.query.state !== 'undefined' && req.query.city !== 'undefined') {
+        place += ', ';
+    }
+    if (req.query.state !== 'undefined') {
+        place += req.query.state;
+    }
+    if (req.query.country !== 'undefined' && (req.query.city !== 'undefined' || req.query.state !== 'undefined')) {
+        place += ', ';
+    }
+    if (req.query.country !== 'undefined') {
+        place += req.query.country;
+    }
+    
+    // Render the post selection page with the appropriate posts
+    const curAcct = getCurrentUser(req);
+    res.render('postSelection', {account: curAcct, posts: posts, location: place});
+});
+
 // GET for the page of a specific post
 router.get('/:postID', async (req, res) => {
     // Get the specific post requested in the URL path
-    const post = await db.getPosts({ _id: req.params.postID });
-
+    const post = await db.getPosts({ _id: req.params.postID })
+        .catch((err) => {});
+    if (post === undefined || post.length !== 1) {
+        return res.redirect('/404');
+    }
+    
     const curAcct = getCurrentUser(req);
-
+    
     // Set up the context that gets sent back to the EJS file
     const context = {
         account: curAcct,
@@ -48,24 +87,6 @@ router.post('/:postID/comment', async (req, res) => {
     await db.addComment(comment, {_id: req.params.postID});
     // Redirect to the post
     res.redirect(`/posts/${req.params.postID}`);
-});
-
-// GET for the post selection page
-router.get('/', async (req, res) => {
-    // Get the posts for the inputted location
-    const posts = await db.getPosts(
-        {
-            location: {
-                city: req.query.city,
-                state: req.query.state,
-                country: req.query.country
-            }
-        }
-    );
-    
-    // Render the post selection page with the appropriate posts
-    const curAcct = getCurrentUser(req);
-    res.render('postSelection', {account: curAcct, posts: posts});
 });
 
 module.exports = router;

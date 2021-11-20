@@ -1,20 +1,39 @@
 body {
-  background-color: #FAFAFA;
-  font-family: "Tangerine", cursive;
+  background-color: #fafafa;
+  font-family: "Libre Baskerville", Arial, Helvetica, sans-serif;
   color: #2196F3;
   margin-left: 2%;
   margin-right: 2%;
+  overflow-y: scroll;
 }
 
 nav, footer {
   background-color: #eeeeee;
+  font-weight: bold;
   margin-top: 1%;
   display: flex;
   height: 10%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+
+#index-link {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  text-decoration: none;
+}
+
+#index-link:visited {
+  color: #2196F3;
+}
+
+#index-link:hover {
+  color: #FF9800;
 }
 
 #logo-space {
-  width: 10%;
+  width: 20%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -25,7 +44,7 @@ nav, footer {
 }
 
 #company {
-  width: 40%;
+  width: 80%;
 }
 #company h1 {
   text-align: left;
@@ -93,6 +112,7 @@ footer h2 {
 #location-selection h2 {
   font-size: 2.5rem;
   color: #FF9800;
+  font-family: Helvetica;
 }
 #location-selection input {
   font-size: 2.5rem;
@@ -100,7 +120,7 @@ footer h2 {
 #location-selection input[type=submit] {
   width: auto;
   border-radius: 5%;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   color: #FF9800;
   height: auto;
   font-family: "Tangerine", cursive;

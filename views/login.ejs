@@ -1,88 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include('./partials/header') %>
 
-    <link rel="stylesheet" href="/stylesheets/global.css">
-    <link rel="stylesheet" href="/stylesheets/login.css">
+<link rel="stylesheet" href="/stylesheets/login.css">
+<title>Digital Passport - Log In</title>
 
-    <title>Digital Passport - Log In</title>
-</head>
-<body>
-    <nav>
-        <div id="logo-space">
-            <img src="/res/logo.jpg" alt="logo">
-        </div>
-        <div id="company">
-            <h1>Digital Passport</h1>
-        </div>
-        <div id="links">
-            <a href="/map"><h3>Map</h3></a>
-            <% if (account.id > 0) { %>
-                <a href="/collection"><h3>Collection</h3></a>
-                <a href=<%= `/profile/${account.username}` %>><h3>Profile</h3></a>
-                <a href="/logout"><h3>Log Out</h3></a>
-            <% } else { %>
-                <a href="/login"><h3>Log In</h3></a>
-            <% } %>
-        </div>
-    </nav>
+<%- include('./partials/navbar') %>
 
-    <div id="login-signup-area">
-        <div id="login">
-            <div class="login-page-cover">
-                <h2>Log In</h2>
-                <form id="login-form" method="POST" action="/login">
-                    <div class="login-row">
-                        <label for="login[username]">Username</label>
-                        <input class="uname" type="text" name="login[username]" required>
+<div id="login-signup-area">
+    <div id="login">
+        <div class="login-page-cover">
+            <h2>Log In</h2>
+            <form id="login-form" method="POST" action="/login">
+                <div class="login-row">
+                    <label for="login[username]">Username</label>
+                    <input class="uname" type="text" name="login[username]" required>
+                </div>
+                <div class="login-row">
+                    <label for="login[password]">Password</label>
+                    <input class="pwd" type="password" name="login[password]" required>
+                </div>
+                <% if (account.id === -1 && account.error === 'login') { %>
+                    <div class="form-error">
+                        <h3>Username or password is incorrect</h3>
                     </div>
-                    <div class="login-row">
-                        <label for="login[password]">Password</label>
-                        <input class="pwd" type="password" name="login[password]" required>
-                    </div>
-                    <% if (account.id === -1 && account.error === 'login') { %>
-                        <div class="form-error">
-                            <h3>Username or password is incorrect</h3>
-                        </div>
-                    <% } %>
-                    <div class="submit-btn login-row">
-                        <input type="submit" value="Start Exploring">
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div id="signup">
-            <div class="login-page-cover">
-                <h2>Sign Up</h2>
-                <form id="signup-form" method="POST" action='/signup'>
-                    <div class="login-row">
-                        <label for="signup[username]">Username</label>
-                        <input class="uname" type="text" name="signup[username]" required>
-                    </div>
-                    <div class="login-row">
-                        <label for="signup[password]">Password</label>
-                        <input class="pwd" type="password" name="signup[password]" required>
-                    </div>
-                    <% if (account.id === -1 && account.error === 'signup') { %>
-                        <div class="form-error">
-                            <h3>Username already exists</h3>
-                        </div>
-                    <% } %>
-                    <div class="submit-btn login-row">
-                        <input type="submit" value="Create Your Passport">
-                    </div>
-                </form>
-            </div>
+                <% } %>
+                <div class="submit-btn login-row">
+                    <input type="submit" value="Start Exploring">
+                </div>
+            </form>
         </div>
     </div>
 
-    <footer>
-        <h2>&copy; Digital Passport. All rights reserved.</h2>
-        <div id="logo-ad">Logo made by <a href="https://www.designevo.com/" title="Free Online Logo Maker">DesignEvo free logo creator</a></div>
-    </footer>
-</body>
-</html>
+    <div id="signup">
+        <div class="login-page-cover">
+            <h2>Sign Up</h2>
+            <form id="signup-form" method="POST" action='/signup'>
+                <div class="login-row">
+                    <label for="signup[username]">Username</label>
+                    <input class="uname" type="text" name="signup[username]" required>
+                </div>
+                <div class="login-row">
+                    <label for="signup[password]">Password</label>
+                    <input class="pwd" type="password" name="signup[password]" required>
+                </div>
+                <% if (account.id === -1 && account.error === 'signup') { %>
+                    <div class="form-error">
+                        <h3>Username already exists</h3>
+                    </div>
+                <% } %>
+                <div class="submit-btn login-row">
+                    <input type="submit" value="Create Your Passport">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %>
