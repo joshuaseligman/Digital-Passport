@@ -1,6 +1,6 @@
 body {
-  background-color: #FAFAFA;
-  font-family: "Tangerine", cursive;
+  background-color: #fafafa;
+  font-family: "Libre Baskerville", Arial, Helvetica, sans-serif;
   color: #2196F3;
   margin-left: 2%;
   margin-right: 2%;
@@ -9,9 +9,12 @@ body {
 
 nav, footer {
   background-color: #eeeeee;
+  font-weight: bold;
   margin-top: 1%;
   display: flex;
   height: 10%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
 }
 
 #index-link {
@@ -184,12 +187,13 @@ footer h2 {
   font-size: 2rem;
   padding-top: 3rem;
   color: #FF9800;
+  text-shadow: 2px 2px 2px #583a00;
 }
 
 #start-btn, #start-btn:visited {
   font-size: 3rem;
   padding: 1rem;
-  border: 3px solid #FAFAFA;
+  border: 3px solid #fafafa;
   text-decoration: none;
   color: #2196F3;
   text-align: center;
@@ -201,7 +205,7 @@ footer h2 {
 }
 
 #start-btn:active {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 /*# sourceMappingURL=index.css.map */
