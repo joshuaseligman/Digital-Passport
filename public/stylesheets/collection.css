@@ -48,7 +48,7 @@ nav, footer {
 }
 #company h1 {
   text-align: left;
-  font-size: 3rem;
+  font-size: 2.5rem;
   padding-left: 3%;
 }
 
@@ -61,7 +61,7 @@ nav, footer {
 #links a {
   text-decoration: none;
   color: #2196F3;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 #links a:hover {
   color: #FF9800;
@@ -136,7 +136,9 @@ footer h2 {
 #no-posts {
   margin-bottom: 0;
   padding-bottom: 0;
-  font-size: 2.25rem;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 3rem;
 }
 #no-posts a {
   color: #2196F3;
