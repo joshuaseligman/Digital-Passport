@@ -12,10 +12,10 @@
         <a href=<%= `/users/${account.username}/addPost` %> id="add-post">Add Post</a>
     <% } %>
 
-    <div id="profile-posts">
+    <div id="posts-area">
         <% if (posts.length > 0) { %>
             <% for (let i = posts.length - 1; i >= 0; i--) { %>
-                <a href=<%= `/posts/${posts[i]._id}` %> class="post" id=<%= posts[i]._id %> > 
+                <a href=<%= `/posts/${posts[i]._id}` %> class="post" id=<%= `${posts[i]._id}` %> > 
                     <img class="post-img" src=<%= `data:${posts[i].img.contentType};base64,${posts[i].img.imgData}` %> > 
                     <div class="overlay"></div>
                 </a>

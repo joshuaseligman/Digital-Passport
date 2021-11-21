@@ -48,7 +48,7 @@ nav, footer {
 }
 #company h1 {
   text-align: left;
-  font-size: 3rem;
+  font-size: 2.5rem;
   padding-left: 3%;
 }
 
@@ -61,7 +61,7 @@ nav, footer {
 #links a {
   text-decoration: none;
   color: #2196F3;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 }
 #links a:hover {
   color: #FF9800;
@@ -83,6 +83,49 @@ footer h2 {
   font-size: 1.25rem;
 }
 
+.post {
+  width: 30%;
+  margin-left: 1.25%;
+  margin-right: 1.25%;
+  margin-top: 1.5%;
+  box-shadow: 5px 5px 2.5px #a8a8a8;
+  height: 28rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  position: relative;
+}
+.post .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.post:hover .overlay {
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.post-img {
+  box-shadow: 5px 5px 2.5px #a8a8a8;
+  width: 100%;
+  height: 28rem;
+  border-radius: 1.5rem;
+}
+
+#posts-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+}
+
 #map {
   height: 30rem;
   margin-top: 2.5%;
@@ -94,15 +137,15 @@ footer h2 {
 
 #directions {
   text-align: center;
-  font-size: 2.75rem;
+  font-size: 2rem;
   padding-top: 1%;
   padding-bottom: 1%;
   margin-bottom: 0;
 }
 
 #location-selection {
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 10%;
+  margin-right: 10%;
   margin-top: 0;
   margin-bottom: 0;
   display: none;
@@ -110,23 +153,23 @@ footer h2 {
   align-items: center;
 }
 #location-selection h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #FF9800;
-  font-family: Helvetica;
+  font-family: "Libre Baskerville", Arial, Helvetica, sans-serif;
 }
 #location-selection input {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 #location-selection input[type=submit] {
   width: auto;
   border-radius: 5%;
   background-color: #fafafa;
-  color: #FF9800;
+  color: #2196F3;
   height: auto;
-  font-family: "Tangerine", cursive;
+  font-family: "Libre Baskerville", Arial, Helvetica, sans-serif;
 }
 #location-selection input[type=submit]:active {
-  color: #2196F3;
+  color: #FF9800;
 }
 
 /*# sourceMappingURL=map.css.map */

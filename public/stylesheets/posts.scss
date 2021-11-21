@@ -1,10 +1,9 @@
 @import './global.scss';
 
-.post {
-    font-family: 'Nunito';
+.post-div {
+    font-family: 'Libre Baskerville', Arial, Helvetica, sans-serif;
     background-color: $nav-color;
     border-radius: 1.5rem;
-    // height: 500px;
     display: flex;
     flex-direction: column;
     margin: 1% 2.5%;
@@ -163,13 +162,13 @@
 
     label {
         font-size: 1.75rem;
-        font-family: Helvetica, Arial, sans-serif;
         text-align: center;
     }
 
     textarea {
         font-size: 1.25rem;
         resize: none;
+        font-family: 'Libre Baskerville', Arial, Helvetica, sans-serif;
     }
 
     textarea:focus {
@@ -179,7 +178,7 @@
     input[type="submit"] {
         color: $primary-text;
         font-size: 1.5rem;
-        font-family: Helvetica, Arial, sans-serif;
+        font-family: 'Libre Baskerville', Arial, Helvetica, sans-serif;
         background-color: rgba(0, 0, 0, 0);
         border: 2px solid $primary-text;
     }
@@ -210,7 +209,6 @@
 
     p {
         font-size: 1.25rem;
-        font-family: Helvetica, Arial, sans-serif;
         line-height: 0.25rem;
         margin-left: 2.5%;
         margin-right: 2.5%;
@@ -223,7 +221,6 @@
 
 #no-comments-text {
     font-size: 2.0rem;
-    font-family: Helvetica, Arial, sans-serif;
     line-height: 0rem;
     margin: 0;
     padding: 0;
