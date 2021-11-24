@@ -13,10 +13,11 @@ const { getCurrentUser, upload } = require('../util');
 // GET for the profile page
 router.get('/:username', async (req, res) => {
     // Get the user requested in the URL
-    const reqUser = await db.getUsers({username: req.params.username});
+    const reqUser = await db.getUsers({username: req.params.username})
+        .catch((err) => {});
     // If the user doesn't exist, go back to the home page
-    if (!reqUser[0]) {
-        res.redirect('/');
+    if (reqUser === undefined || reqUser.length !== 1) {
+        return res.redirect('/404');
     }
     // Get the posts of the user
     const posts = await db.getPosts({user: req.params.username});
@@ -26,41 +27,37 @@ router.get('/:username', async (req, res) => {
     res.render('profile', {account: curAcct, user: reqUser[0], posts: posts});
 });
 
-// POST for updating a user's saved posts collection
+// POST for adding a post to a user's saved posts collection
 router.post('/:username/savedPosts/:postID/add', async (req, res) => {
-    // If the user wants to add the post to their collection
-    if (req.body.updateType === 'add') {
-        // Add the post to the collection
-        await db.addToSavedPosts(req.body.postID, {username: req.body.user});
-    } else {
-        // Otherwise remove the post from the collection
-        await db.removeFromSavedPosts(req.body.postID, {username: req.body.user});
+    // Make sure the post still exists before trying to add it
+    const postCheck = await db.getPosts({_id: req.params.postID});
+    if (postCheck.length === 0) {
+        return res.redirect('/404');
     }
+
+    // Add the post to the collection
+    await db.addToSavedPosts(req.params.postID, {username: req.params.username});
+
     // Redirect to the post page
-    res.redirect(`/posts/${req.body.postID}`);
+    res.redirect(`/posts/${req.params.postID}`);
 });
 
-// POST for updating a user's saved posts collection
+// POST for removing a post from a user's saved posts collection
 router.post('/:username/savedPosts/:postID/remove', async (req, res) => {
-    // If the user wants to add the post to their collection
-    if (req.body.updateType === 'add') {
-        // Add the post to the collection
-        await db.addToSavedPosts(req.body.postID, {username: req.body.user});
-    } else {
-        // Otherwise remove the post from the collection
-        await db.removeFromSavedPosts(req.body.postID, {username: req.body.user});
-    }
+    // Remove the post from the collection
+    await db.removeFromSavedPosts(req.params.postID, {username: req.params.username});
+
     // Redirect to the post page
-    res.redirect(`/posts/${req.body.postID}`);
+    res.redirect(`/posts/${req.params.postID}`);
 });
 
 // GET for the collection page
 router.get('/:username/collection', (req, res) => {
     // Only can see the page if logged in. If not logged in, redirect to landing page
     if (!req.session.user) {
-        res.redirect('/');
+        res.redirect('/404');
     } else if (req.session.user !== req.params.username) {
-        res.redirect('/');
+        res.redirect('/404');
     } else {
         let user, savedPosts;
         // Get the user
@@ -83,9 +80,9 @@ router.get('/:username/collection', (req, res) => {
 router.get('/:username/addPost', (req, res) => {
     // If the user is logged out, redirect to the landing page
     if (!req.session.user) {
-        res.redirect('/');
+        res.redirect('/404');
     } else if (req.session.user !== req.params.username) {
-        res.redirect('/');
+        res.redirect('/404');
     } else {
         // Render the add post page
         const curAcct = getCurrentUser(req);
@@ -101,10 +98,7 @@ router.post('/:username/addPost', upload.single('pic'), async (req, res) => {
     newPath = newPath.join('.');
 
     // Resize the image
-    await sharp(path.join(__dirname, '..', req.file.path)).resize({ width: 720 }).toFile(path.join(__dirname, '..', newPath))
-    .then(function(newFileInfo) {
-        console.log("Success");
-    })
+    await sharp(path.join(__dirname, '..', req.file.path)).resize({ width: 1080 }).toFile(path.join(__dirname, '..', newPath))
     .catch(function(err) {
         console.log(err);
     });
@@ -156,6 +150,5 @@ router.post('/:username/addPost', upload.single('pic'), async (req, res) => {
     // Redirect to the user's profile page
     res.redirect(`/users/${req.session.user}`);
 });
-
 
 module.exports = router;

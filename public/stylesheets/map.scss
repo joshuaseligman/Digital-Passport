@@ -11,15 +11,15 @@
 
 #directions {
     text-align: center;
-    font-size: 2.75rem;
+    font-size: 2rem;
     padding-top: 1%;
     padding-bottom: 1%;
     margin-bottom: 0;
 }
 
 #location-selection {
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 10%;
+    margin-right: 10%;
     margin-top: 0;
     margin-bottom: 0;
     display: none;
@@ -27,24 +27,25 @@
     align-items: center;
 
     h2 {
-        font-size: 2.5rem;
+        font-size: 2rem;
         color: $secondary-text;
+        font-family: 'Libre Baskerville', Arial, Helvetica, sans-serif;
     }
 
     input {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     input[type="submit"] {
         width: auto;
         border-radius: 5%;
         background-color: $bg-color;
-        color: $secondary-text;
+        color: $primary-text;
         height: auto;
-        font-family: "Tangerine", cursive;
+        font-family: 'Libre Baskerville', Arial, Helvetica, sans-serif;
     }
 
     input[type="submit"]:active {
-        color: $primary-text;
+        color: $secondary-text;
     }
 }

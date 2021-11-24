@@ -9,4 +9,9 @@ router.get('/', (req, res) => {
     res.render('index', {account: curAcct});
 });
 
+router.get('/about', (req, res) => {
+    const curAcct = getCurrentUser(req);
+    res.render('about', {account: curAcct});
+})
+
 module.exports = router;
