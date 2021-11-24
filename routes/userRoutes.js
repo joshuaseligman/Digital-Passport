@@ -98,7 +98,7 @@ router.post('/:username/addPost', upload.single('pic'), async (req, res) => {
     newPath = newPath.join('.');
 
     // Resize the image
-    await sharp(path.join(__dirname, '..', req.file.path)).resize({ width: 720 }).toFile(path.join(__dirname, '..', newPath))
+    await sharp(path.join(__dirname, '..', req.file.path)).resize({ width: 1080 }).toFile(path.join(__dirname, '..', newPath))
     .catch(function(err) {
         console.log(err);
     });
