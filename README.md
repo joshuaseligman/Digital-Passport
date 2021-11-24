@@ -12,10 +12,27 @@ The profile page shows all the posts made by a given user. Details for each post
 
 Lastly, a user's collection consists of their saved posts that they want to keep for future use. The collection is private and can only be viewed by the logged-in user.
 
-To use Digital Passport, complete the following instructions:
+To use Digital Passport using Docker and the public database, complete the following instructions:
+
+1. Download Docker. If you do not already have Docker, you can download it <a href="https://www.docker.com" target="_blank">here</a>.
+2. Pull the image using the following command: `docker pull joshuaseligman/digital-passport`.
+3. Run the image using the following command: `docker run -d -p 3000:3000 joshuaseligman/digital-passport`.
+5. Once the server is running, open a web browser and go to <em>localhost:3000</em> to view the webpage.
+
+To use Digital Passport using Docker and a private database, complete the following instructions:
+
+1. Download Docker. If you do not already have Docker, you can download it <a href="https://www.docker.com" target="_blank">here</a>.
+2. Download or clone the repository.
+3. Add a .env file in the project directory with the following line: `DB_URI=yourMongoDBUri`.
+3. Build the image using the following command: `docker build . -t digital-passport`.
+4. Run the image using the following command: `docker run -d -p 3000:3000 digital-passport`.
+5. Once the server is running, open a web browser and go to <em>localhost:3000</em> to view the webpage.
+
+To use Digital Passport using Node.js and a private database, complete the following instructions:
 
 1. Download Node.js. If you do not already have Node, you can download it <a href="https://nodejs.org/en/" target="_blank">here</a>.
 2. Download or clone the repository.
 3. Navigate to the directory of the project and run the following command: `npm install`. This will download all of the project dependencies.
-4. Run the following command to start the server: `npm run start`.
-5. Once the server is running, open a web browser and go to <em>localhost:3000</em> to view the webpage.
+4. Add a .env file in the project directory with the following line: `DB_URI=yourMongoDBUri`.
+5. Run the following command to start the server: `npm run start`.
+6. Once the server is running, open a web browser and go to <em>localhost:3000</em> to view the webpage.
