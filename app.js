@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 
 // Use an assigned port or 3000 as default
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 
 const indexRoutes = require('./routes/indexRoutes');
 app.use('/', indexRoutes);
