@@ -24,10 +24,9 @@ To use Digital Passport using Docker and a private database, complete the follow
 1. Download Docker. If you do not already have Docker, you can download it <a href="https://www.docker.com" target="_blank">here</a>.
 2. Download or clone the repository.
 3. Add a .env file in the project directory with the following line: `DB_URI=yourMongoDBUri`.
-4. Add a folder called `uploads` to the project directory.
-5. Build the image using the following command: `docker build . -t digital-passport`.
-6. Run the image using the following command: `docker run -d -p 3000:3000 digital-passport`.
-7. Once the server is running, open a web browser and go to <em>localhost:3000</em> to view the webpage.
+4. Build the image using the following command: `docker build . -t digital-passport`.
+5. Run the image using the following command: `docker run -d -p 3000:3000 digital-passport`.
+6. Once the server is running, open a web browser and go to <em>localhost:3000</em> to view the webpage.
 
 To use Digital Passport using Node.js and a private database, complete the following instructions:
 
@@ -35,6 +34,5 @@ To use Digital Passport using Node.js and a private database, complete the follo
 2. Download or clone the repository.
 3. Navigate to the directory of the project and run the following command: `npm install`. This will download all of the project dependencies.
 4. Add a .env file in the project directory with the following line: `DB_URI=yourMongoDBUri`.
-5. Add a folder called `uploads` to the project directory.
-6. Run the following command to start the server: `npm run start`.
-7. Once the server is running, open a web browser and go to <em>localhost:3000</em> to view the webpage.
+5. Run the following command to start the server: `npm run start`.
+6. Once the server is running, open a web browser and go to <em>localhost:3000</em> to view the webpage.
