@@ -4,7 +4,7 @@
     background-image: url('/res/lightning.jpg');
     background-size: cover;
     height: 500px;
-    border-radius: 5%;
+    border-radius: 1.5rem;
     margin-top: 2%;
     margin-bottom: 0;
 }
@@ -12,7 +12,7 @@
 #error-area {
     background-color: rgba(0, 0, 0, 0.3);
     height: 100%;
-    border-radius: 5%;
+    border-radius: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
