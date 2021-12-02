@@ -137,7 +137,6 @@ footer h2 {
   width: 48.75%;
   background-color: #eeeeee;
   border-radius: 5%;
-  text-shadow: 2px 2px 2px rgba(88, 59, 0, 0.85);
 }
 
 #login {
@@ -163,6 +162,7 @@ footer h2 {
   font-size: 3rem;
   padding-left: 2.5%;
   padding-top: 2.5%;
+  text-shadow: 2px 2px 2px rgba(88, 59, 0, 0.85);
 }
 
 .login-row {
@@ -174,6 +174,10 @@ footer h2 {
   margin-right: 2.5%;
   font-size: 1.75rem;
   width: 25%;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: fit-content;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
 }
 .login-row input {
   font-family: "Libre Baskerville", Arial, Helvetica, sans-serif;
@@ -202,10 +206,11 @@ footer h2 {
 }
 
 .form-error {
-  background-color: #80d8ff;
-  color: #FF9800;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: red;
   margin-left: 25%;
   margin-right: 25%;
+  width: fit-content;
 }
 .form-error h3 {
   text-align: center;
