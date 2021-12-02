@@ -15,9 +15,10 @@ router.post('/map', (req, res) => {
     const city = req.body.city;
     const state = req.body.state;
     const country = req.body.country;
+    const filter = req.body.filter;
 
     // Redirect to the post selection page with the query specific data
-    res.redirect(`/posts?city=${city}&state=${state}&country=${country}`.replace(' ', '%20'));
+    res.redirect(`/posts?city=${city}&state=${state}&country=${country}&filter=${filter}`.replace(' ', '%20'));
 });
 
 module.exports = router;

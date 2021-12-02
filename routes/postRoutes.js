@@ -6,32 +6,59 @@ const db = require('../db');
 
 // GET for the post selection page
 router.get('/', async (req, res) => {
-    // Get the posts for the inputted location
-    const posts = await db.getPosts(
-        {
-            location: {
-                city: req.query.city,
-                state: req.query.state,
-                country: req.query.country
-            }
+    // Determine the filter
+    const filter = req.query.filter;
+    const filteredLocation = {
+        country: req.query.country
+    };
+    if (filter !== 'country') {
+        filteredLocation.state = req.query.state;
+
+        if (filter !== 'state') {
+            filteredLocation.city = req.query.city;
         }
-    );
+    }
+
+    // Get the posts for the inputted location
+    let posts;
+    if (filter === 'country') {
+        posts = await db.getPosts(
+            {
+                "location.country": filteredLocation.country
+            }
+        );
+    } else if (filter === 'state') {
+        posts = await db.getPosts(
+            {
+                "location.country": filteredLocation.country,
+                "location.state": filteredLocation.state
+            }
+        );
+    } else {
+        posts = await db.getPosts(
+            {
+                "location.country": filteredLocation.country,
+                "location.state": filteredLocation.state,
+                "location.city": filteredLocation.city
+            }
+        );
+    }
 
     let place = ''; 
-    if (req.query.city !== 'undefined') {
-        place += req.query.city;
+    if (isNotUndefined(filteredLocation.city)) {
+        place += filteredLocation.city;
     }
-    if (req.query.state !== 'undefined' && req.query.city !== 'undefined') {
+    if (isNotUndefined(filteredLocation.state) && isNotUndefined(filteredLocation.city)) {
         place += ', ';
     }
-    if (req.query.state !== 'undefined') {
-        place += req.query.state;
+    if (isNotUndefined(filteredLocation.state)) {
+        place += filteredLocation.state;
     }
-    if (req.query.country !== 'undefined' && (req.query.city !== 'undefined' || req.query.state !== 'undefined')) {
+    if (isNotUndefined(filteredLocation.country) && (isNotUndefined(filteredLocation.city) || isNotUndefined(filteredLocation.state))) {
         place += ', ';
     }
-    if (req.query.country !== 'undefined') {
-        place += req.query.country;
+    if (isNotUndefined(filteredLocation.country)) {
+        place += filteredLocation.country;
     }
     
     // Render the post selection page with the appropriate posts
@@ -88,5 +115,9 @@ router.post('/:postID/comment', async (req, res) => {
     // Redirect to the post
     res.redirect(`/posts/${req.params.postID}`);
 });
+
+function isNotUndefined(val) {
+    return val !== undefined && val !== 'undefined';
+}
 
 module.exports = router;

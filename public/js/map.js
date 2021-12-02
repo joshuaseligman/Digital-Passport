@@ -7,6 +7,7 @@ const bounds = L.latLngBounds(L.latLng(-85, -180), L.latLng(85, 180));
 const info = document.querySelectorAll('.info');
 const formData = document.querySelectorAll('.location-form-data');
 const locationSelection = document.querySelector('#location-selection');
+const filterButtons = document.querySelectorAll('.search-filter-btn');
 
 // Create the reverse geocoding api variable
 const platform = new H.service.Platform({
@@ -48,7 +49,14 @@ map.on('click', (e) => {
         'at': `${e.latlng['lat']},${e.latlng['lng']}`
     }, (result) => {
         // Set the variables accordingly on the page
-        const loc = result['items'][0]['address'];
+        try {
+            const loc = result['items'][0]['address'];
+        } catch (err) {     
+            map.setView(L.latLng(25, 0), 2);
+            map.removeLayer(marker);
+            return;
+        }
+
         info[0].textContent = loc['city'];
         if (loc['state'] !== undefined && loc['city'] !== undefined) {
             info[0].textContent += ', ';
@@ -65,5 +73,41 @@ map.on('click', (e) => {
         formData[2].value = loc['countryCode'];
 
         locationSelection.style.display = 'flex';
+
+        resetFilter(loc);
+
     }, alert);
 });
+
+function resetFilter(location) {
+    for (const btn of filterButtons) {
+        btn.classList.remove('active');
+    }
+
+    let madeActive = false;
+
+    if (location['city'] === undefined) {
+        filterButtons[0].style.display = 'none';
+    } else {
+        filterButtons[0].style.display = 'inline-block';
+        filterButtons[0].classList.add('active');
+        madeActive = true;
+    }
+    if (location['state'] === undefined) {
+        filterButtons[1].style.display = 'none';
+    } else {
+        filterButtons[1].style.display = 'inline-block';
+        if (!madeActive) {
+            filterButtons[1].classList.add('active');
+            madeActive = true;
+        }
+    }
+    if (location['countryCode'] === undefined) {
+        filterButtons[2].style.display = 'none';
+    } else {
+        filterButtons[2].style.display = 'inline-block';
+        if (!madeActive) {
+            filterButtons[2].classList.add('active');
+        }
+    }
+}

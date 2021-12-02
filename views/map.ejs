@@ -10,18 +10,30 @@
 <div id="selection-area">
     <h1 id="directions">Navigate the map and click on the place where you want to go.</h1>
     <form id="location-selection" action="/map" method="POST">
-        <h2>
-            <span class="info">City, </span><span class="info">State, </span><span class="info">Country</span>
-        </h2>
-        <input class="location-form-data" type="hidden" name="city" value="">
-        <input class="location-form-data" type="hidden" name="state" value="">
-        <input class="location-form-data" type="hidden" name="country" value="">
-        <input type="submit" value="Explore">
+        <div id="search">
+            <h2>
+                <span class="info">City, </span><span class="info">State, </span><span class="info">Country</span>
+            </h2>
+            <input class="location-form-data" type="hidden" name="city" value="">
+            <input class="location-form-data" type="hidden" name="state" value="">
+            <input class="location-form-data" type="hidden" name="country" value="">
+            <input type="submit" value="Explore">
+        </div>
+        <div id="search-filter">
+            <h2>Select your search filter:</h2>
+            <div>
+                <button type="button" class="search-filter-btn" id="city">City</button>
+                <button type="button" class="search-filter-btn" id="state">State</button>
+                <button type="button" class="search-filter-btn" id="country">Country</button>
+                <input type="hidden" name="filter" value="city" id="filter-input">
+            </div>
+        </div>
     </form>
 </div>
 
 <div id="map"></div>
 
 <script src="/js/map.js"></script>
+<script src="/js/toggleSearchFilter.js"></script>
 
 <%- include('./partials/footer') %>
