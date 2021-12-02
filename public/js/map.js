@@ -49,11 +49,13 @@ map.on('click', (e) => {
         'at': `${e.latlng['lat']},${e.latlng['lng']}`
     }, (result) => {
         // Set the variables accordingly on the page
+        let loc;
         try {
-            const loc = result['items'][0]['address'];
+            loc = result['items'][0]['address'];
         } catch (err) {     
             map.setView(L.latLng(25, 0), 2);
             map.removeLayer(marker);
+            marker = undefined;
             return;
         }
 
