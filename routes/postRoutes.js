@@ -66,6 +66,8 @@ router.get('/', async (req, res) => {
     res.render('postSelection', {account: curAcct, posts: posts, location: place});
 });
 
+// Gets the best nearby city based on the location in the query parameters
+// or the 3 most popular cities if no query parameters
 router.get('/cities', async (req, res) => {
     let options = {};
     if (req.query.country !== undefined && req.query.state !== undefined) {
@@ -116,9 +118,22 @@ router.get('/cities', async (req, res) => {
         }
         res.send(bestNearbyCity);
     } else {
-        res.send(locCounts);
+        let topCounts = [];
+        for (const [country, stateProp] of Object.entries(locCounts)) {
+            for (const [stateKey, cityProp] of Object.entries(locCounts[country])) {
+                for (const [cityKey, location] of Object.entries(locCounts[country][stateKey])) {
+                    topCounts.push([country, stateKey, cityKey, location]);
+                }
+            }
+        }
+
+        topCounts.sort((city1, city2) => {
+            return city1[3][1] - city2[3][1];
+        });
+
+        res.send(topCounts.slice(-3).reverse());
     }
-})
+});
 
 // GET for the page of a specific post
 router.get('/:postID', async (req, res) => {

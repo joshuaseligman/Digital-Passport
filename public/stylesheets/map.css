@@ -200,4 +200,21 @@ footer h2 {
   background-color: #ffd180;
 }
 
+#popular-locations {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#popular-locations h3 {
+  font-size: 1.5rem;
+}
+#popular-locations p {
+  font-size: 1.25rem;
+  text-decoration: underline;
+}
+#popular-locations p:hover {
+  color: #FF9800;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=map.css.map */

@@ -81,3 +81,23 @@
         background-color: $sub-orange;
     }
 }
+
+#popular-locations {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1.25rem;
+        text-decoration: underline;
+    }
+
+    p:hover {
+        color: $secondary-text;
+        cursor: pointer;
+    }
+}

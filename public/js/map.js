@@ -154,3 +154,29 @@ for (const mapForm of mapForms) {
         }
     });
 }
+
+const popularLocations = document.querySelectorAll('.popular-location');
+if (popularLocations.length > 0) {
+    fetch('/posts/cities')
+    .then((res) => res.json())
+    .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+            popularLocations[i].textContent = data[i][2];
+            if (data[i][1] !== 'undefined' && data[i][2] !== 'undefined') {
+                popularLocations[i].textContent += ', ';
+            }
+
+            popularLocations[i].textContent += (data[i][1] !== 'undefined') ? data[i][1] : '';
+            if (data[i][0] !== 'undefined' && (data[i][2] !== 'undefined' || data[i][1] !== 'undefined')) {
+                popularLocations[i].textContent += ', ';
+            }
+            popularLocations[i].textContent += data[i][0];
+
+            popularLocations[i].addEventListener('click', (e) => {
+                map.fire('click', {
+                    latlng: L.latLng(data[i][3][0].lat, data[i][3][0].lng)
+                })
+            });
+        }
+    });
+}
