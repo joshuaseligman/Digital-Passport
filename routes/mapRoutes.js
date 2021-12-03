@@ -4,13 +4,13 @@ const router = express.Router();
 const { getCurrentUser } = require('../util');
 
 // GET for the map page where users select the location
-router.get('/map', (req, res) => {
+router.get('/', (req, res) => {
     const curAcct = getCurrentUser(req);
     res.render('map', {account: curAcct}); 
 });
 
 // POST for the map page
-router.post('/map', (req, res) => {
+router.post('/', (req, res) => {
     // Get the data from the form
     const city = req.body.city;
     const state = req.body.state;

@@ -8,6 +8,8 @@ const info = document.querySelectorAll('.info');
 const formData = document.querySelectorAll('.location-form-data');
 const locationSelection = document.querySelector('#location-selection');
 const filterButtons = document.querySelectorAll('.search-filter-btn');
+const postLat = document.querySelector('#post-lat');
+const postLng = document.querySelector('#post-lng');
 
 // Create the reverse geocoding api variable
 const platform = new H.service.Platform({
@@ -76,8 +78,19 @@ map.on('click', (e) => {
 
         locationSelection.style.display = 'flex';
 
-        resetFilter(loc);
+        service.geocode({
+            'in': `countryCode:${loc['countryCode']}`,
+            'qq': `city=${loc['city']};state=${loc['state']}`
+        }, (location) => {
+            if (postLat !== null && postLng !== null) {
+                postLat.value = location['items'][0].position.lat;
+                postLng.value = location['items'][0].position.lng;
+            }
+        }, alert);
 
+        if (filterButtons.length > 0) {
+            resetFilter(loc);
+        }
     }, alert);
 });
 

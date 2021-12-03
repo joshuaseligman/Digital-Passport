@@ -16,7 +16,11 @@ const postSchema = mongoose.Schema({
     location: {
         city: String,
         state: String,
-        country: String
+        country: String,
+        position: {
+            lat: Number,
+            lng: Number
+        }
     },
     // Every post is uploaded at a certain date
     date: {

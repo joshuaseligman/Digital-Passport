@@ -66,6 +66,12 @@ router.get('/', async (req, res) => {
     res.render('postSelection', {account: curAcct, posts: posts, location: place});
 });
 
+router.get('/cities', async (req, res) => {
+    const locations = await db.getPosts({}, {_id: 0, location: 1});
+    const locCounts = getTotals(locations);
+    res.send(locCounts);
+})
+
 // GET for the page of a specific post
 router.get('/:postID', async (req, res) => {
     // Get the specific post requested in the URL path
@@ -118,6 +124,26 @@ router.post('/:postID/comment', async (req, res) => {
 
 function isNotUndefined(val) {
     return val !== undefined && val !== 'undefined';
+}
+
+function getTotals(locs) {
+    const counts = {};
+    for (const l of locs) {
+        const loc = l.location
+        if (counts[loc.country] === undefined) {
+            counts[loc.country] = {};
+            counts[loc.country][loc.state] = {};
+            counts[loc.country][loc.state][loc.city] = 1;
+        } else if (counts[loc.country][loc.state] === undefined) {
+            counts[loc.country][loc.state] = {};
+            counts[loc.country][loc.state][loc.city] = 1;
+        } else if (counts[loc.country][loc.state][loc.city] === undefined) {
+            counts[loc.country][loc.state][loc.city] = 1;
+        } else {
+            counts[loc.country][loc.state][loc.city]++;
+        }
+    }
+    return counts;
 }
 
 module.exports = router;
