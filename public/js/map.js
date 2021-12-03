@@ -10,6 +10,9 @@ const locationSelection = document.querySelector('#location-selection');
 const filterButtons = document.querySelectorAll('.search-filter-btn');
 const postLat = document.querySelector('#post-lat');
 const postLng = document.querySelector('#post-lng');
+const mapForms = document.querySelectorAll('.map-form');
+
+let betterNearbyCity = [];
 
 // Create the reverse geocoding api variable
 const platform = new H.service.Platform({
@@ -82,9 +85,19 @@ map.on('click', (e) => {
             'in': `countryCode:${loc['countryCode']}`,
             'qq': `city=${loc['city']};state=${loc['state']}`
         }, (location) => {
+            const cityPos = location['items'][0].position;
+            if (filterButtons.length > 0 && !filterButtons[0].classList.contains('active')) {
+                return;
+            } else {
+                fetch(`/posts/cities?state=${formData[1].value}&country=${formData[2].value}&lat=${cityPos.lat}&lng=${cityPos.lng}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    betterNearbyCity = data;
+                });
+            }
             if (postLat !== null && postLng !== null) {
-                postLat.value = location['items'][0].position.lat;
-                postLng.value = location['items'][0].position.lng;
+                postLat.value = cityPos.lat;
+                postLng.value = cityPos.lng;
             }
         }, alert);
 
@@ -125,4 +138,19 @@ function resetFilter(location) {
             filterButtons[2].classList.add('active');
         }
     }
+}
+
+for (const mapForm of mapForms) {
+    mapForm.addEventListener('submit', (e) => {
+        if (filterButtons.length > 0 && !filterButtons[0].classList.contains('active') || betterNearbyCity.length === 0) {
+            return;
+        }
+        if (confirm(`${formData[0].value} is close to ${betterNearbyCity[0]} but has fewer posts. Would you like to use ${betterNearbyCity[0]} instead of ${formData[0].value}?`)) {
+            formData[0].value = betterNearbyCity[0];
+            if (postLat !== null && postLng !== null) {
+                postLat.value = betterNearbyCity[1][0].lat;
+                postLng.value = betterNearbyCity[1][0].lng;
+            }
+        }
+    });
 }

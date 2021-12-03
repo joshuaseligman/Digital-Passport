@@ -67,9 +67,57 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/cities', async (req, res) => {
-    const locations = await db.getPosts({}, {_id: 0, location: 1});
+    let options = {};
+    if (req.query.country !== undefined && req.query.state !== undefined) {
+        options = {
+            "location.country": req.query.country,
+            "location.state": req.query.state,
+        };
+    }
+    const locations = await db.getPosts(
+        options, 
+        {   _id: 0, 
+            location: 1
+        }
+    );
     const locCounts = getTotals(locations);
-    res.send(locCounts);
+
+    if (req.query.lat && req.query.lng) {
+        let bestNearbyCity = [];
+        let cityCount = 0;
+        for (const [city, location] of Object.entries(locCounts[req.query.country][req.query.state])) {
+            const lng1 = req.query.lng * Math.PI / 180;
+            const lng2 = location[0].lng * Math.PI / 180;
+            const lat1 = req.query.lat * Math.PI / 180;
+            const lat2 = location[0].lat * Math.PI / 180;
+
+            // Haversine formula from https://www.geeksforgeeks.org/program-distance-two-points-earth/
+            const dlng = lng2 - lng1;
+            const dlat = lat2 - lat1;
+            const a = Math.pow(Math.sin(dlat / 2), 2)
+                    + Math.cos(lat1) * Math.cos(lat2)
+                    * Math.pow(Math.sin(dlng / 2), 2);
+                
+            const c = 2 * Math.asin(Math.sqrt(a));
+    
+            // Radius of earth in miles
+            const r = 3956;
+
+            const dist = c * r;
+
+            if (dist === 0) {
+                cityCount = location[1];
+            } else if (dist <= 25 && (bestNearbyCity.length === 0 || location[1] > bestNearbyCity[1][1])) {
+                bestNearbyCity = [city, location];
+            }
+            if (bestNearbyCity.length > 0 && cityCount >= bestNearbyCity[1][1]) {
+                bestNearbyCity = [];
+            }
+        }
+        res.send(bestNearbyCity);
+    } else {
+        res.send(locCounts);
+    }
 })
 
 // GET for the page of a specific post
@@ -133,14 +181,14 @@ function getTotals(locs) {
         if (counts[loc.country] === undefined) {
             counts[loc.country] = {};
             counts[loc.country][loc.state] = {};
-            counts[loc.country][loc.state][loc.city] = 1;
+            counts[loc.country][loc.state][loc.city] = [loc.position, 1];
         } else if (counts[loc.country][loc.state] === undefined) {
             counts[loc.country][loc.state] = {};
-            counts[loc.country][loc.state][loc.city] = 1;
+            counts[loc.country][loc.state][loc.city] = [loc.position, 1];
         } else if (counts[loc.country][loc.state][loc.city] === undefined) {
-            counts[loc.country][loc.state][loc.city] = 1;
+            counts[loc.country][loc.state][loc.city] = [loc.position, 1];
         } else {
-            counts[loc.country][loc.state][loc.city]++;
+            counts[loc.country][loc.state][loc.city][1]++;
         }
     }
     return counts;
