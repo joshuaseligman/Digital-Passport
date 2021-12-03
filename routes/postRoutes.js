@@ -127,6 +127,13 @@ router.get('/cities', async (req, res) => {
             }
         }
 
+        for (let i = topCounts.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const temp = topCounts[i];
+            topCounts[i] = topCounts[j];
+            topCounts[j] = temp;
+        }
+
         topCounts.sort((city1, city2) => {
             return city1[3][1] - city2[3][1];
         });
