@@ -208,12 +208,12 @@ footer h2 {
 .form-error {
   background-color: rgba(0, 0, 0, 0.6);
   color: red;
-  margin-left: 25%;
-  margin-right: 25%;
   width: fit-content;
+  margin: auto;
 }
 .form-error h3 {
   text-align: center;
+  padding: 0.5%;
 }
 
 /*# sourceMappingURL=login.css.map */
