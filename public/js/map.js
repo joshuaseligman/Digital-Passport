@@ -89,7 +89,7 @@ map.on('click', (e) => {
             if (filterButtons.length > 0 && !filterButtons[0].classList.contains('active')) {
                 return;
             } else {
-                fetch(`/posts/cities?state=${formData[1].value}&country=${formData[2].value}&lat=${cityPos.lat}&lng=${cityPos.lng}`)
+                fetch(`/cities/nearby?state=${formData[1].value}&country=${formData[2].value}&lat=${cityPos.lat}&lng=${cityPos.lng}`)
                 .then((res) => res.json())
                 .then((data) => {
                     betterNearbyCity = data;
@@ -157,7 +157,7 @@ for (const mapForm of mapForms) {
 
 const popularLocations = document.querySelectorAll('.popular-location');
 if (popularLocations.length > 0) {
-    fetch('/posts/cities')
+    fetch('/cities/popular')
     .then((res) => res.json())
     .then((data) => {
         for (let i = 0; i < data.length; i++) {

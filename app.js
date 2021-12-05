@@ -40,6 +40,9 @@ app.use('/posts', postRoutes);
 const userRoutes = require('./routes/userRoutes');
 app.use('/users', userRoutes);
 
+const cityRoutes = require('./routes/cityRoutes');
+app.use('/cities', cityRoutes);
+
 app.use((req, res) => {
     res.status(404);
     const curUser = getCurrentUser(req);
