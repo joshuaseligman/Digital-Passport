@@ -35,11 +35,11 @@
     <div class="post-function">
         <% if (account.id > 0 && account.username !== post.user) { %>
             <% if (user.savedPosts.includes(post._id)) { %>
-                <form class="collection-form" method="POST" action=<%=`/users/${account.username}/savedPosts/${post._id}/remove`%>>
+                <form class="collection-form" method="POST" action=<%=`/users/${account.username}/collection/${post._id}/remove`%>>
                     <input type="submit" class="btn" value="Remove from Collection">
                 </form>
             <% } else { %>
-                <form class="collection-form" method="POST" action=<%=`/users/${account.username}/savedPosts/${post._id}/add`%>>
+                <form class="collection-form" method="POST" action=<%=`/users/${account.username}/collection/${post._id}/add`%>>
                     <input type="submit" class="btn" value="Save to Collection">
                 </form>
             <% } %>

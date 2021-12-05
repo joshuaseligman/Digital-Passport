@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
     res.render('index', {account: curAcct});
 });
 
+// GET for the about page
 router.get('/about', (req, res) => {
     const curAcct = getCurrentUser(req);
     res.render('about', {account: curAcct});

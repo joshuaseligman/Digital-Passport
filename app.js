@@ -28,11 +28,11 @@ const PORT = process.env.PORT || 3000;
 const indexRoutes = require('./routes/indexRoutes');
 app.use('/', indexRoutes);
 
-const mapRoutes = require('./routes/mapRoutes');
-app.use('/map', mapRoutes);
-
 const accountRoutes = require('./routes/accountRoutes');
 app.use('/', accountRoutes);
+
+const mapRoutes = require('./routes/mapRoutes');
+app.use('/map', mapRoutes);
 
 const postRoutes = require('./routes/postRoutes');
 app.use('/posts', postRoutes);

@@ -8,42 +8,29 @@ const db = require('../db');
 router.get('/', async (req, res) => {
     // Determine the filter
     const filter = req.query.filter;
+    // Every post should have a country
     const filteredLocation = {
         country: req.query.country
     };
+    const options = {
+        'location.country': filteredLocation.country
+    };
+    // If the filter is not "country", it must have a state
     if (filter !== 'country') {
         filteredLocation.state = req.query.state;
+        options['location.state'] = filteredLocation.state;
 
+        // If the filter is not "state", it must have a city
         if (filter !== 'state') {
             filteredLocation.city = req.query.city;
+            options['location.city'] = filteredLocation.city;
         }
     }
 
-    // Get the posts for the inputted location
-    let posts;
-    if (filter === 'country') {
-        posts = await db.getPosts(
-            {
-                "location.country": filteredLocation.country
-            }
-        );
-    } else if (filter === 'state') {
-        posts = await db.getPosts(
-            {
-                "location.country": filteredLocation.country,
-                "location.state": filteredLocation.state
-            }
-        );
-    } else {
-        posts = await db.getPosts(
-            {
-                "location.country": filteredLocation.country,
-                "location.state": filteredLocation.state,
-                "location.city": filteredLocation.city
-            }
-        );
-    }
+    // Get the posts for the inputted location based on the filter
+    const posts = await db.getPosts(options);
 
+    // Format the name of the filtered location with the commas
     let place = ''; 
     if (isNotUndefined(filteredLocation.city)) {
         place += filteredLocation.city;
@@ -116,6 +103,7 @@ router.post('/:postID/comment', async (req, res) => {
     res.redirect(`/posts/${req.params.postID}`);
 });
 
+// Function for determining if a value is neither undefined nor the string "undefined"
 function isNotUndefined(val) {
     return val !== undefined && val !== 'undefined';
 }

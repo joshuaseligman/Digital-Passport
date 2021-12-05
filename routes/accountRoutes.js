@@ -8,6 +8,13 @@ const { getCurrentUser } = require('../util');
 
 // GET for the login page
 router.get('/login', (req, res) => {
+    // If the user is already logged in
+    if (req.session.user) {
+        // Redirect to their profile page
+        return res.redirect(`/users/${req.session.user}`);
+    }
+
+    // Show the login page
     const curAcct = getCurrentUser(req);
     res.render('login', {account: curAcct});
 });

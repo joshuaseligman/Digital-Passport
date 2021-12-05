@@ -27,30 +27,6 @@ router.get('/:username', async (req, res) => {
     res.render('profile', {account: curAcct, user: reqUser[0], posts: posts});
 });
 
-// POST for adding a post to a user's saved posts collection
-router.post('/:username/savedPosts/:postID/add', async (req, res) => {
-    // Make sure the post still exists before trying to add it
-    const postCheck = await db.getPosts({_id: req.params.postID});
-    if (postCheck.length === 0) {
-        return res.redirect('/404');
-    }
-
-    // Add the post to the collection
-    await db.addToSavedPosts(req.params.postID, {username: req.params.username});
-
-    // Redirect to the post page
-    res.redirect(`/posts/${req.params.postID}`);
-});
-
-// POST for removing a post from a user's saved posts collection
-router.post('/:username/savedPosts/:postID/remove', async (req, res) => {
-    // Remove the post from the collection
-    await db.removeFromSavedPosts(req.params.postID, {username: req.params.username});
-
-    // Redirect to the post page
-    res.redirect(`/posts/${req.params.postID}`);
-});
-
 // GET for the collection page
 router.get('/:username/collection', (req, res) => {
     // Only can see the page if logged in. If not logged in, redirect to landing page
@@ -74,6 +50,30 @@ router.get('/:username/collection', (req, res) => {
                     });
                 });
     }
+});
+
+// POST for adding a post to a user's saved posts collection
+router.post('/:username/collection/:postID/add', async (req, res) => {
+    // Make sure the post still exists before trying to add it
+    const postCheck = await db.getPosts({_id: req.params.postID});
+    if (postCheck.length === 0) {
+        return res.redirect('/404');
+    }
+
+    // Add the post to the collection
+    await db.addToSavedPosts(req.params.postID, {username: req.params.username});
+
+    // Redirect to the post page
+    res.redirect(`/posts/${req.params.postID}`);
+});
+
+// POST for removing a post from a user's saved posts collection
+router.post('/:username/collection/:postID/remove', async (req, res) => {
+    // Remove the post from the collection
+    await db.removeFromSavedPosts(req.params.postID, {username: req.params.username});
+
+    // Redirect to the post page
+    res.redirect(`/posts/${req.params.postID}`);
 });
 
 // GET for the add post page
