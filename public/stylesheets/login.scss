@@ -11,7 +11,7 @@
     width: 48.75%;
     background-color: $nav-color;
     border-radius: 5%;
-    text-shadow: 2px 2px 2px rgba(88, 59, 0, 0.85);
+    // text-shadow: 2px 2px 2px rgba(88, 59, 0, 0.85);
 }
 
 #login {
@@ -19,6 +19,7 @@
     background-image: urL('../res/login-img.jpg');
     background-size: cover;
     background-position: center;
+    
 }
 
 #signup {
@@ -31,12 +32,13 @@
     background-color: rgba(0, 0, 0, 0.6);
     height: 100%;
     border-radius: 5%;
-
+    
     h2 {
         margin-top: 0;
         font-size: 3.0rem;
         padding-left: 2.5%;
         padding-top: 2.5%;
+        text-shadow: 2px 2px 2px rgba(88, 59, 0, 0.85);
     }
 }
 
@@ -49,6 +51,10 @@
         margin-right: 2.5%;
         font-size: 1.75rem;
         width: 25%;
+        background-color: rgba(0, 0, 0, 0.6);
+        width: fit-content;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
     }
 
     input {
@@ -79,15 +85,16 @@
 
 .submit-btn {
     justify-content: space-evenly;
+    margin-right: 2.5%;
 }
 
 .form-error {
-    background-color: $sub-blue;
-    color: $secondary-text;
-    margin-left: 25%;
-    margin-right: 25%;
-
+    background-color: rgba(0, 0, 0, 0.6);
+    color: red;
+    width: fit-content;
+    margin: auto;
     h3 {
         text-align: center;
+        padding: 0.5%;
     }
 }
