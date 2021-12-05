@@ -203,6 +203,7 @@ footer h2 {
 
 .submit-btn {
   justify-content: space-evenly;
+  margin-right: 2.5%;
 }
 
 .form-error {
