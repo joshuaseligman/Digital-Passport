@@ -29,16 +29,19 @@ const indexRoutes = require('./routes/indexRoutes');
 app.use('/', indexRoutes);
 
 const mapRoutes = require('./routes/mapRoutes');
-app.use('/', mapRoutes);
+app.use('/map', mapRoutes);
 
 const accountRoutes = require('./routes/accountRoutes');
 app.use('/', accountRoutes);
 
 const postRoutes = require('./routes/postRoutes');
-app.use('/posts', postRoutes)
+app.use('/posts', postRoutes);
 
 const userRoutes = require('./routes/userRoutes');
 app.use('/users', userRoutes);
+
+const cityRoutes = require('./routes/cityRoutes');
+app.use('/cities', cityRoutes);
 
 app.use((req, res) => {
     res.status(404);

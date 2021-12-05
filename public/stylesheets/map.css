@@ -151,16 +151,24 @@ footer h2 {
   display: none;
   justify-content: space-evenly;
   align-items: center;
+  flex-direction: column;
 }
-#location-selection h2 {
+
+#search {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+#search h2 {
   font-size: 2rem;
   color: #FF9800;
   font-family: "Libre Baskerville", Arial, Helvetica, sans-serif;
 }
-#location-selection input {
+#search input {
   font-size: 2rem;
 }
-#location-selection input[type=submit] {
+#search input[type=submit] {
   width: auto;
   border-radius: 5%;
   background-color: #fafafa;
@@ -168,8 +176,45 @@ footer h2 {
   height: auto;
   font-family: "Libre Baskerville", Arial, Helvetica, sans-serif;
 }
-#location-selection input[type=submit]:active {
+#search input[type=submit]:active {
   color: #FF9800;
+}
+
+#search-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 70%;
+  margin-bottom: 1%;
+}
+#search-filter .search-filter-btn {
+  background-color: #fafafa;
+  border: 1px solid #FF9800;
+  margin: 0;
+  color: #2196F3;
+  font-size: 1.5rem;
+  font-family: "Libre Baskerville", Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+#search-filter .active {
+  background-color: #ffd180;
+}
+
+#popular-locations {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#popular-locations h3 {
+  font-size: 1.5rem;
+}
+#popular-locations p {
+  font-size: 1.25rem;
+  text-decoration: underline;
+}
+#popular-locations p:hover {
+  color: #FF9800;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=map.css.map */

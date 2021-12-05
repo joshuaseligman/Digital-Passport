@@ -24,7 +24,7 @@ db.once('open', () => {
 // Functions to export to other files
 module.exports = {
     // Get the posts with the given information
-    getPosts: async (options = {}) => Post.find(options),
+    getPosts: async (options = {}, projection = {}) => Post.find(options, projection),
     // Delete the post with the given information
     deletePost: async (options = {}) => Post.deleteOne(options),
     // Add a comment to the post provided

@@ -7,6 +7,12 @@ const bounds = L.latLngBounds(L.latLng(-85, -180), L.latLng(85, 180));
 const info = document.querySelectorAll('.info');
 const formData = document.querySelectorAll('.location-form-data');
 const locationSelection = document.querySelector('#location-selection');
+const filterButtons = document.querySelectorAll('.search-filter-btn');
+const postLat = document.querySelector('#post-lat');
+const postLng = document.querySelector('#post-lng');
+const mapForms = document.querySelectorAll('.map-form');
+
+let betterNearbyCity = [];
 
 // Create the reverse geocoding api variable
 const platform = new H.service.Platform({
@@ -48,7 +54,16 @@ map.on('click', (e) => {
         'at': `${e.latlng['lat']},${e.latlng['lng']}`
     }, (result) => {
         // Set the variables accordingly on the page
-        const loc = result['items'][0]['address'];
+        let loc;
+        try {
+            loc = result['items'][0]['address'];
+        } catch (err) {     
+            map.setView(L.latLng(25, 0), 2);
+            map.removeLayer(marker);
+            marker = undefined;
+            return;
+        }
+
         info[0].textContent = loc['city'];
         if (loc['state'] !== undefined && loc['city'] !== undefined) {
             info[0].textContent += ', ';
@@ -65,5 +80,103 @@ map.on('click', (e) => {
         formData[2].value = loc['countryCode'];
 
         locationSelection.style.display = 'flex';
+
+        service.geocode({
+            'in': `countryCode:${loc['countryCode']}`,
+            'qq': `city=${loc['city']};state=${loc['state']}`
+        }, (location) => {
+            const cityPos = location['items'][0].position;
+            if (filterButtons.length > 0 && !filterButtons[0].classList.contains('active')) {
+                return;
+            } else {
+                fetch(`/cities/nearby?state=${formData[1].value}&country=${formData[2].value}&lat=${cityPos.lat}&lng=${cityPos.lng}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    betterNearbyCity = data;
+                });
+            }
+            if (postLat !== null && postLng !== null) {
+                postLat.value = cityPos.lat;
+                postLng.value = cityPos.lng;
+            }
+        }, alert);
+
+        if (filterButtons.length > 0) {
+            resetFilter(loc);
+        }
     }, alert);
 });
+
+function resetFilter(location) {
+    for (const btn of filterButtons) {
+        btn.classList.remove('active');
+    }
+
+    let madeActive = false;
+
+    if (location['city'] === undefined) {
+        filterButtons[0].style.display = 'none';
+    } else {
+        filterButtons[0].style.display = 'inline-block';
+        filterButtons[0].classList.add('active');
+        madeActive = true;
+    }
+    if (location['state'] === undefined) {
+        filterButtons[1].style.display = 'none';
+    } else {
+        filterButtons[1].style.display = 'inline-block';
+        if (!madeActive) {
+            filterButtons[1].classList.add('active');
+            madeActive = true;
+        }
+    }
+    if (location['countryCode'] === undefined) {
+        filterButtons[2].style.display = 'none';
+    } else {
+        filterButtons[2].style.display = 'inline-block';
+        if (!madeActive) {
+            filterButtons[2].classList.add('active');
+        }
+    }
+}
+
+for (const mapForm of mapForms) {
+    mapForm.addEventListener('submit', (e) => {
+        if (filterButtons.length > 0 && !filterButtons[0].classList.contains('active') || betterNearbyCity.length === 0) {
+            return;
+        }
+        if (confirm(`${formData[0].value} is close to ${betterNearbyCity[0]} but has fewer posts. Would you like to use ${betterNearbyCity[0]} instead of ${formData[0].value}?`)) {
+            formData[0].value = betterNearbyCity[0];
+            if (postLat !== null && postLng !== null) {
+                postLat.value = betterNearbyCity[1][0].lat;
+                postLng.value = betterNearbyCity[1][0].lng;
+            }
+        }
+    });
+}
+
+const popularLocations = document.querySelectorAll('.popular-location');
+if (popularLocations.length > 0) {
+    fetch('/cities/popular')
+    .then((res) => res.json())
+    .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+            popularLocations[i].textContent = data[i][2];
+            if (data[i][1] !== 'undefined' && data[i][2] !== 'undefined') {
+                popularLocations[i].textContent += ', ';
+            }
+
+            popularLocations[i].textContent += (data[i][1] !== 'undefined') ? data[i][1] : '';
+            if (data[i][0] !== 'undefined' && (data[i][2] !== 'undefined' || data[i][1] !== 'undefined')) {
+                popularLocations[i].textContent += ', ';
+            }
+            popularLocations[i].textContent += data[i][0];
+
+            popularLocations[i].addEventListener('click', (e) => {
+                map.fire('click', {
+                    latlng: L.latLng(data[i][3][0].lat, data[i][3][0].lng)
+                })
+            });
+        }
+    });
+}
