@@ -7,7 +7,7 @@
 
 <%- include('./partials/navbar') %>
 
-<form id="addPostForm" method="POST" enctype="multipart/form-data">
+<form id="addPostForm" class="map-form" method="POST" enctype="multipart/form-data">
     <label for="pic">Upload an image</label>
     <div id="file-upload">
         <input type="file" accept=".png, .jpeg, .jpg" name="pic" id="img-input" required>
@@ -25,6 +25,8 @@
         <input type="hidden" name="city" class="location-form-data" required>
         <input type="hidden" name="state" class="location-form-data">
         <input type="hidden" name="country" class="location-form-data" required>
+        <input type="hidden" name="lat" id="post-lat" required>
+        <input type="hidden" name="lng" id="post-lng" required>
         <input type="Submit" value="Post">
     </div>
 </form>

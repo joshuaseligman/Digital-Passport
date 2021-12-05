@@ -123,7 +123,11 @@ router.post('/:username/addPost', upload.single('pic'), async (req, res) => {
         location: {
             city: req.body.city,
             state: req.body.state,
-            country: req.body.country
+            country: req.body.country,
+            position: {
+                lat: req.body.lat,
+                lng: req.body.lng
+            }
         },
         date: {
             month: curDate[1],
